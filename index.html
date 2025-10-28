@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terminus Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="bg-gradient h-screen w-screen overflow-hidden">
+
+    <!-- INTRO SECTION -->
+    <div id="introContainer" class="h-full w-full relative">
+        <nav style="z-index: 8; backdrop-filter: blur(50px);"
+            class="bg-white  mt-2 rounded-md p-2 h-14 w-[98.5%]  flex items-center shadow-md absolute top-0 left-2">
+            <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center">
+                <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" class="h-8" />
+            </div>
+        </nav>
+        <div id="slides" class="h-full w-full relative">
+            <!-- Slide 1 -->
+            <div
+                class="slide h-full w-full flex flex-col md:flex-row items-center justify-center text-center md:text-left text-gray-800 animate__animated animate__fadeIn px-6 md:px-16 relative">
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                    class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
+
+                <!-- Image Section -->
+                <div
+                    class="w-[600px] min-w[300px] bg-white ring-white ring-4 rounded-lg overflow-hidden flex-shrink-0 mb-6 md:mb-0 md:mr-10 bg-white animate__animated animate__PopOut">
+                    <img src="./assets/imgs/login/dashboard3.gif" class="w-[200px] w-full object-contain"
+                        alt="Terminus illustration rounded-lg" style="z-index: 4;" />
+                </div>
+
+                <!-- Text Section -->
+                <div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#0349d7] mb-3">
+                        Welcome to Terminus
+                    </h2>
+                    <p class="max-w-md text-black text-sm md:text-lg mb-4">
+                        Simplify your terminal operations with precision, speed, and reliability.
+                        From invoicing and container tracking to barge entries and performance
+                        reports—all in one place.
+                    </p>
+
+                    <ul class="text-gray-200 text-sm md:text-base space-y-2 text-left mx-auto md:mx-0">
+                        <li class="flex items-start text-black space-x-2">
+                            <i
+                                class="fa-solid fa-file-invoice text-[#0349d7] w-10 h-8 flex justify-center items-center bg-white rounded-full"></i>
+                            <span><strong style="background: white;" class="text-[#0349d7] p-1 mt-4">Automated
+                                    Invoicing:</strong> Generate and manage invoices effortlessly for
+                                all transactions.</span>
+                        </li>
+
+                        <li class="flex text-black items-start space-x-2">
+                            <i
+                                class="fa-solid fa-truck text-[#0349d7] w-10 h-8 flex justify-center items-center bg-white rounded-full"></i>
+                            <span><strong style="background: white;" class="text-[#0349d7] p-1 mt-4">Container
+                                    Tracking:</strong>
+                                Monitor movements,
+                                locations, and statuses in
+                                real time.</span>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <!-- Slide 2 -->
+            <div
+                class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                    class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
+                <h2 class="text-4xl font-bold text-[#0349d7] mb-3">Real-time Insights</h2>
+                <p class="max-w-md text-gray-600 text-lg">Monitor container movements, schedules, and reports — all in
+                    real time.</p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div
+                class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                    class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
+                <h2 class="text-4xl font-bold text-[#0349d7] mb-3">Secure & Reliable</h2>
+                <p class="max-w-md text-gray-600 text-lg">Experience enterprise-grade protection for your terminal
+                    operations data.</p>
+            </div>
+        </div>
+
+        <!-- Buttons bottom-right -->
+        <div class="absolute bottom-10 right-10 flex items-center space-x-4">
+            <button id="prevBtn"
+                class="hidden bg-white text-black px-5 py-1 rounded-lg shadow hover:bg-black  hover:text-white hover:ring-2 ring-white transition">Prev</button>
+            <button id="nextBtn"
+                class="bg-white text-black px-5 py-1 rounded-lg shadow hover:bg-black hover:text-white hover:ring-2 ring-white transition">Next</button>
+            <button id="skipBtn"
+                class="bg-black text-white px-5 py-1 rounded-lg shadow  hover:text-white ring-2 ring-white transition">Skip</button>
+        </div>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <!-- LOGIN SECTION -->
+    <div id="loginContainer"
+        class="hidden h-full min-h-full w-full flex flex-col items-center justify-center animate__animated animate__fadeIn">
+        <div class="w-full h-full bg-white shadow-md overflow-hidden flex flex-col md:flex-row">
+            <!-- LEFT SIDE -->
+            <div class="w-full max-w-4xl md:w-1/2 flex flex-col justify-between px-10 py-12 space-y-6">
+
+                <!-- Logo -->
+                <div>
+                    <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" class="w-full max-w-48">
+                </div>
+
+                <!-- Welcome Text -->
+                <div class="max-w-4xl m-auto text-center">
+                    <h1 class="text-2xl font-semibold text-gray-900">Welcome Back</h1>
+                    <p class="text-gray-500 mt-1 text-sm">
+                        Log in to manage your container terminal operations with Terminus.
+                    </p>
+                </div>
+
+                <!-- Login Form -->
+                <form class="space-y-4 w-full max-w-md m-auto text-sm">
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-gray-700 font-medium text-xs mb-1">Username</label>
+                        <div class="relative mt-1">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input id="username" type="text" placeholder="Enter your username"
+                                class="w-full text-sm pl-8 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                        </div>
+                    </div>
+
+                    <!-- Facility -->
+                    <div>
+                        <label for="facility" class="block text-gray-700 font-medium text-xs mb-1">Facility</label>
+                        <div class="relative mt-1">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
+                                <i class="fa-solid fa-building"></i>
+                            </span>
+                            <select id="facility"
+                                class="w-full text-sm pl-8 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="">Select Facility</option>
+                                <option value="mainland">Mainland Terminal</option>
+                                <option value="seaview">Seaview Terminal</option>
+                                <option value="apapa">Apapa Terminal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label class="text-xs font-medium text-gray-700">Password</label>
+                        <div class="relative mt-1">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" placeholder="••••••••"
+                                class="w-full text-sm pl-8 pr-8 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                                id="passwordInput" />
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-xs"
+                                id="togglePassword">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Remember & Forgot -->
+                    <div class="flex items-center justify-between text-xs mt-2">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" id="rememberMe" class="rounded text-indigo-600 w-3 h-3" />
+                            <span>Remember Me</span>
+                        </label>
+                        <a href="#" class="text-indigo-600 hover:underline">Forgot Password?</a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit"
+                        class="w-full py-2 text-sm bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition">
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Footer -->
+                <footer class="text-center text-[10px] text-gray-400 mt-4">
+                    © 2025 Terminus Enterprises LTD. |
+                    <a href="#" class="text-indigo-500 hover:underline">Privacy Policy</a>
+                </footer>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div
+                class="w-full md:w-1/2 bg-[#0349d7] text-white flex flex-col justify-center items-center p-10 relative overflow-hidden">
+                <img src="./assets/imgs/bg/bg1.png" alt="Background pattern"
+                    class="absolute inset-0 w-full h-full object-cover opacity-10 moving-bg" style="z-index: 1;" />
+
+                <div class="max-w-sm" style="z-index: 2;">
+                    <h2 class="text-xl font-semibold mb-2">
+                        Simplify your terminal operations with Terminus.
+                    </h2>
+                    <p class="text-indigo-200 text-xs mb-6">
+                        Terminus helps container terminals manage daily operations — from invoicing and rating to barge
+                        entries, container tracking, and performance reporting — all in one seamless system.
+                    </p>
+
+                    <!-- Image Slider -->
+                    <div class=" w-full h-50 overflow-hidden relative">
+                        <div id="slider" class="flex transition-transform duration-700 ease-in-out">
+                            <img src="./assets/imgs/login/dashboard.png" alt="Dashboard preview 1"
+                                class="w-full object-cover  shadow-lg flex-shrink-0" />
+                            <img src="./assets/imgs/login/dashboard2.gif" alt="Dashboard preview 2"
+                                class="w-full object-contain  shadow-lg flex-shrink-0" />
+                            <img src="./assets/imgs/login/dashboard3.gif" alt="Dashboard preview 3"
+                                class="w-full  object-cover rounded-lg shadow-lg flex-shrink-0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute inset-0 bg-indigo-700/30 backdrop-blur-sm" style="z-index: -1"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const slides = document.querySelectorAll(".slide");
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        const skipBtn = document.getElementById("skipBtn");
+        const introContainer = document.getElementById("introContainer");
+        const loginContainer = document.getElementById("loginContainer");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.add("hidden");
+                if (i === index) {
+                    slide.classList.remove("hidden");
+                    slide.classList.add("animate__fadeIn");
+                }
+            });
+            prevBtn.classList.toggle("hidden", index === 0);
+            nextBtn.textContent = index === slides.length - 1 ? "Finish" : "Next";
+        }
+
+        nextBtn.addEventListener("click", () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else {
+                transitionToLogin();
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        skipBtn.addEventListener("click", transitionToLogin);
+
+        function transitionToLogin() {
+            introContainer.classList.add("animate__fadeOutUp");
+            setTimeout(() => {
+                introContainer.classList.add("hidden");
+                loginContainer.classList.remove("hidden");
+                loginContainer.classList.add("animate__fadeInDown");
+            }, 600);
+        }
+
+        showSlide(currentSlide);
+
+        // Password toggle
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("passwordInput");
+        togglePassword.addEventListener("click", () => {
+            const type =
+                passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            togglePassword.innerHTML =
+                type === "password"
+                    ? '<i class="fa-solid fa-eye"></i>'
+                    : '<i class="fa-solid fa-eye-slash"></i>';
+        });
+
+        // Image Slider
+        const slider = document.getElementById("slider");
+        let index = 0;
+        setInterval(() => {
+            index = (index + 1) % slider.children.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }, 8000);
+
+        // ========== LOGIN VALIDATION ==========
+        const loginForm = document.querySelector("form");
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const facility = document.getElementById("facility").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+
+            // Demo credentials
+            const validUsers = [
+                { username: "admin", password: "1234", facility: "mainland" },
+                { username: "operator", password: "1234", facility: "apapa" },
+            ];
+
+            const matchedUser = validUsers.find(
+                (user) =>
+                    user.username === username &&
+                    user.password === password &&
+                    user.facility === facility
+            );
+
+            const loginButton = loginForm.querySelector("button[type='submit']");
+
+            if (!username || !facility || !password) {
+                showError("Please fill in all fields.");
+                return;
+            }
+
+            if (matchedUser) {
+                loginButton.textContent = "Logging in...";
+                loginButton.disabled = true;
+                loginButton.classList.add("opacity-70");
+
+                setTimeout(() => {
+                    // Redirect or include dashboard page
+                    window.location.href = "dashboard.html";
+                    // OR if using includeHTML system:
+                    // includeHTML("content", "pages/dashboard.html");
+                }, 1000);
+            } else {
+                showError("Invalid credentials. Please try again.");
+            }
+        });
+
+        function showError(message) {
+            let errorBox = document.querySelector("#loginError");
+            if (!errorBox) {
+                errorBox = document.createElement("div");
+                errorBox.id = "loginError";
+                errorBox.className =
+                    "text-red-600 text-xs mt-2 animate__animated animate__fadeIn";
+                loginForm.prepend(errorBox);
+            }
+            errorBox.textContent = message;
+
+            setTimeout(() => {
+                errorBox.classList.remove("animate__fadeIn");
+                errorBox.classList.add("animate__fadeOut");
+            }, 2500);
+        }
+    </script>
+
+</body>
+
+</html>

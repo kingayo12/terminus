@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buttons</title>
+
+    <style>
+        .btn {
+            padding: 5px 10px;
+            border-style: none;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: blue;
+            color: white;
+            border-radius: 100px;
+        }
+
+        .btn-secondary {
+            background-color: rgb(241, 185, 0);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    This are buttons
+    <button type="button"></button>
+
+    <!-- Used to submit forms  -->
+    <button type="submit"></button>
+
+    <!-- reset the form  -->
+    <button type="reset"></button>
+
+    <div>My name is Ayo, click below to know my age. <br />
+        <button type="button" onclick="alert('I am 25 years old')">Click me</button>
+    </div>
+
+
+    <form action="">
+        <input type="text" name="username" placeholder="Enter username">
+        <input type="password" name="password" placeholder="Enter password">
+        <button type="submit">Login</button>
+        <button type="reset">Reset</button>
+    </form>
+
+
+    <!-- ---------------------styled button --------------------------- -->
+    <button type="button" class="btn btn-primary"> Login </button>
+    <button type="button" class="btn btn-secondary"> Register </button>
+
+
+
+</body>
+
+</html>

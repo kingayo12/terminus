@@ -1,0 +1,145 @@
+<div class="header">
+    <div class="left">
+        <button onclick="handleThemeShow()"><i class="fa fa-palette"></i></button>
+        <div class="search">
+            <input type="text" placeholder="Search...">
+            <i class="fa fa-search"></i>
+        </div>
+        <!-- <button><i class="fa fa-palette"></i></button> -->
+    </div>
+    <div class="right">
+        <div class="toggle_theme" onclick="handleThemeSwitch()">
+            <i class="fa fa-moon"></i>
+            <i class="fa fa-sun-bright"></i>
+            <div class="theme_switch">
+                <div class="toggle_circle"></div>
+            </div>
+        </div>
+        <div class="noti_wrapper">
+            <button class="noti" onclick="handleNotiPopup()">
+                <i class="fa fa-bell"></i>
+                <span class="noti_count">3</span>
+            </button>
+
+            <div class="noti_box animate__animated animate__fadeInDown">
+                <h3>Notifications</h3>
+                <button class="closeNotiBtn" onclick="closeNotiPopup()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <ul class="noti_list">
+                    <li>
+                        <p> New container report uploaded.</p>
+                    </li>
+                    <li>
+                        <p>Payment for invoice #245 confirmed.</p>
+                    </li>
+                    <li>
+                        <p>Low storage space warning.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel_wrapper">
+            <button class="panel" onclick="handlePanelPopup()"><i class="fa-brands fa-windows"></i></button>
+
+            <div class="panel_box animate__animated animate__fadeInDown">
+                <h3>Current Workspace</h3>
+                <button class="closePanelBtn" onclick="closePanelPopup()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="panel_preview">
+                    <div class="preview_header">Dashboard</div>
+                    <div class="preview_content">
+                        <p>Quick overview of your active module...</p>
+                        <div class="preview_grid">
+                            <div class="preview_card">Reports</div>
+                            <div class="preview_card">Tasks</div>
+                            <div class="preview_card">Performance</div>
+                            <div class="preview_card">Logs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="user_wrapper">
+            <div class="user_img">
+                <img src="./" alt="User Image">
+                <div class="user_initials">CS</div>
+            </div>
+
+            <div class="user_info">
+                <p class="user_name">Codespro Solutions</p>
+                <p class="user_role">Administrator</p>
+            </div>
+        </button>
+    </div>
+</div>
+
+<div class="theme_wrapper">
+
+    <div class="boxTheme animate__animated animate__fadeInDown">
+        <h3>Select Themes </h3>
+        <button class="closeThemeBtn" onclick="closeThemePopup()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="boxTheme1 lightmode" id="default-btn" data-content="Default">
+            <div class="lnav">
+                <div class="laside"></div>
+                <div class="lmain_cont">
+                    <div class="ltopnav"></div>
+                    <div class="boxesl">
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxTheme1 darkmode" id="black-btn" data-content="Dark mode">
+            <div class="lnav">
+                <div class="laside"></div>
+                <div class="lmain_cont">
+                    <div class="ltopnav"></div>
+                    <div class="boxesl">
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="boxTheme1 blueish theme" id="blue-btn" data-content="blue">
+            <div class="lnav">
+                <div class="laside"></div>
+                <div class="lmain_cont">
+                    <div class="ltopnav"></div>
+                    <div class="boxesl">
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxTheme1 defaultish theme" id="white-btn" data-content="Light Mode">
+            <div class="lnav">
+                <div class="laside"></div>
+                <div class="lmain_cont">
+                    <div class="ltopnav"></div>
+                    <div class="boxesl">
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

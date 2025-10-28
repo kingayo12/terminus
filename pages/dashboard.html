@@ -1,0 +1,174 @@
+<!-- pages/dashboard.html -->
+<div class="dashboard_page">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="#" class="crumb">Home</a></li>
+            <li><a href="#" class="crumb">Dashboard</a></li>
+            <li aria-current="page" class="crumb current">Overview</li>
+        </ol>
+    </nav>
+
+    <!-- Cards -->
+    <section class="cards_container">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: 0s;">
+            <div class="card_icon bg-primary">
+                <i class="fa-solid fa-door-open"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Today's Gate-In</div>
+                <div class="card_value">42</div>
+                <div class="card_meta">Updated: 10 mins ago</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .08s;">
+            <div class="card_icon bg-success">
+                <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Yard Stock by TEUs</div>
+                <div class="card_value">138</div>
+                <div class="card_meta">Total Capacity: 80%</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .16s;">
+            <div class="card_icon bg-info">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Gate-In Today</div>
+                <div class="card_value">63</div>
+                <div class="card_meta">Containers processed</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .24s;">
+            <div class="card_icon bg-warning-dark">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Gate-Out Today</div>
+                <div class="card_value">51</div>
+                <div class="card_meta">Containers released</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .32s;">
+            <div class="card_icon bg-info">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Check-In (L.Month)</div>
+                <div class="card_value">312</div>
+                <div class="card_meta">Compared to 286 in Sept</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .4s;">
+            <div class="card_icon bg-error">
+                <i class="fa-solid fa-calendar-minus"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Check-Out (L.Month)</div>
+                <div class="card_value">287</div>
+                <div class="card_meta">+4% vs previous month</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .48s;">
+            <div class="card_icon bg-warning-dark">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Pending Invoices</div>
+                <div class="card_value">19</div>
+                <div class="card_meta">Total value: ₦12.4M</div>
+            </div>
+        </article>
+
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .56s;">
+            <div class="card_icon bg-success">
+                <i class="fa-solid fa-warehouse"></i>
+            </div>
+            <div class="card_body">
+                <div class="card_title">Containers in Yard</div>
+                <div class="card_value">204</div>
+                <div class="card_meta">Currently stocked</div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Secondary row: larger summary + recent activities -->
+    <section class="secondary_row">
+        <div class="summary_card animate__animated animate__fadeInLeft" style="animation-delay: .32s;">
+            <h3 class="summary_title">Today’s Snapshot</h3>
+
+            <div class="summary_stats">
+                <div class="stat">
+                    <div class="stat_label">In Gate (Laden)</div>
+                    <div class="stat_value">48</div>
+                </div>
+                <div class="divider"></div>
+                <div class="stat">
+                    <div class="stat_label">Out Gate (Empty)</div>
+                    <div class="stat_value">21</div>
+                </div>
+                <div class="divider"></div>
+                <div class="stat">
+                    <div class="stat_label">Avg Turnaround</div>
+                    <div class="stat_value">2h 14m</div>
+                </div>
+            </div>
+
+            <!-- Chart area -->
+            <div class="chart_container" style="margin-top: 18px;">
+                <canvas id="snapshotChart"></canvas>
+            </div>
+        </div>
+
+
+        <aside class="activities_card animate__animated animate__fadeInRight" style="animation-delay: .4s;">
+            <div class="activities_header">
+                <h3>Recent Activities</h3>
+                <a href="#" class="view_all">View all</a>
+            </div>
+
+            <ul class="activities_list">
+                <li>
+                    <span class="dot dot-green" aria-hidden="true"></span>
+                    <div class="act_text">
+                        <div class="act_main">Truck <strong>#TX2145</strong> entered gate</div>
+                        <div class="act_sub">12:14 PM — Gate A</div>
+                    </div>
+                </li>
+
+                <li>
+                    <span class="dot dot-yellow" aria-hidden="true"></span>
+                    <div class="act_text">
+                        <div class="act_main">Invoice <strong>#INV004</strong> pending approval</div>
+                        <div class="act_sub">Finance team notified</div>
+                    </div>
+                </li>
+
+                <li>
+                    <span class="dot dot-blue" aria-hidden="true"></span>
+                    <div class="act_text">
+                        <div class="act_main">Vessel <strong>MV Horizon</strong> docked at Quay 3</div>
+                        <div class="act_sub">ETA 11:00 AM — Unloading</div>
+                    </div>
+                </li>
+
+                <li>
+                    <span class="dot dot-red" aria-hidden="true"></span>
+                    <div class="act_text">
+                        <div class="act_main">Container <strong>C567</strong> delayed</div>
+                        <div class="act_sub">Issue: Documentation</div>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+    </section>
+</div>

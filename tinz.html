@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terminus Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(135deg, #e0f2fe, #ffffff);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient h-screen w-screen overflow-hidden">
+
+    <!-- INTRO SECTION -->
+    <div id="introContainer" class="h-full w-full relative">
+        <div id="slides" class="h-full w-full relative">
+            <!-- Slide 1 -->
+            <div
+                class="slide h-full w-full flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
+                <img src="https://cdn-icons-png.flaticon.com/512/2907/2907439.png"
+                    class="w-32 mb-6 animate__animated animate__pulse animate__infinite" />
+                <h2 class="text-4xl font-bold text-[#0f2167] mb-3">Welcome to Terminus</h2>
+                <p class="max-w-md text-gray-600 text-lg">Simplify your terminal operations with precision, speed, and
+                    reliability.</p>
+            </div>
+
+            <!-- Slide 2 -->
+            <div
+                class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
+                <img src="https://cdn-icons-png.flaticon.com/512/1484/1484569.png"
+                    class="w-32 mb-6 animate__animated animate__pulse animate__infinite" />
+                <h2 class="text-4xl font-bold text-[#0f2167] mb-3">Real-time Insights</h2>
+                <p class="max-w-md text-gray-600 text-lg">Monitor container movements, schedules, and reports — all in
+                    real time.</p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div
+                class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
+                <img src="https://cdn-icons-png.flaticon.com/512/2784/2784427.png"
+                    class="w-32 mb-6 animate__animated animate__pulse animate__infinite" />
+                <h2 class="text-4xl font-bold text-[#0f2167] mb-3">Secure & Reliable</h2>
+                <p class="max-w-md text-gray-600 text-lg">Experience enterprise-grade protection for your terminal
+                    operations data.</p>
+            </div>
+        </div>
+
+        <!-- Buttons bottom-right -->
+        <div class="absolute bottom-10 right-10 flex items-center space-x-4">
+            <button id="prevBtn"
+                class="hidden bg-blue-200 text-[#0f2167] px-4 py-2 rounded-lg shadow hover:bg-blue-300 transition">Prev</button>
+            <button id="nextBtn"
+                class="bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition">Next</button>
+            <button id="skipBtn"
+                class="bg-blue-300 text-[#0f2167] px-5 py-2 rounded-lg shadow hover:bg-blue-400 transition">Skip</button>
+        </div>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <div id="loginContainer"
+        class="hidden h-full w-full flex flex-col items-center justify-center bg-white animate__animated animate__fadeIn">
+        <div class="w-full bg-white rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row">
+            <!-- LEFT SIDE -->
+            <div class="w-full max-w-4xl md:w-1/2 flex flex-col justify-between px-10 py-12 space-y-6">
+                <!-- Logo -->
+                <div>
+                    <!-- Replace with your logo image later -->
+                    <h2 class="text-2xl font-bold text-gray-800">Terminus</h2>
+                </div>
+
+                <!-- Welcome Text -->
+                <div>
+                    <h1 class="text-3xl font-semibold text-gray-900">Welcome Back</h1>
+                    <p class="text-gray-500 mt-2">
+                        Enter your email and password to access your account.
+                    </p>
+                </div>
+
+                <!-- Login Form -->
+                <form class="flex flex-col space-y-5">
+                    <!-- Email -->
+                    <div>
+                        <label class="text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" placeholder="you@example.com"
+                            class="w-full mt-2 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label class="text-sm font-medium text-gray-700">Password</label>
+                        <div class="relative mt-2">
+                            <input type="password" placeholder="••••••••"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                            <span
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm">👁️</span>
+                        </div>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" class="rounded text-indigo-600" />
+                            <span>Remember Me</span>
+                        </label>
+                        <a href="#" class="text-indigo-600 hover:underline">Forgot Your Password?</a>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg transition">
+                        Log In
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="flex items-center justify-center my-2">
+                        <div class="border-t border-gray-200 w-1/3"></div>
+                        <span class="mx-2 text-gray-400 text-sm">Or Login With</span>
+                        <div class="border-t border-gray-200 w-1/3"></div>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="flex space-x-4">
+                        <button type="button"
+                            class="flex-1 border border-gray-300 py-2 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition">
+                            Google
+                        </button>
+                        <button type="button"
+                            class="flex-1 border border-gray-300 py-2 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition">
+                            Apple
+                        </button>
+                    </div>
+
+                    <!-- Register -->
+                    <p class="text-sm text-center text-gray-600 mt-4">
+                        Don’t Have An Account?
+                        <a href="#" class="text-indigo-600 font-medium hover:underline">Register Now.</a>
+                    </p>
+                </form>
+
+                <!-- Footer -->
+                <footer class="text-center text-xs text-gray-400 mt-6">
+                    © 2025 Terminus Enterprises LTD. |
+                    <a href="#" class="text-indigo-500 hover:underline">Privacy Policy</a>
+                </footer>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div
+                class="w-full md:w-1/2 bg-indigo-600 text-white flex flex-col justify-center items-center p-10 relative">
+                <div class="max-w-sm">
+                    <h2 class="text-2xl font-semibold mb-2">
+                        Effortlessly manage your team and operations.
+                    </h2>
+                    <p class="text-indigo-200 text-sm mb-8">
+                        Log in to access your CRM dashboard and manage your team.
+                    </p>
+
+                    <!-- Placeholder for dashboard image -->
+                    <div class="bg-white/20 rounded-xl w-full h-48 flex items-center justify-center">
+                        <span class="text-white/70 text-sm">[Dashboard Image Here]</span>
+                    </div>
+                </div>
+
+                <!-- Optional background pattern -->
+                <div class="absolute inset-0 bg-indigo-700/30 backdrop-blur-sm" style="z-index: -1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll(".slide");
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        const skipBtn = document.getElementById("skipBtn");
+        const introContainer = document.getElementById("introContainer");
+        const loginContainer = document.getElementById("loginContainer");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.add("hidden");
+                if (i === index) {
+                    slide.classList.remove("hidden");
+                    slide.classList.add("animate__fadeIn");
+                }
+            });
+
+            prevBtn.classList.toggle("hidden", index === 0);
+            nextBtn.textContent = index === slides.length - 1 ? "Finish" : "Next";
+        }
+
+        nextBtn.addEventListener("click", () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else {
+                introContainer.classList.add("animate__fadeOutUp");
+                setTimeout(() => {
+                    introContainer.classList.add("hidden");
+                    loginContainer.classList.remove("hidden");
+                    loginContainer.classList.add("animate__fadeInDown");
+                }, 600);
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        skipBtn.addEventListener("click", () => {
+            introContainer.classList.add("animate__fadeOutUp");
+            setTimeout(() => {
+                introContainer.classList.add("hidden");
+                loginContainer.classList.remove("hidden");
+                loginContainer.classList.add("animate__fadeInDown");
+            }, 600);
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+
+</html>
