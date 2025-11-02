@@ -24,7 +24,7 @@
 }
 
 body.dark-theme {
-  --primary-color: #5a8dfb;
+  --primary-color: #0349d7;
   --secondary-color: #12141f;
   --background-light: #212529;
   --background-dark: #fff;
@@ -1466,13 +1466,43 @@ button.noti .noti_count {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* background: pink; */
+  flex-direction: row;
 }
 
 /* Toggle switch style */
 .switch {
   position: relative;
-  width: 46px;
+  width: 80px;
   height: 24px;
+}
+.switch_label {
+  position: absolute;
+  cursor: pointer;
+  /* background-color: #ccc; */
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--accent-color);
+  justify-content: center;
+}
+
+.switch_text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.switch_text::before {
+  content: attr(data-off);
+}
+.switch input:checked + .switch_label .switch_text::before {
+  content: attr(data-on);
 }
 .switch input {
   opacity: 0;
@@ -1505,7 +1535,7 @@ button.noti .noti_count {
   background-color: var(--primary-color);
 }
 .switch input:checked + label:before {
-  transform: translateX(22px);
+  transform: translateX(54px);
 }
 
 /* ---------- Form Actions ---------- */
@@ -1568,18 +1598,19 @@ button.noti .noti_count {
   background: var(--background-light);
   border: 1px solid var(--border-color);
   border-radius: 10px;
+  padding: 10px;
   box-shadow: 0 8px 24px rgba(14, 30, 64, 0.04);
 }
 
 .records_table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 12px !important;
   min-width: 800px;
 }
 .records_table thead {
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  color: #fff;
+  background: var(--primary-color);
+  color: #fff !important;
 }
 .records_table th,
 .records_table td {
@@ -1587,8 +1618,21 @@ button.noti .noti_count {
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
+
+.records_table td {
+  color: var(--text-color);
+}
 .records_table tbody tr:hover {
   background: rgba(3, 73, 215, 0.05);
+}
+
+/* Datatable Buttons Styling */
+.dt-button {
+  border: none !important;
+  margin: 2px !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 12px !important;
 }
 
 /* Status badges */
@@ -1606,6 +1650,34 @@ button.noti .noti_count {
 .status.no {
   background: rgba(231, 76, 60, 0.1);
   color: var(--error-color);
+}
+
+.dataTables_info {
+  font-size: 12px !important;
+  color: var(--text-light) !important;
+}
+
+.dataTables_paginate .paginate_button {
+  background: transparent !important;
+  color: var(--accent-color) !important;
+  border: 1px solid var(--accent-color) !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  margin: 2px !important;
+  font-size: 12px !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+  border: 1px solid var(--accent-color) !important;
+  background: transparent !important;
+  color: var(--text-light) !important;
+}
+
+.dataTables_paginate .paginate_button.disabled {
+  background: transparent !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-light) !important;
+  cursor: not-allowed !important;
 }
 
 /* ---------- Responsive ---------- */

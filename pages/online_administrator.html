@@ -80,7 +80,9 @@
                 <label><i class="fa-solid fa-door-closed"></i> Ignore Gate Out Rules</label>
                 <div class="switch">
                     <input type="checkbox" id="ignoreRule">
-                    <label for="ignoreRule"></label>
+                    <label for="ignoreRule" class="switch_label">
+                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                    </label>
                 </div>
             </div>
 
@@ -89,7 +91,9 @@
                 <label><i class="fa-solid fa-ban"></i> Suspended</label>
                 <div class="switch">
                     <input type="checkbox" id="suspended">
-                    <label for="suspended"></label>
+                    <label for="suspended" class="switch_label">
+                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                    </label>
                 </div>
             </div>
 
@@ -98,7 +102,9 @@
                 <label><i class="fa-solid fa-check-circle"></i> Approved</label>
                 <div class="switch">
                     <input type="checkbox" id="approved">
-                    <label for="approved"></label>
+                    <label for="approved" class="switch_label">
+                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                    </label>
                 </div>
             </div>
 
@@ -107,7 +113,9 @@
                 <label><i class="fa-solid fa-envelope-circle-check"></i> Email Confirmed</label>
                 <div class="switch">
                     <input type="checkbox" id="emailConfirmed">
-                    <label for="emailConfirmed"></label>
+                    <label for="emailConfirmed" class="switch_label">
+                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                    </label>
                 </div>
             </div>
 
@@ -116,7 +124,9 @@
                 <label><i class="fa-solid fa-ship"></i> Manifest Allowed</label>
                 <div class="switch">
                     <input type="checkbox" id="manifestAllowed">
-                    <label for="manifestAllowed"></label>
+                    <label for="manifestAllowed" class="switch_label">
+                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -127,7 +137,7 @@
             <button type="reset" class="btn btn-dark"><i class="fa-solid fa-rotate-left"></i> Clear</button>
             <button type="button" class="btn btn-primary"><i class="fa-solid fa-search"></i> Search</button>
         </div>
-        ```
+
 
     </form>
 
@@ -164,8 +174,9 @@
                     <td>John Ade</td>
                     <td><span class="status yes">Yes</span></td>
                     <td><span class="status no">No</span></td>
-                    <td> <button class="action-btn edit"><i class="fa fa-edit"></i></button> <button
-                            class="action-btn delete"><i class="fa fa-trash"></i></button> </td>
+                    <td> <button class="action-btn edit" onclick="handleDelete(this, 1)"><i
+                                class="fa fa-edit"></i></button> <button class="action-btn delete"><i
+                                class="fa fa-trash"></i></button> </td>
                 </tr>
                 <tr>
                     <td>Harbor Freight</td>
@@ -176,8 +187,9 @@
                     <td>Mary Okafor</td>
                     <td><span class="status no">No</span></td>
                     <td><span class="status yes">Yes</span></td>
-                    <td> <button class="action-btn edit"><i class="fa fa-edit"></i></button> <button
-                            class="action-btn delete"><i class="fa fa-trash"></i></button> </td>
+                    <td> <button class="action-btn edit"><i class="fa fa-edit"
+                                onclick="handleDelete(this, 1)"></i></button> <button class="action-btn delete"><i
+                                class="fa fa-trash"></i></button> </td>
                 </tr>
             </tbody>
         </table>

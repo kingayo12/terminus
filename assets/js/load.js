@@ -43,6 +43,39 @@ function initSidebarMenu() {
         // Load the page into #content
         includeHTML("content", pageFile, () => {
           console.log(`✅ Loaded ${target}.html`);
+
+          $(document).ready(function () {
+            const table = $(".records_table").DataTable({
+              dom: "Bfrtip",
+              buttons: [
+                { extend: "copy", className: "btn btn-dark" },
+                { extend: "csv", className: "btn btn-primary" },
+                { extend: "excel", className: "btn btn-success" },
+                { extend: "pdf", className: "btn btn-danger" },
+                { extend: "print", className: "btn btn-info" },
+                { extend: "colvis", className: "btn btn-secondary" },
+              ],
+              pageLength: 5,
+              responsive: true,
+            });
+
+            // 📝 Handle Edit
+            $(".records_table").on("click", ".action-btn.edit", function () {
+              const row = $(this).closest("tr");
+              const data = table.row(row).data();
+              alert(`Editing ${data[0]} (${data[1]})`);
+              // You can auto-fill your form fields here with the data values
+            });
+
+            // 🗑️ Handle Delete
+            $(".records_table").on("click", ".action-btn.delete", function () {
+              const row = $(this).closest("tr");
+              const data = table.row(row).data();
+              if (confirm(`Are you sure you want to delete ${data[0]}?`)) {
+                table.row(row).remove().draw();
+              }
+            });
+          });
         });
       }
     });
