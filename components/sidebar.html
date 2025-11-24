@@ -3,7 +3,10 @@
         <img src="./assets/imgs/logo/logo.png" alt="Logo" class="logo_lg">
         <img src="./assets/imgs/logo/logo_sm.png" alt="" class="logo_sm">
     </div>
-    <div class="collapse_btn" onclick="handleCollapseToggle()">
+    <div class="collapse_btn xl-hidden" onclick="handleCollapseToggle()">
+        <i class="fa fa-angle-left"></i>
+    </div>
+    <div class="collapse_btn md-hidden" onclick="handlemobileToggle()">
         <i class="fa fa-angle-left"></i>
     </div>
     <div class="menu_items">
@@ -34,7 +37,7 @@
         <a href="#" class="menu_item"><i class="fa-solid fa-clock-rotate-left"></i><span>Gate History</span></a>
     </div>
     <div class="exit_settings">
-        <a href="#" class="menu_item"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+        <a href="#" class="menu_item" data-target="Settings"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
     </div>
 </div>

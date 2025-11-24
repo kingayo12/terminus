@@ -1,6 +1,8 @@
 <div class="header">
     <div class="left">
-        <button onclick="handleThemeShow()"><i class="fa fa-palette"></i></button>
+        <button type="button" title="menu toggle" onclick="handlemobileToggle()" class="md-hidden"><i
+                class="fa fa-bars"></i></button>
+        <button type="button" title="theme toggle" onclick="handleThemeShow()"><i class="fa fa-palette"></i></button>
         <div class="search">
             <input type="text" placeholder="Search...">
             <i class="fa fa-search"></i>
@@ -18,7 +20,7 @@
         <div class="noti_wrapper">
             <button class="noti" onclick="handleNotiPopup()">
                 <i class="fa fa-bell"></i>
-                <span class="noti_count">3</span>
+                <span class="noti_count">20</span>
             </button>
 
             <div class="noti_box animate__animated animate__fadeInDown">
@@ -65,12 +67,12 @@
         </div>
         <button class="user_wrapper">
             <div class="user_img">
-                <img src="./" alt="User Image">
-                <div class="user_initials">CS</div>
+                <img src="../assets/imgs/profile/user.png" alt="User Image">
+                <div class="user_initials"></div>
             </div>
 
             <div class="user_info">
-                <p class="user_name">Codespro Solutions</p>
+                <p class="user_name" title="Codespro Solutions">Codespro Solutions</p>
                 <p class="user_role">Administrator</p>
             </div>
         </button>
@@ -84,7 +86,7 @@
         <button class="closeThemeBtn" onclick="closeThemePopup()">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="boxTheme1 lightmode" id="default-btn" data-content="Default">
+        <div class="boxTheme1 lightmode" id="default-btn" data-content="default">
             <div class="lnav">
                 <div class="laside"></div>
                 <div class="lmain_cont">
@@ -98,22 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="boxTheme1 darkmode" id="black-btn" data-content="Dark mode">
-            <div class="lnav">
-                <div class="laside"></div>
-                <div class="lmain_cont">
-                    <div class="ltopnav"></div>
-                    <div class="boxesl">
-                        <div class="boxl"></div>
-                        <div class="boxl"></div>
-                        <div class="boxl"></div>
-                        <div class="boxl"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="boxTheme1 blueish theme" id="blue-btn" data-content="blue">
+        <div class="boxTheme1 purple-theme" id="purple-btn" data-content="Purple Royale">
             <div class="lnav">
                 <div class="laside"></div>
                 <div class="lmain_cont">
@@ -127,7 +114,21 @@
                 </div>
             </div>
         </div>
-        <div class="boxTheme1 defaultish theme" id="white-btn" data-content="Light Mode">
+        <div class="boxTheme1 royal-theme" id="royal-btn" data-content="Royal">
+            <div class="lnav">
+                <div class="laside"></div>
+                <div class="lmain_cont">
+                    <div class="ltopnav"></div>
+                    <div class="boxesl">
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                        <div class="boxl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxTheme1 amethyst-theme" id="amethyst-btn" data-content="Amethyst">
             <div class="lnav">
                 <div class="laside"></div>
                 <div class="lmain_cont">

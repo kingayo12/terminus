@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<body>
+<body class="default">
 
     <div class="dashboard_container">
         <!-- sidebar -->
@@ -33,13 +33,30 @@
 
             </div>
         </div>
+        <!-- ================= LOCK SCREEN OVERLAY ================= -->
+        <div id="lockScreen" class="lock-overlay">
+            <div class="lock-container">
+                <h2><i class="fa-solid fa-lock"></i> Session Locked</h2>
+                <p>Please enter your password or unlock token</p>
+
+                <input id="unlockInput" type="password" placeholder="Enter password or token">
+
+                <button id="unlockBtn">
+                    <span class="btnText">Unlock</span>
+                    <span class="btnLoader"></span>
+                </button>
+
+                <p class="error-text" id="unlockError"></p>
+            </div>
+        </div>
+
     </div>
 
 
 
     <script src="./assets/js/charts.js" defer></script>
-    <script src="./assets/js/load.js" defer></script>
     <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/load.js" defer></script>
 
     <!-- datatablejs  -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

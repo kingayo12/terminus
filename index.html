@@ -9,6 +9,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style>
+        /* OTP input styles */
+        .otp-box {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            outline: none;
+            background-color: white;
+        }
+
+        .otp-box:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+        }
+
+        #twoFABox {
+            width: 100%;
+            animation-duration: 0.6s;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient h-screen w-screen overflow-hidden">
@@ -16,21 +42,18 @@
     <!-- INTRO SECTION -->
     <div id="introContainer" class="h-full w-full relative">
         <nav style="z-index: 8; backdrop-filter: blur(50px);"
-            class="bg-white  mt-2 rounded-md p-2 h-14 w-[98.5%]  flex items-center shadow-md absolute top-0 left-2">
+            class="bg-white mt-2 rounded-md p-2 h-14 w-[98.5%] flex items-center shadow-md absolute top-0 left-2">
             <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center">
-                <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" class="h-8" />
+                <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" loading="lazy" class="h-8" />
             </div>
         </nav>
+
         <div id="slides" class="h-full w-full relative">
             <!-- Slide 1 -->
             <div
-                class="slide h-full w-full flex flex-col  items-center text-center justify-center text-center md:text-left text-gray-800 animate__animated animate__fadeIn px-6 md:px-16 relative">
-                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                class="slide h-full w-full flex flex-col items-center text-center justify-center text-gray-800 animate__animated animate__fadeIn px-6 md:px-16 relative">
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern" loading="lazy"
                     class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
-
-                <!-- Text Section -->
-
-
                 <h2 class="text-3xl md:text-4xl font-bold text-[#0349d7] mb-3">
                     TOS
                 </h2>
@@ -39,37 +62,12 @@
                     From invoicing and container tracking to barge entries and performance
                     reports—all in one place.
                 </p>
-
-                <!-- <ul class="text-gray-200 text-sm md:text-base space-y-2 text-left mx-auto md:mx-0">
-                    <li class="flex items-start text-black space-x-2">
-                        <i
-                            class="fa-solid fa-file-invoice text-[#0349d7] w-10 h-8 flex justify-center items-center bg-white rounded-full"></i>
-                        <span><strong style="background: white;" class="text-[#0349d7] p-1 mt-4">Automated
-                                Invoicing:</strong> Generate and manage invoices effortlessly for
-                            all transactions.</span>
-                    </li>
-
-                    <li class="flex text-black items-start space-x-2">
-                        <i
-                            class="fa-solid fa-truck text-[#0349d7] w-10 h-8 flex justify-center items-center bg-white rounded-full"></i>
-                        <span><strong style="background: white;" class="text-[#0349d7] p-1 mt-4">Container
-                                Tracking:</strong>
-                            Monitor movements,
-                            locations, and statuses in
-                            real time.</span>
-                    </li>
-
-
-                </ul> -->
-
-
             </div>
-
 
             <!-- Slide 2 -->
             <div
                 class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
-                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern" loading="lazy"
                     class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
                 <h2 class="text-4xl font-bold text-[#0349d7] mb-3">Real-time Insights</h2>
                 <p class="max-w-md text-gray-600 text-lg">Monitor container movements, schedules, and reports — all in
@@ -79,7 +77,7 @@
             <!-- Slide 3 -->
             <div
                 class="slide h-full w-full hidden flex flex-col items-center justify-center text-center text-gray-800 animate__animated animate__fadeIn">
-                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern"
+                <img src="./assets/imgs/bg/ik.jpg" alt="Background pattern" loading="lazy"
                     class="absolute inset-0 w-full h-full object-cover opacity-10" style="z-index: -1;" />
                 <h2 class="text-4xl font-bold text-[#0349d7] mb-3">Secure & Reliable</h2>
                 <p class="max-w-md text-gray-600 text-lg">Experience enterprise-grade protection for your terminal
@@ -90,16 +88,15 @@
         <!-- Buttons bottom-right -->
         <div class="absolute bottom-10 right-10 flex items-center space-x-4">
             <button id="prevBtn"
-                class="hidden bg-white text-black px-5 py-1 rounded-lg shadow hover:bg-black  hover:text-white hover:ring-2 ring-white transition">Prev</button>
+                class="hidden bg-white text-black px-5 py-1 rounded-lg shadow hover:bg-black hover:text-white hover:ring-2 ring-white transition">Prev</button>
             <button id="nextBtn"
                 class="bg-white text-black px-5 py-1 rounded-lg shadow hover:bg-black hover:text-white hover:ring-2 ring-white transition">Next</button>
             <button id="skipBtn"
-                class="bg-black text-white px-5 py-1 rounded-lg shadow  hover:text-white ring-2 ring-white transition">Skip
+                class="bg-black text-white px-5 py-1 rounded-lg shadow hover:text-white ring-2 ring-white transition">Skip
                 Intro</button>
         </div>
     </div>
 
-    <!-- LOGIN SECTION -->
     <!-- LOGIN SECTION -->
     <div id="loginContainer"
         class="hidden h-full min-h-full w-full flex flex-col items-center justify-center animate__animated animate__fadeIn">
@@ -107,29 +104,29 @@
             <!-- LEFT SIDE -->
             <div class="relative w-full max-w-4xl md:w-1/2 flex flex-col justify-between px-10 py-12 space-y-4">
 
-                <!-- Logo -->
-                <div class="flex flex-row justify-between ">
-                    <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" class="w-full max-w-48">
+                <div class="flex flex-row justify-between">
+                    <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" loading="lazy" class="w-full max-w-48">
                     <div class="version text-indigo-200 text-[10px]">V 7.1.2</div>
                 </div>
 
-                <!-- Welcome Text -->
-                <div class="max-w-4xl m-auto text-center">
-                    <!-- <h1 class="text-2xl font-semibold text-gray-900">Welcome Back</h1>
+                <div class="two_hidden max-w-4xl w-full flex flex-col m-auto text-center">
+                    <h1
+                        class="text-2xl font-semibold text-gray-900 relative text-center flex align-center justify-center text-center w-full">
+                        Sign In
+                        <div
+                            class="text-left absolute float-left top-16 w-full -right-44 flex justify-center items-center">
+                            <button id="replayIntroBtn"
+                                class="text-xs text-blue-600 hover:bg-blue-200/10 rounded-full px-2 py-1">
+                                Replay Intro <i class="fa fa-play"></i>
+                            </button>
+                        </div>
+                    </h1>
                     <p class="text-gray-500 mt-1 text-sm">
                         Log in to manage your container terminal operations with Terminus.
-                    </p> -->
-                    <h1 class="text-2xl font-semibold text-gray-900">Sign In</h1>
-
-                </div>
-                <div class="text-left absolute top-28 right-10 md:right-24  sm:right-16">
-                    <button id="replayIntroBtn" class="text-xs text-blue-600 hover:underline">
-                        -Replay Intro
-                    </button>
+                    </p>
                 </div>
 
-                <!-- Login Form -->
-                <form class="space-y-4 w-full max-w-md m-auto text-sm">
+                <form class="two_hidden space-y-4 w-full max-w-md m-auto text-sm">
                     <!-- Username -->
                     <div>
                         <label for="username" class="block text-gray-700 font-medium text-xs mb-1">Username</label>
@@ -182,7 +179,7 @@
                             <input type="checkbox" id="rememberMe" class="rounded text-indigo-600 w-3 h-3" />
                             <span>Remember Me</span>
                         </label>
-                        <a href="#" class="text-indigo-600 hover:underline">Forgot Password?</a>
+                        <a href="forgotpassword.html" class="text-indigo-600 hover:underline">Forgot Password?</a>
                     </div>
 
                     <!-- Login Button -->
@@ -190,8 +187,6 @@
                         class="w-full py-2 text-sm bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition">
                         Sign In
                     </button>
-
-
 
                     <!-- Social Login -->
                     <div class="flex flex-row space-x-4 w-32 m-auto align-center justify-center">
@@ -213,22 +208,48 @@
                     </p>
                 </form>
 
+                <!-- 2FA SECTION (inside login container) -->
+                <div id="twoFABox"
+                    class="hidden animate__animated animate__fadeIn flex flex-col items-center justify-center px-8 py-10 text-center">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Two-Factor Authentication</h2>
+                    <p class="text-sm text-gray-600 mb-8">
+                        Enter the 6-digit verification code sent to your registered email or phone number.
+                    </p>
 
+                    <!-- OTP Boxes -->
+                    <div id="otpInputs" class="flex justify-between gap-3 mb-8">
+                        <input type="text" maxlength="1" class="otp-box" />
+                        <input type="text" maxlength="1" class="otp-box" />
+                        <input type="text" maxlength="1" class="otp-box" />
+                        <input type="text" maxlength="1" class="otp-box" />
+                        <input type="text" maxlength="1" class="otp-box" />
+                        <input type="text" maxlength="1" class="otp-box" />
+                    </div>
 
-                <!-- Footer -->
+                    <button id="verify2FABtn"
+                        class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">Verify</button>
+
+                    <p id="twoFAError" class="text-red-600 text-xs mt-3 hidden">Invalid code. Please try again.</p>
+
+                    <p class="text-sm text-gray-500 mt-6">
+                        Didn’t receive a code?
+                        <button id="resendCode" class="text-blue-600 hover:underline text-sm">Resend</button>
+                    </p>
+                </div>
+
                 <footer class="text-center text-[10px] text-gray-400 mt-1">
                     © 2025 Terminus Enterprises LTD. |
                     <a href="#" class="text-[#0349d7] hover:underline">Privacy Policy</a>
                 </footer>
             </div>
 
+
             <!-- RIGHT SIDE -->
             <div
                 class="w-full md:w-1/2 bg-[#0349d7] text-white flex flex-col justify-center items-center p-10 relative overflow-hidden hidden md:flex">
-                <img src="./assets/imgs/bg/bg1.png" alt="Background pattern"
+                <img loading="lazy" src="./assets/imgs/bg/bg1.png" alt="Background pattern"
                     class="absolute inset-0 w-full h-full object-cover opacity-10 moving-bg" style="z-index: 1;" />
-
-                <div class="max-w-sm" style="z-index: 2;">
+                <div class="two_hidden max-w-sm" style="z-index: 2;">
                     <h2 class="text-xl font-semibold mb-2">
                         Simplify your terminal operations with Terminus.
                     </h2>
@@ -236,16 +257,14 @@
                         Terminus helps container terminals manage daily operations — from invoicing and rating to barge
                         entries, container tracking, and performance reporting — all in one seamless system.
                     </p>
-
-                    <!-- Image Slider -->
-                    <div class=" w-full h-50 overflow-hidden relative">
+                    <div class="w-full h-50 overflow-hidden relative">
                         <div id="slider" class="flex transition-transform duration-700 ease-in-out">
-                            <img src="./assets/imgs/login/dashboard.png" alt="Dashboard preview 1"
-                                class="w-full object-cover  shadow-lg flex-shrink-0" />
-                            <img src="./assets/imgs/login/dashboard2.gif" alt="Dashboard preview 2"
-                                class="w-full object-contain  shadow-lg flex-shrink-0" />
-                            <img src="./assets/imgs/login/dashboard3.gif" alt="Dashboard preview 3"
-                                class="w-full  object-cover rounded-lg shadow-lg flex-shrink-0" />
+                            <img src="./assets/imgs/login/dashboard.png" alt="Dashboard preview 1" loading="lazy"
+                                class="w-full object-cover shadow-lg flex-shrink-0" />
+                            <img src="./assets/imgs/login/dashboard2.gif" alt="Dashboard preview 2" loading="lazy"
+                                class="w-full object-contain shadow-lg flex-shrink-0" />
+                            <img src="./assets/imgs/login/dashboard3.gif" alt="Dashboard preview 3" loading="lazy"
+                                class="w-full object-cover rounded-lg shadow-lg flex-shrink-0" />
                         </div>
                     </div>
                 </div>
@@ -255,7 +274,8 @@
         </div>
     </div>
 
-
+    <!-- 2FA SECTION -->
+    <!-- 2FA SECTION -->
     <script>
         const slides = document.querySelectorAll(".slide");
         const nextBtn = document.getElementById("nextBtn");
@@ -265,7 +285,6 @@
         const loginContainer = document.getElementById("loginContainer");
         let currentSlide = 0;
 
-        // ========== INTRO CONTROL ==========
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.add("hidden");
@@ -283,7 +302,6 @@
                 currentSlide++;
                 showSlide(currentSlide);
             } else {
-                // When user clicks FINISH, mark intro as seen permanently
                 localStorage.setItem("introSeen", "true");
                 transitionToLogin();
             }
@@ -297,7 +315,6 @@
         });
 
         skipBtn.addEventListener("click", () => {
-            // Skip just hides the intro for now (don’t mark as seen)
             transitionToLogin();
         });
 
@@ -310,7 +327,6 @@
             }, 600);
         }
 
-        // Check on page load if intro was already finished
         if (localStorage.getItem("introSeen") === "true") {
             introContainer.classList.add("hidden");
             loginContainer.classList.remove("hidden");
@@ -318,20 +334,16 @@
             showSlide(currentSlide);
         }
 
-        // ========== PASSWORD TOGGLE ==========
         const togglePassword = document.getElementById("togglePassword");
         const passwordInput = document.getElementById("passwordInput");
         togglePassword.addEventListener("click", () => {
-            const type =
-                passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
             passwordInput.setAttribute("type", type);
-            togglePassword.innerHTML =
-                type === "password"
-                    ? '<i class="fa-solid fa-eye"></i>'
-                    : '<i class="fa-solid fa-eye-slash"></i>';
+            togglePassword.innerHTML = type === "password"
+                ? '<i class="fa-solid fa-eye"></i>'
+                : '<i class="fa-solid fa-eye-slash"></i>';
         });
 
-        // ========== IMAGE SLIDER ==========
         const slider = document.getElementById("slider");
         let index = 0;
         setInterval(() => {
@@ -339,7 +351,6 @@
             slider.style.transform = `translateX(-${index * 100}%)`;
         }, 8000);
 
-        // ========== LOGIN VALIDATION ==========
         const loginForm = document.querySelector("form");
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -373,7 +384,7 @@
                 loginButton.classList.add("opacity-70");
 
                 setTimeout(() => {
-                    window.location.href = "dashboard.html";
+                    handleLoginSuccess(matchedUser);
                 }, 1000);
             } else {
                 showError("Invalid credentials. Please try again.");
@@ -386,31 +397,99 @@
                 errorBox = document.createElement("div");
                 errorBox.id = "loginError";
                 errorBox.className =
-                    "text-red-600 text-xs mt-2 animate__animated animate__fadeIn";
-                loginForm.prepend(errorBox);
+                    "absolute top bg-red-600/10 p-2 right-[38%] top-2 mt-2 rounded-md text-red-600 text-xs mt-2 animate__animated animate__fadeIn";
+                loginForm.appendChild(errorBox);
             }
             errorBox.textContent = message;
-
-            setTimeout(() => {
-                errorBox.classList.remove("animate__fadeIn");
-                errorBox.classList.add("animate__fadeOut");
-            }, 2500);
         }
 
-        // ========== REPLAY INTRO ==========
-        const replayBtn = document.getElementById("replayIntroBtn");
-        if (replayBtn) {
-            replayBtn.addEventListener("click", () => {
-                localStorage.removeItem("introSeen");
-                loginContainer.classList.add("hidden");
-                introContainer.classList.remove("hidden");
-                currentSlide = 0;
-                showSlide(currentSlide);
+        document.getElementById("replayIntroBtn").addEventListener("click", () => {
+            localStorage.removeItem("introSeen");
+            location.reload();
+        });
+
+        // ================= 2FA AUTHENTICATION (INLINE) =================
+        const twoFABox = document.getElementById("twoFABox");
+        const verify2FABtn = document.getElementById("verify2FABtn");
+        const twoFAError = document.getElementById("twoFAError");
+        const resendCodeBtn = document.getElementById("resendCode");
+        const otpInputs = document.querySelectorAll(".otp-box");
+        const twoHidden = document.querySelectorAll(".two_hidden");
+
+        let generated2FACode = null;
+        let currentUser = null;
+
+        function handleLoginSuccess(user) {
+            currentUser = user;
+            generated2FACode = generate2FACode();
+            console.log("2FA code:", generated2FACode);
+            alert(`Your 2FA code is: ${generated2FACode}`); // simulate sending
+
+            // hide login form, show 2FA form inside same box
+            // document.getElementById("loginForm").classList.add("hidden");
+            twoHidden.forEach(el => el.classList.add("hidden"));
+            twoFABox.classList.remove("hidden");
+            otpInputs[0].focus();
+        }
+
+        function generate2FACode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // OTP input auto-jump and backspace
+        otpInputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                e.target.value = value;
+                if (value && index < otpInputs.length - 1) otpInputs[index + 1].focus();
             });
-        }
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Verify entered code
+        verify2FABtn.addEventListener("click", () => {
+            const enteredCode = Array.from(otpInputs)
+                .map((input) => input.value)
+                .join("");
+
+            if (enteredCode.length < 6) {
+                twoFAError.textContent = "Please enter all 6 digits.";
+                twoFAError.classList.remove("hidden");
+                return;
+            }
+
+            if (enteredCode === generated2FACode) {
+                verify2FABtn.textContent = "Verifying...";
+                verify2FABtn.disabled = true;
+
+                setTimeout(() => {
+                    alert("2FA verification successful!");
+                    window.location.href = "dashboard.html";
+                }, 1000);
+            } else {
+                twoFAError.classList.remove("hidden");
+                twoFAError.textContent = "Invalid code. Please try again.";
+                twoFAError.classList.add("animate__shakeX");
+                setTimeout(() => twoFAError.classList.remove("animate__shakeX"), 800);
+                otpInputs.forEach((input) => (input.value = ""));
+                otpInputs[0].focus();
+            }
+        });
+
+        // Resend new code
+        resendCodeBtn.addEventListener("click", () => {
+            generated2FACode = generate2FACode();
+            console.log("New 2FA code:", generated2FACode);
+            alert(`A new 2FA code has been sent: ${generated2FACode}`);
+        });
+
+
     </script>
-
-
 </body>
 
 </html>

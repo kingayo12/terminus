@@ -1,0 +1,860 @@
+<div class="settings">
+    <div class="settings_menu">
+        <div class="nav_links">
+            <h6>Account</h6>
+            <a class="navlink active" onclick="handleSettingsMenu(this, 'profile')">
+                <i class="fa fa-user"></i> My Profile
+            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'security')">
+                <i class="fa fa-lock"></i> Security
+            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'notifications')">
+                <i class="fa fa-bell"></i> Notifications
+            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'billing')">
+                <i class="fa fa-credit-card"></i> Billing
+            </a>
+
+            <h6>Preferences</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'theme')">
+                <i class="fa fa-paint-brush"></i> Theme
+            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'language')">
+                <i class="fa fa-language"></i> Language
+            </a>
+
+            <h6>System</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'logs')">
+                <i class="fa fa-file"></i> Logs
+            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'apikey')">
+                <i class="fa fa-key"></i> API Keys
+            </a>
+        </div>
+    </div>
+
+    <div class="settings_content">
+        <div id="contentBox" class="content-box">
+
+            <div class="tabPage active" id="profile">
+                <div class="set_header">
+                    <h3>My Profile</h3>
+                    <div class="button_header">
+                        <button id="cancelBtn" class="cancelBtn">Cancel</button>
+                        <button id="saveBtn" class="saveBtn">
+                            <span class="btnText">Save Changes</span>
+                            <span class="loader"></span>
+                        </button>
+                        <button id="editBtn">Edit</button>
+                    </div>
+
+                </div>
+
+                <div class="details">
+                    <div class="setting_bg">
+                        <img src="../assets/imgs/bg/setbg.jpg" alt="" class="imghidden df">
+                        <img src="../assets/imgs/bg/setbg2.jpg" alt="" class="imghidden em">
+                        <img src="../assets/imgs/bg/setbg3.jpg" alt="" class="imghidden pr">
+                        <img src="../assets/imgs/bg/setbg4.jpg" alt="" class="imghidden">
+                        <img src="../assets/imgs/bg/setbg5.jpg" alt="" class="imghidden">
+                    </div>
+
+                    <div class="profile_cards">
+                        <!-- Profile Image -->
+                        <div class="profile_image">
+                            <div class="profile_wrapper" id="profileWrapper">
+                                <img id="profileImg" src="../assets/imgs/profile/user.png">
+                            </div>
+                            <button class="change_image_btn" onclick="changeProfileImage()">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="name">Codespro Solutions</div>
+
+                        <div class="or">Or</div>
+
+                        <!-- Avatar Selection -->
+                        <div class="avatars_selection">
+                            <h4>Select Avatar</h4>
+                            <div class="avatars_grid">
+                                <div class="avatar_card"><img src="../assets/imgs/profile/avatar/avatar1.png"
+                                        onclick="selectAvatar(this)" alt="Avatar 1"></div>
+                                <div class="avatar_card"><img src="../assets/imgs/profile/avatar/avatar2.png"
+                                        onclick="selectAvatar(this)" alt="Avatar 2"></div>
+                                <div class="avatar_card"><img src="../assets/imgs/profile/avatar/avatar3.png"
+                                        onclick="selectAvatar(this)" alt="Avatar 3"></div>
+                                <div class="avatar_card"><img src="../assets/imgs/profile/avatar/avatar4.png"
+                                        onclick="selectAvatar(this)" alt="Avatar 4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Info -->
+                        <div class="info">
+                            <div class="email"><span>Email:</span>info@codesprosolutions.net</div>
+                            <div class="role"><span>Role:</span>Administrator</div>
+                            <div class="phone_number"><span>Tel No:</span>+234902345678</div>
+                            <div class="organization"><span>Organization:</span> Codespro Solutions</div>
+                            <div class="address"></div>
+                        </div>
+                    </div>
+                    <!-- Profile Form -->
+                    <div class="profile_form">
+
+
+                        <form class="form_grid">
+                            <div class="form_group">
+                                <h2>Account Information</h2>
+                            </div>
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Full Name:</label>
+                                    <p class="display_text" id="displayFullName">John Doe</p>
+                                </div>
+                                <input type="text" id="fullName" data-field="fullName" value="John Doe"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Username:</label>
+                                    <p class="display_text" id="displayUsername">johndoe123</p>
+                                </div>
+                                <input type="text" id="username" data-field="username" value="johndoe123"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Email:</label>
+                                    <p class="display_text" id="displayEmail">john@mail.com</p>
+                                </div>
+                                <input type="email" id="email" data-field="email" value="john@mail.com"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Phone Number:</label>
+                                    <p class="display_text" id="displayPhone">+234 801 234 5678</p>
+                                </div>
+                                <input type="tel" id="phone" data-field="phone" value="+234 801 234 5678"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Bio:</label>
+                                    <p class="display_text" id="displayBio">Frontend developer at KingsDev</p>
+                                </div>
+                                <textarea id="bio" data-field="bio" rows="4"
+                                    class="edit_input">Frontend developer at KingsDev</textarea>
+                            </div>
+
+                            <div class="form_group">
+                                <h2>Personal Verification</h2>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Date of Birth:</label>
+                                    <p class="display_text" id="displayDateOfBirth">1995-10-25</p>
+                                </div>
+                                <input type="date" id="dateOfBirth" data-field="dateOfBirth" value="1995-10-25"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Full Address:</label>
+                                    <p class="display_text" id="displayAddress">123 Main St, Ikeja, Lagos, Nigeria</p>
+                                </div>
+                                <textarea id="address" data-field="address" rows="3"
+                                    class="edit_input">123 Main St, Ikeja, Lagos, Nigeria</textarea>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>BVN:</label>
+                                    <p class="display_text" id="displayBvn">12345678901</p>
+                                </div>
+                                <input type="text" id="bvn" data-field="bvn" value="12345678901" maxlength="11"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>NIN:</label>
+                                    <p class="display_text" id="displayNin">987654321012</p>
+                                </div>
+                                <input type="text" id="nin" data-field="nin" value="987654321012" maxlength="12"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <h2>Guarantor Information</h2>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Guarantor Full Name:</label>
+                                    <p class="display_text" id="displayGuarantorName">Aisha Bello</p>
+                                </div>
+                                <input type="text" id="guarantorName" data-field="guarantorName" value="Aisha Bello"
+                                    class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Guarantor Phone:</label>
+                                    <p class="display_text" id="displayGuarantorPhone">+234 809 876 5432</p>
+                                </div>
+                                <input type="tel" id="guarantorPhone" data-field="guarantorPhone"
+                                    value="+234 809 876 5432" class="edit_input">
+                            </div>
+
+                            <div class="form_group">
+                                <div class="form_wrp">
+                                    <label>Address:</label>
+                                    <p class="display_text" id="displayGuarantorAddress">70B Adeola Odeku St, Victoria
+                                        Island, Lagos</p>
+                                </div>
+                                <textarea id="guarantorAddress" data-field="guarantorAddress" rows="3"
+                                    class="edit_input">70B Adeola Odeku St, Victoria Island, Lagos</textarea>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="profile_completion_card">
+                        <h5>Complete your profile</h5>
+
+                        <div class="circular_progress_wrapper">
+                            <svg class="circular_progress" width="120" height="120">
+                                <circle class="bg" cx="60" cy="60" r="54" stroke-width="12" />
+                                <circle class="progress" cx="60" cy="60" r="54" stroke-width="12" />
+                            </svg>
+                            <div class="progress_text" id="completionPercent">0%</div>
+                        </div>
+
+                        <ul class="completion_list" id="completionItems">
+                            <!-- Items will be injected by JS -->
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="tabPage" id="security">
+                <div class="security-settings-container">
+
+                    <div class="set_header">
+                        <h3>Security</h3>
+                    </div>
+                    <div class="details col-2">
+
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-shield-halved"></i> Two-Factor Authentication (2FA)</h4>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggle2FA" aria-label="Enable Two-Factor Authentication">
+                                    <label for="toggle2FA" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <p class="setting-detail">
+                                Requires a secondary verification code from a mobile app or text message every time you
+                                log
+                                in.
+                                **Highly recommended** for maximum security.
+                            </p>
+                            <button id="manage2FABtn" class="btn btn-secondary setting-action-btn" disabled><i
+                                    class="fa-solid fa-mobile-screen"></i>
+                                Manage 2FA Setup</button>
+
+                            <div id="twoFAModal" class="modal-overlay">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h3><i class="fa-solid fa-lock-open"></i> Two-Factor Authentication</h3>
+                                        <span class="close-button">&times;</span>
+                                    </div>
+
+                                    <!-- Scrollable Body -->
+                                    <div class="modal-body">
+                                        <div class="two-fa-management-container">
+                                            <h3><i class="fa-solid fa-lock-open"></i> Two-Factor Authentication Status
+                                            </h3>
+
+                                            <div class="status-box" id="twoFaStatus">
+                                                <p>Current Status: <span
+                                                        class="status-badge status-inactive">Inactive</span></p>
+                                                <p>Last Modified: Never</p>
+                                            </div>
+
+                                            <section class="setup-section">
+                                                <h4><i class="fa-solid fa-qrcode"></i> Setup Authenticator App</h4>
+                                                <p class="section-detail">Scan the QR code below with your preferred
+                                                    TOTP
+                                                    application (e.g., Google Authenticator, Authy, Microsoft
+                                                    Authenticator)
+                                                    to link your account.</p>
+
+                                                <div class="qr-code-box">
+                                                    <div class="qr-placeholder">
+
+
+                                                        [Image of a placeholder QR code]
+
+                                                    </div>
+                                                    <div class="secret-key-info">
+                                                        <p>Can't scan the code? Use this secret key:</p>
+                                                        <code id="secretKeyDisplay">ABCD-EFGH-IJKL-MNOP</code>
+                                                        <button class="btn btn-secondary btn-small copy-btn"><i
+                                                                class="fa-regular fa-copy"></i> Copy Key</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="verification-step">
+                                                    <h5>3. Verify Setup</h5>
+                                                    <p>Enter the 6-digit code generated by your app to activate 2FA.</p>
+                                                    <input type="text" id="verificationCode"
+                                                        placeholder="Enter 6-digit code" maxlength="6"
+                                                        class="form-control">
+                                                    <button id="activate2FA"
+                                                        class="btn btn-primary setting-action-btn"><i
+                                                            class="fa-solid fa-check"></i> Activate 2FA</button>
+                                                </div>
+
+                                                <div class="action-footer">
+                                                    <button id="regenerateKey" class="btn btn-secondary-small"><i
+                                                            class="fa-solid fa-sync"></i> Regenerate QR Code</button>
+                                                </div>
+                                            </section>
+
+                                            <hr>
+
+                                            <section class="setup-section recovery-section">
+                                                <h4><i class="fa-solid fa-clipboard-list"></i> Recovery Methods</h4>
+
+                                                <div class="recovery-group">
+                                                    <h5>Recovery Codes</h5>
+                                                    <p class="section-detail">Use these codes to log in if you lose
+                                                        access
+                                                        to your primary device. Store them in a safe place.</p>
+                                                    <div id="recoveryCodeStatus" class="status-box status-warning">
+                                                        Status: <span class="status-badge status-pending">Not
+                                                            Generated</span>
+                                                    </div>
+                                                    <button id="generateCodes"
+                                                        class="btn btn-warning setting-action-btn"><i
+                                                            class="fa-solid fa-key"></i> Generate & Download
+                                                        Codes</button>
+                                                </div>
+                                            </section>
+
+                                            <hr>
+
+                                            <section class="setup-section advanced-section">
+                                                <h4><i class="fa-solid fa-desktop"></i> Trusted Devices & Management
+                                                </h4>
+                                                <p class="section-detail">Review devices that bypass 2FA or manage
+                                                    security
+                                                    settings.</p>
+
+                                                <button id="revokeTrusted" class="btn btn-secondary-small"><i
+                                                        class="fa-solid fa-delete-left"></i> Revoke All Trusted
+                                                    Devices</button>
+
+                                                <button id="disable2FA" class="btn btn-error setting-action-btn"><i
+                                                        class="fa-solid fa-ban"></i> Temporarily Disable 2FA</button>
+                                            </section>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        </hr>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-lock"></i> Screen Lock / Auto Logout</h4>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleLock" aria-label="Enable Automatic Screen Lock">
+                                    <label for="toggleLock" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <p class="setting-detail">
+                                Automatically lock your screen or log you out after a period of inactivity (e.g., 5
+                                minutes)
+                                to protect your data if you step away.
+                            </p>
+                            <button class="btn btn-secondary setting-action-btn" id="openLockBtn"><i
+                                    class="fa-solid fa-clock"></i> Set
+                                Inactivity Timeout</button>
+
+                            <!-- ================= SCREEN LOCK TIMEOUT MODAL ================== -->
+                            <div id="lockTimeoutModal" class="modal-overlay">
+                                <div class="modal-container">
+
+                                    <div class="modal-header">
+                                        <h3><i class="fa-solid fa-clock"></i> Set Inactivity Timeout</h3>
+                                        <button class="close-btn" onclick="closeLockModal()">&times;</button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <label>Select timeout duration:</label>
+
+                                        <select id="timeoutSelect" class="timeout-select">
+                                            <option value="1">1 minute</option>
+                                            <option value="5" selected>5 minutes</option>
+                                            <option value="10">10 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="60">1 hour</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn cancel" onclick="closeLockModal()">Cancel</button>
+                                        <button class="btn save" onclick="saveTimeoutSetting()">Save</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        </hr>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-key"></i> Change Password</h4>
+                            </div>
+                            <p class="setting-detail">
+                                Use a strong, unique password to secure your account. Avoid reusing passwords.
+                            </p>
+                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-lock"></i> Change
+                                Password</button>
+                        </div>
+
+                        <hr>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-location-dot"></i> Login Alerts</h4>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleAlerts" checked
+                                        aria-label="Receive Email Alerts for New Logins">
+                                    <label for="toggleAlerts" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <p class="setting-detail">
+                                Receive an email notification whenever your account is accessed from a new device or
+                                location.
+                            </p>
+                            <button class="btn btn-secondary setting-action-btn"><i class="fa-solid fa-chart-line"></i>
+                                Review Recent Activity</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabPage" id="notifications">
+                <div class="notifications-settings-container">
+                    <div class="set_header">
+                        <h3>Notifications</h3>
+                    </div>
+                    <div class="details col-2">
+                        <p class="description">
+                            Manage how you receive notifications, including email, in-app alerts, and push
+                            notifications.
+                        </p>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-bell"></i> Global Notifications</h4>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleGlobal" checked
+                                        aria-label="Enable All Notifications">
+                                    <label for="toggleGlobal" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <p class="setting-detail">
+                                Turn this off to mute all notifications except critical security alerts.
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="setup-section col-2">
+                            <h4><i class="fa-solid fa-envelope"></i> Delivery Channels</h4>
+                            <p class="section-detail">Choose which methods we use to notify you.</p>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>Email Notifications</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleEmail" checked
+                                            aria-label="Enable Email Notifications">
+                                        <label for="toggleEmail" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Receive important account updates and weekly summaries via
+                                    email.
+                                </p>
+                            </div>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>In-App Alerts</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleInApp" checked
+                                            aria-label="Enable In-App Notifications">
+                                        <label for="toggleInApp" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">See badges and alerts within the application interface.</p>
+                            </div>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>Push Notifications</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="togglePush" aria-label="Enable Push Notifications">
+                                        <label for="togglePush" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Send notifications directly to your desktop or mobile device
+                                    (requires browser permission).</p>
+                                <button class="btn btn-secondary setting-action-btn"><i
+                                        class="fa-solid fa-bell-slash"></i>
+                                    Manage Push Permissions</button>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="setup-section">
+                            <h4><i class="fa-solid fa-list-check"></i> Notify Me About...</h4>
+                            <p class="section-detail">Customize alerts for specific activities.</p>
+
+                            <div class delivery-channel>
+                                <div class="security-header">
+                                    <h5>Account Security & Access</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleSecurity" checked
+                                            aria-label="Enable Security Notifications">
+                                        <label for="toggleSecurity" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Alerts for password changes, new device logins, and 2FA
+                                    activity.
+                                </p>
+                            </div>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>Transaction Status</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleTransaction" checked
+                                            aria-label="Enable Transaction Notifications">
+                                        <label for="toggleTransaction" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Updates when a payment is sent, received, or fails.</p>
+                            </div>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>System Updates & News</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleSystem"
+                                            aria-label="Enable System Notifications">
+                                        <label for="toggleSystem" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Alerts for new features, maintenance schedules, and
+                                    promotional
+                                    content.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tabPage" id="billing">
+                <div class="billing-container">
+                    <div class="details col-2">
+
+                        <p class="description">
+                            Manage your payment methods, subscription information, and view invoice history.
+                        </p>
+
+                        <!-- SUBSCRIPTION -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-box"></i> Subscription Plan</h4>
+                            </div>
+                            <p class="setting-detail">
+                                You're currently subscribed to the <strong>Pro Plan</strong> — $15/month.
+                            </p>
+                            <button class="btn btn-secondary setting-action-btn">
+                                <i class="fa-solid fa-arrow-up"></i> Upgrade / Change Plan
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <!-- PAYMENT METHOD -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-wallet"></i> Payment Method</h4>
+                            </div>
+                            <p class="setting-detail">
+                                Default payment method: <strong>Visa ending in 4820</strong>, expires 05/28.
+                            </p>
+                            <button class="btn btn-secondary setting-action-btn">
+                                <i class="fa-solid fa-pen"></i> Update Payment Method
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <!-- BILLING HISTORY -->
+                        <div class="setup-section">
+                            <h4><i class="fa-solid fa-file-invoice"></i> Billing History</h4>
+                            <p class="section-detail">Download receipts and track previous payments.</p>
+
+                            <div class="delivery-channel billing-item">
+                                <div class="security-header">
+                                    <h5>Nov 02, 2025 – $15.00</h5>
+                                    <button class="btn btn-secondary setting-action-btn">
+                                        <i class="fa-solid fa-download"></i> Receipt
+                                    </button>
+                                </div>
+                                <p class="setting-detail">Invoice: <strong>#INV-84920</strong></p>
+                            </div>
+
+                            <div class="delivery-channel billing-item">
+                                <div class="security-header">
+                                    <h5>Oct 02, 2025 – $15.00</h5>
+                                    <button class="btn btn-secondary setting-action-btn">
+                                        <i class="fa-solid fa-download"></i> Receipt
+                                    </button>
+                                </div>
+                                <p class="setting-detail">Invoice: <strong>#INV-84211</strong></p>
+                            </div>
+
+                            <div class="delivery-channel billing-item">
+                                <div class="security-header">
+                                    <h5>Sep 02, 2025 – $15.00</h5>
+                                    <button class="btn btn-secondary setting-action-btn">
+                                        <i class="fa-solid fa-download"></i> Receipt
+                                    </button>
+                                </div>
+                                <p class="setting-detail">Invoice: <strong>#INV-83350</strong></p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- BILLING PREFERENCES -->
+                        <div class="setup-section">
+                            <h4><i class="fa-solid fa-gear"></i> Billing Preferences</h4>
+                            <p class="section-detail">Customize how you receive billing notifications.</p>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>Email Invoices</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggleInvoiceEmails" checked>
+                                        <label for="toggleInvoiceEmails" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">Receive a PDF invoice every time you're billed.</p>
+                            </div>
+
+                            <div class="delivery-channel">
+                                <div class="security-header">
+                                    <h5>Payment Reminders</h5>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="togglePaymentReminders" checked>
+                                        <label for="togglePaymentReminders" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                                <p class="setting-detail">You will be notified before your next billing date.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="tabPage" id="theme">
+                <div class="theme-container">
+                    <div class="set_header">
+                        <h3>Theme Settings</h3>
+                    </div>
+                    <div class="details">
+                        <div class="boxTheme">
+
+                            <div class="boxTheme1 defaultish theme" id="white-btn" data-content="default">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 emerald-theme" id="emerald-btn" data-content="Emerald">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 purple-theme" id="purple-btn" data-content="Purple Royale">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 royal-theme" id="royal-btn" data-content="Royal">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 amethyst-theme" id="amethyst-btn" data-content="Amethyst">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 crimson-theme" id="crimson-btn" data-content="Crimson">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 amber-theme" id="amber-btn" data-content="Amber">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 sunset-theme" id="sunset-btn" data-content="Sunset">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 rose-theme" id="rose-btn" data-content="Rose Pink">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxTheme1 neon-theme" id="neon-btn" data-content="Cyber Neon">
+                                <div class="lnav">
+                                    <div class="laside"></div>
+                                    <div class="lmain_cont">
+                                        <div class="ltopnav"></div>
+                                        <div class="boxesl">
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                            <div class="boxl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tabPage" id="language">Language Settings Content</div>
+            <div class="tabPage" id="logs">System Logs Content</div>
+            <div class="tabPage" id="apikey">API Keys Content</div>
+
+            <div id="toast" class="toast_notification">Profile updated successfully!</div>
+
+        </div>
+    </div>
+</div>
