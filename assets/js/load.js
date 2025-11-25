@@ -49,10 +49,17 @@ function includeHTML(id, file, ...callbacks) {
 function initialLoad() {
   // Load components and run their specific initialization functions afterward
   includeHTML("sidebar", "./components/sidebar.html", initSidebarMenu);
-  includeHTML("header", "./components/header.html", initUserInitials, initTheme);
+  includeHTML("header", "./components/header.html", initUserInitials);
 
   // The 'content' area is loaded last, and its callback includes initDataTables
-  includeHTML("content", "../pages/dashboard.html", initDataTables);
+  includeHTML(
+    "content",
+    "../pages/dashboard.html",
+    initDataTables,
+    initTheme,
+    initDarkModeToggle,
+    initPreferences,
+  );
 
   // Cards component is loaded without a dedicated callback
   includeHTML("cards", "../cards.html", updateProfileCompletion);
@@ -98,7 +105,8 @@ function initSidebarMenu() {
         init2FA, // Assumes 2FA logic needs to be set up on new page
         initLockSetting, // Assumes Lock Setting logic needs to be set up on new page
         initAppLock, // Assumes App Lock logic needs to be set up on new page
-        initTheme, // Assumes Theme logic needs to be set up on new page
+        initTheme, // Re-apply theme settings
+        initPreferences, // Re-initialize dashboard preferences
 
         // Dynamically call initialization function for the new page (e.g., init_settings)
         () => {
@@ -610,71 +618,217 @@ function initAppLock() {
   console.log("🔐 App Lock Active");
 }
 
-function initTheme() {
-  const themeBoxes = document.querySelectorAll(".boxTheme1");
-  const body = document.body;
+// Function to apply theme with optional animation
+function applyTheme(theme, animate = true) {
+  // 1. Sanitize theme for className (e.g., "Theme One" -> "theme-one")
+  const safeTheme = theme.trim().toLowerCase().replace(/\s+/g, "-");
 
-  // Load saved theme
-  const savedTheme = localStorage.getItem("selectedTheme");
-  const savedDark = localStorage.getItem("darkMode") === "true";
+  if (animate) {
+    // Use a class for the transition instead of inline styles for cleaner code
+    document.body.classList.add("theme-transition");
+    document.body.style.opacity = 0;
 
-  if (savedTheme) applyTheme(savedTheme, false);
-  if (savedDark) body.classList.add("dark-mode");
-
-  // Click handler for theme boxes
-  themeBoxes.forEach((box) => {
-    box.addEventListener("click", () => {
-      const theme = box.getAttribute("data-content");
-      applyTheme(theme, true);
-      localStorage.setItem("selectedTheme", theme);
-    });
-  });
-
-  // DARK MODE BUTTON LISTENER
-  const darkToggle = document.querySelector(".toggle_theme");
-  if (darkToggle) {
-    darkToggle.addEventListener("click", () => {
-      const isDark = body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", isDark);
-    });
-  }
-
-  // Function to apply theme with optional animation
-  function applyTheme(theme, animate = true) {
-    // sanitize theme for className
-    const safeTheme = theme.trim().toLowerCase().replace(/\s+/g, "-");
-
-    if (animate) {
-      body.style.transition = "opacity 0.3s ease";
-      body.style.opacity = 0;
+    setTimeout(() => {
+      replaceThemeClass(safeTheme);
+      document.body.style.opacity = 1; // Optional: Remove transition class after animation to save performance
 
       setTimeout(() => {
-        body.className = ""; // remove previous theme
-        replaceThemeClass(safeTheme); // add sanitized class
-        body.style.opacity = 1; // fade in
+        document.body.classList.remove("theme-transition");
       }, 300);
-    } else {
-      body.className = "";
-      replaceThemeClass(safeTheme);
-    }
-  }
-
-  // Replace existing theme class
-  function replaceThemeClass(newTheme) {
-    body.className = body.className
-      .split(" ")
-      .filter((cls) => cls !== "dark-mode") // remove theme but NOT dark mode
-      .join(" ");
-
-    body.classList.add(newTheme);
-
-    if (localStorage.getItem("darkMode") === "true") {
-      body.classList.add("dark-mode");
-    }
+    }, 300);
+  } else {
+    replaceThemeClass(safeTheme);
   }
 }
 
-// Initialize theme switching after DOM loads
+// Optimized function to replace existing theme class
+function replaceThemeClass(newTheme) {
+  const body = document.body; // Get all current classes as an array
+
+  const classes = Array.from(body.classList); // A simple way to identify existing themes: they are not 'dark-mode' // Assuming your theme classes are simple like 'theme-one', 'theme-two', etc.
+
+  const themeClasses = classes.filter((cls) => cls !== "dark-mode"); // Remove all identified theme classes
+
+  themeClasses.forEach((cls) => body.classList.remove(cls)); // Add the new theme class
+
+  body.classList.add(newTheme); // Ensure dark mode status is reapplied from localStorage after class replacement
+
+  const savedDark = localStorage.getItem("darkMode") === "true";
+  if (savedDark) {
+    body.classList.add("dark-mode");
+  } else {
+    body.classList.remove("dark-mode"); // Crucial if a theme change happens while dark mode is off
+  }
+}
+
+/**
+ * 🎨 Initializes the primary application theme (e.g., 'blue', 'red', 'green').
+ * Relies on applyTheme() being available globally or defined nearby.
+ */
+function initTheme() {
+  const themeBoxes = document.querySelectorAll(".boxTheme1");
+  const body = document.body; // Load and apply saved theme
+
+  const savedTheme = localStorage.getItem("selectedTheme"); // Apply initial theme state without animation (if saved) // NOTE: The dark mode class must be applied *after* the theme class // to ensure dark-mode CSS overrides are correctly processed.
+
+  if (savedTheme) {
+    // Assumes applyTheme handles setting the theme class
+    applyTheme(savedTheme, false);
+  } // Click handler for theme boxes
+
+  themeBoxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      const theme = box.getAttribute("data-content");
+      localStorage.setItem("selectedTheme", theme); // Apply theme with animation
+      applyTheme(theme, true);
+    });
+  });
+}
+
+// -------------------------------------------------------------
+
+/**
+ * 🌙 Initializes Dark Mode functionality (toggling and persistent state).
+ */
+function initDarkModeToggle() {
+  const darkToggle = document.querySelector(".toggle_theme");
+  const body = document.body;
+
+  if (!darkToggle) {
+    console.warn("initDarkModeToggle: Element with class '.toggle_theme' not found.");
+    return;
+  } // Load saved dark mode state
+
+  const savedDark = localStorage.getItem("darkMode") === "true"; // Apply initial dark mode state
+
+  if (savedDark) {
+    body.classList.add("dark-mode");
+    darkToggle.setAttribute("aria-checked", "true");
+    darkToggle.classList.add("dark"); // Sync the custom toggle's visual state
+  } // DARK MODE BUTTON LISTENER
+
+  darkToggle.addEventListener("click", () => {
+    // 1. Toggle the 'dark-mode' class on the body
+    const isDark = body.classList.toggle("dark-mode"); // 2. Update localStorage
+
+    localStorage.setItem("darkMode", isDark); // 3. Sync the button's visual and accessible state
+
+    darkToggle.setAttribute("aria-checked", isDark);
+    darkToggle.classList.toggle("dark", isDark);
+  });
+}
+
+// ========================= UTILITY/HELPER FUNCTION (Assuming this is an external helper) =========================
+function handleThemeSwitch() {
+  // This function seems redundant now that initDarkModeToggle handles everything.
+  // It's only toggling the button's class, not the body theme.
+  // You should integrate its logic into initDarkModeToggle or remove it.
+  // Retaining for reference, but it's likely safe to delete if not used elsewhere.
+  document.querySelector(".toggle_theme").classList.toggle("dark");
+}
+
+// Initialization should only run once
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
+  initTheme(); // Load primary theme
+  initDarkModeToggle(); // Load dark mode toggle
+});
+
+/**
+ * Initializes the dashboard preferences modal logic.
+ * This function is designed to be called directly after the content area is loaded.
+ */
+function initPreferences() {
+  const prefModal = document.getElementById("preferenceModal");
+  const prefList = document.getElementById("prefList");
+  const closeBtn = document.getElementById("closePrefBtn");
+  const openBtn = document.getElementById("openPrefBtn"); // Gear button to open modal
+
+  if (!prefModal || !prefList || !closeBtn || !openBtn) return;
+
+  // Load saved preferences from localStorage
+  let savedPrefs = JSON.parse(localStorage.getItem("prefs")) || {};
+
+  // Collect all items that can be toggled
+  function getPrefItems() {
+    return document.querySelectorAll("[data-pref]");
+  }
+
+  // Generate the list of toggleable preferences
+  function generatePreferences() {
+    prefList.innerHTML = ""; // Clear old list
+
+    getPrefItems().forEach((item, index) => {
+      const key = item.dataset.pref;
+      const label = item.dataset.prefLabel || `Item ${index + 1}`;
+
+      // Save key to the element
+      item.dataset.prefKey = key;
+
+      // Unique ID for checkbox
+      const checkboxId = `prefCheckbox-${index}`;
+
+      // Create a toggle row
+      const row = document.createElement("div");
+      row.className = "pref";
+      row.innerHTML = `
+        <div class="toggle-switch">
+          <span>${label}</span>
+          <input type="checkbox" id="${checkboxId}" data-key="${key}" ${
+        savedPrefs[key] !== false ? "checked" : ""
+      }>
+          <label for="${checkboxId}" class="toggle-label"></label>
+        </div>
+      `;
+
+      prefList.appendChild(row);
+    });
+
+    applyPreferences();
+  }
+
+  // Apply user preferences to elements
+  function applyPreferences() {
+    getPrefItems().forEach((item) => {
+      const key = item.dataset.prefKey;
+      item.style.display = savedPrefs[key] === false ? "none" : "";
+    });
+  }
+
+  // Listen for changes in toggles
+  prefList.addEventListener("change", (e) => {
+    if (e.target.type !== "checkbox") return;
+
+    const key = e.target.dataset.key;
+    savedPrefs[key] = e.target.checked;
+    localStorage.setItem("prefs", JSON.stringify(savedPrefs));
+
+    applyPreferences();
+  });
+
+  // Open modal
+  openBtn.addEventListener("click", () => {
+    generatePreferences();
+    prefModal.style.display = "flex";
+  });
+
+  // Close modal
+  closeBtn.addEventListener("click", () => {
+    prefModal.style.display = "none";
+  });
+
+  // Expose globally
+  window.openPreferences = () => {
+    generatePreferences();
+    prefModal.style.display = "flex";
+  };
+
+  // Apply preferences on page load
+  applyPreferences();
+
+  generatePreferences();
+}
+
+// Initialize preferences when DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  initPreferences();
 });

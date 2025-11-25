@@ -8,11 +8,17 @@
             <li><a href="#" class="crumb">Dashboard</a></li>
             <li aria-current="page" class="crumb current">Overview</li>
         </ol>
+        <button class="btn" id="openPrefBtn">
+            <i class="fa fa-gear"></i>
+        </button>
+
+
     </nav>
 
     <!-- Cards -->
     <section class="cards_container">
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: 0s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: 0s;" data-pref="todayGateIn"
+            data-pref-label="Today's Gate-In">
             <div class="card_icon bg-primary">
                 <i class="fa-solid fa-door-open"></i>
             </div>
@@ -23,7 +29,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .08s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .08s;"
+            data-pref="YardStockbyTEUs" data-pref-label="Yard Stock by TEUs">
             <div class="card_icon bg-success">
                 <i class="fa-solid fa-boxes-stacked"></i>
             </div>
@@ -34,7 +41,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .16s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .16s;" data-pref="GateInToday"
+            data-pref-label="Gate-In Today">
             <div class="card_icon bg-info">
                 <i class="fa-solid fa-truck-ramp-box"></i>
             </div>
@@ -45,7 +53,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .24s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .24s;"
+            data-pref="GateOutToday" data-pref-label="Gate-Out Today">
             <div class="card_icon bg-warning-dark">
                 <i class="fa-solid fa-truck-fast"></i>
             </div>
@@ -56,7 +65,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .32s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .32s;" data-pref="checkIn"
+            data-pref-label="Check-In (L.Month)">
             <div class="card_icon bg-info">
                 <i class="fa-solid fa-calendar-check"></i>
             </div>
@@ -67,7 +77,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .4s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .4s;" data-pref="checkOut"
+            data-pref-label="Check-Out (L.Month)">
             <div class="card_icon bg-error">
                 <i class="fa-solid fa-calendar-minus"></i>
             </div>
@@ -78,7 +89,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .48s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .48s;"
+            data-pref="PendingInvoices" data-pref-label="Pending Invoices">
             <div class="card_icon bg-warning-dark">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
             </div>
@@ -89,7 +101,8 @@
             </div>
         </article>
 
-        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .56s;">
+        <article class="card animate__animated animate__fadeInUp" style="animation-delay: .56s;"
+            data-pref="ContainersinYard" data-pref-label="Containers in Yard">
             <div class="card_icon bg-success">
                 <i class="fa-solid fa-warehouse"></i>
             </div>
@@ -103,7 +116,8 @@
 
     <!-- Secondary row: larger summary + recent activities -->
     <section class="secondary_row">
-        <div class="summary_card animate__animated animate__fadeInLeft" style="animation-delay: .32s;">
+        <div class="summary_card animate__animated animate__fadeInLeft" style="animation-delay: .32s;"
+            data-pref="TodaysSnapshot" data-pref-label="Today’s Snapshot">
             <h3 class="summary_title">Today’s Snapshot</h3>
 
             <div class="summary_stats">

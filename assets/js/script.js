@@ -9,12 +9,6 @@ function handlemobileToggle() {
   sidebar.classList.toggle("showd");
 }
 
-// ========================= THEME SWITCH =========================
-function handleThemeSwitch() {
-  document.body.classList.toggle("dark-theme");
-  document.querySelector(".toggle_theme").classList.toggle("dark");
-}
-
 // ========================= THEME POPUP =========================
 function handleThemeShow() {
   const wrap = document.querySelector(".theme_wrapper");

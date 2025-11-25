@@ -9,6 +9,9 @@
             <li><a href="#" class="crumb"><i class="fa fa-globe"></i> Online Administration</a></li>
             <li><a href="#" class="crumb"><i class="fa fa-users"></i> Online Clients Management</a></li>
         </ol>
+        <button class="btn" id="openPrefBtn">
+            <i class="fa fa-gear"></i>
+        </button>
     </nav>
 
     <!-- Form Section -->
@@ -16,20 +19,20 @@
     <form class="client_form">
         <div class="form_grid">
             <!-- Client Name -->
-            <div class="form_group">
-                <label><i class="fa-regular fa-pen-to-square"></i> Client Name</label>
+            <div class="form_group" data-pref="ClientName" data-pref-label="Client Name">
+                <label><i class="fa-regular fa-pen-to-square"></i> </label>
                 <input type="text" placeholder="Client Name">
             </div>
 
 
             <!-- Client Code -->
-            <div class="form_group">
+            <div class="form_group" data-pref="ClientCode" data-pref-label="Client Code">
                 <label><i class="fa-solid fa-code"></i> Client Code</label>
                 <input type="text" placeholder="Client Code">
             </div>
 
             <!-- Category -->
-            <div class="form_group">
+            <div class="form_group" data-pref="Category" data-pref-label="Category">
                 <label><i class="fa-solid fa-layer-group"></i> Category</label>
                 <select>
                     <option>--Choose Category--</option>
@@ -40,43 +43,43 @@
             </div>
 
             <!-- Billing Address -->
-            <div class="form_group">
+            <div class="form_group" data-pref="BillingAddress" data-pref-label="Billing Address">
                 <label><i class="fa-regular fa-note-sticky"></i> Billing Address</label>
                 <input type="text" placeholder="Billing Address">
             </div>
 
             <!-- Billing Address Line 2 -->
-            <div class="form_group">
+            <div class="form_group" data-pref="BillingAddressLine2" data-pref-label="Billing Address Line2">
                 <label><i class="fa-regular fa-note-sticky"></i> Billing Address Line2</label>
                 <textarea rows="2" placeholder="Billing Address Line2"></textarea>
             </div>
 
             <!-- Telephone -->
-            <div class="form_group">
+            <div class="form_group" data-pref="Telephone" data-pref-label="Telephone">
                 <label><i class="fa-solid fa-phone"></i> Telephone</label>
                 <input type="text" placeholder="Telephone">
             </div>
 
             <!-- Email -->
-            <div class="form_group">
+            <div class="form_group" data-pref="Email" data-pref-label="Email">
                 <label><i class="fa-regular fa-envelope"></i> Email</label>
                 <input type="email" placeholder="Email">
             </div>
 
             <!-- Contact Person -->
-            <div class="form_group">
+            <div class="form_group" data-pref="ContactPerson" data-pref-label="Contact Person">
                 <label><i class="fa-solid fa-user-tie"></i> Contact Person</label>
                 <input type="text" placeholder="Contact Person">
             </div>
 
             <!-- CPPhone Number -->
-            <div class="form_group">
+            <div class="form_group" data-pref="CPPhoneNumber" data-pref-label=" CPPhone Number">
                 <label><i class="fa-solid fa-phone-volume"></i> CPPhone Number</label>
                 <input type="text" placeholder="CPPhone Number">
             </div>
 
             <!-- Ignore Gate Out Rules -->
-            <div class="form_group switch_group">
+            <div class="form_group switch_group" data-pref="IgnoreGateOutRules" data-pref-label="Ignore Gate Out Rules">
                 <label><i class="fa-solid fa-door-closed"></i> Ignore Gate Out Rules</label>
                 <div class="switch">
                     <input type="checkbox" id="ignoreRule">
@@ -87,7 +90,7 @@
             </div>
 
             <!-- Suspended -->
-            <div class="form_group switch_group">
+            <div class="form_group switch_group" data-pref="Suspended" data-pref-label="Suspended">
                 <label><i class="fa-solid fa-ban"></i> Suspended</label>
                 <div class="switch">
                     <input type="checkbox" id="suspended">
@@ -98,7 +101,7 @@
             </div>
 
             <!-- Approved -->
-            <div class="form_group switch_group">
+            <div class="form_group switch_group" data-pref="Approved" data-pref-label="Approved">
                 <label><i class="fa-solid fa-check-circle"></i> Approved</label>
                 <div class="switch">
                     <input type="checkbox" id="approved">
@@ -109,7 +112,7 @@
             </div>
 
             <!-- Email Confirmed -->
-            <div class="form_group switch_group">
+            <div class="form_group switch_group" data-pref="Email Confirmed" data-pref-label="EmailConfirmed">
                 <label><i class="fa-solid fa-envelope-circle-check"></i> Email Confirmed</label>
                 <div class="switch">
                     <input type="checkbox" id="emailConfirmed">
@@ -120,7 +123,7 @@
             </div>
 
             <!-- Manifest Allowed -->
-            <div class="form_group switch_group">
+            <div class="form_group switch_group" data-pref="ManifestAllowed" data-pref-label="Manifest Allowed">
                 <label><i class="fa-solid fa-ship"></i> Manifest Allowed</label>
                 <div class="switch">
                     <input type="checkbox" id="manifestAllowed">
