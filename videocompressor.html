@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Compressor</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00000020;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        video {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+
+    <!-- Load FFmpeg WASM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ffmpeg.js/4.3.1/ffmpeg.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Video Compressor (HTML + JS using FFmpeg.wasm)</h2>
+
+        <input type="file" id="videoInput" accept="video/*">
+
+        <label>Select Compression Level:</label>
+        <select id="quality">
+            <option value="2000k">High Quality (2 Mbps)</option>
+            <option value="1500k">Medium Quality (1.5 Mbps)</option>
+            <option value="800k">Low Quality (0.8 Mbps)</option>
+        </select>
+
+        <button id="compressBtn">Compress Video</button>
+
+        <h3>Output Preview</h3>
+        <video id="preview" controls></video>
+
+        <a id="downloadLink" style="display:none;" download="compressed_video.mp4">
+            <button>Download Compressed Video</button>
+        </a>
+
+    </div>
+
+    <script>
+        const videoInput = document.getElementById("videoInput");
+        const preview = document.getElementById("preview");
+        const compressBtn = document.getElementById("compressBtn");
+        const downloadLink = document.getElementById("downloadLink");
+
+        let selectedFile = null;
+
+        videoInput.addEventListener("change", (e) => {
+            selectedFile = e.target.files[0];
+        });
+
+        compressBtn.addEventListener("click", async () => {
+            if (!selectedFile) {
+                alert("Please upload a video first!");
+                return;
+            }
+
+            const quality = document.getElementById("quality").value;
+
+            alert("Please wait… Compressing video (this may take some minutes).");
+
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(selectedFile);
+
+            reader.onload = async () => {
+                const FF = await FFmpeg.createFFmpeg({ log: true });
+                await FF.load();
+
+                const inputName = "input.mp4";
+                const outputName = "output.mp4";
+
+                // Write video to memory
+                FF.FS("writeFile", inputName, new Uint8Array(reader.result));
+
+                // Run FFmpeg compression
+                await FF.run(
+                    "-i", inputName,
+                    "-b:v", quality,   // video bitrate
+                    "-vf", "scale=1280:-1",  // resize width to 1280, keep aspect ratio
+                    outputName
+                );
+
+                // Read result
+                const data = FF.FS("readFile", outputName);
+                const blob = new Blob([data.buffer], { type: "video/mp4" });
+                const url = URL.createObjectURL(blob);
+
+                preview.src = url;
+                downloadLink.href = url;
+                downloadLink.style.display = "block";
+            };
+        });
+    </script>
+
+</body>
+
+</html>

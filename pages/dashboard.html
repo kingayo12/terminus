@@ -8,7 +8,7 @@
             <li><a href="#" class="crumb">Dashboard</a></li>
             <li aria-current="page" class="crumb current">Overview</li>
         </ol>
-        <button class="btn" id="openPrefBtn">
+        <button class="btn animate__animated animate__fadeInRight" id="openPrefBtn" style="animation-delay: .4s;">
             <i class="fa fa-gear"></i>
         </button>
 
@@ -113,6 +113,32 @@
             </div>
         </article>
     </section>
+
+    <div id="breakdown-popup" class="cps-modal-overlay">
+        <div class="cps-modal-content">
+
+            <button class="cps-close-btn">&times;</button>
+
+            <div class="cps-modal-flex">
+
+                <!-- Sidebar -->
+                <aside class="cps-modal-sidebar">
+                    <h3>Dashboard Metrics</h3>
+                    <div id="modal-card-toggles" class="cps-sidebar-cards-wrapper"></div>
+                </aside>
+
+                <!-- Main Area -->
+                <main class="cps-modal-main">
+                    <div id="breakdown-title" class="cps-modal-header">Detailed Breakdown</div>
+                    <div id="breakdown-table-container" class="cps-modal-body">
+                        <p>Click a metric card on the left to see the breakdown.</p>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </div>
+
 
     <!-- Secondary row: larger summary + recent activities -->
     <section class="secondary_row">

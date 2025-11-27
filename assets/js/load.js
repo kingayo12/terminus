@@ -59,6 +59,8 @@ function initialLoad() {
     initTheme,
     initDarkModeToggle,
     initPreferences,
+    initDashboardCards,
+    initBreakdownModal,
   );
 
   // Cards component is loaded without a dedicated callback
@@ -107,6 +109,8 @@ function initSidebarMenu() {
         initAppLock, // Assumes App Lock logic needs to be set up on new page
         initTheme, // Re-apply theme settings
         initPreferences, // Re-initialize dashboard preferences
+        initDashboardCards,
+        initBreakdownModal,
 
         // Dynamically call initialization function for the new page (e.g., init_settings)
         () => {
@@ -181,12 +185,21 @@ function initDataTables() {
     const table = $(this).DataTable({
       dom: "Bfrtip",
       buttons: [
-        { extend: "copy", className: "btn btn-dark" },
-        { extend: "csv", className: "btn btn-primary" },
-        { extend: "excel", className: "btn btn-success" },
-        { extend: "pdf", className: "btn btn-danger" },
-        { extend: "print", className: "btn btn-info" },
-        { extend: "colvis", className: "btn btn-secondary" },
+        {
+          extend: "collection",
+          className: "btn btn-primary",
+          text: '<i class="fa fa-download"></i> Export',
+          autoClose: true,
+          buttons: [
+            { extend: "copy", text: "Copy" },
+            { extend: "csv", text: "Export CSV" },
+            { extend: "excel", text: "Export Excel" },
+            { extend: "pdf", text: "Export PDF" },
+          ],
+        },
+
+        { extend: "print", className: "btn btn-info", text: "Print" },
+        { extend: "colvis", className: "btn btn-secondary", text: "Columns" },
       ],
       pageLength: 5,
       responsive: true,
@@ -832,3 +845,175 @@ function initPreferences() {
 document.addEventListener("DOMContentLoaded", () => {
   initPreferences();
 });
+
+// ------------------------dashbord cards -------------------------------
+// --- NEW GLOBAL FUNCTION DECLARATIONS ---
+
+/**
+ * Initializes the main dashboard cards with click handlers to open the breakdown modal.
+ */
+/**
+ * Initialize dashboard cards (after includeHTML finishes loading them)
+ */
+function initDashboardCards() {
+  const cards = document.querySelectorAll(".cards_container .card");
+
+  if (cards.length === 0) {
+    console.warn("initDashboardCards: No dashboard cards found.");
+    return;
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const metric = card.getAttribute("data-pref-label");
+      const dataKey = card.getAttribute("data-pref");
+
+      if (typeof window.openBreakdownModal === "function") {
+        window.openBreakdownModal(metric, dataKey);
+      } else {
+        console.error("openBreakdownModal is not initialized yet!");
+      }
+    });
+  });
+}
+
+/**
+ * Setup modal functionality. Should only run once after modal HTML loads.
+ */
+function initBreakdownModal() {
+  const popup = document.getElementById("breakdown-popup");
+  const closeBtn = document.querySelector(".cps-close-btn");
+  const toggleContainer = document.getElementById("modal-card-toggles");
+
+  if (!popup || !toggleContainer) {
+    console.error("initBreakdownModal: Missing popup or toggle container.");
+    return;
+  }
+
+  // Clone dashboard cards into sidebar toggles
+  const originalCards = document.querySelectorAll(".cards_container .card");
+
+  toggleContainer.innerHTML = ""; // prevent duplicates if reloaded
+
+  originalCards.forEach((originalCard) => {
+    const clonedCard = originalCard.cloneNode(true);
+
+    clonedCard.classList.remove("animate__animated", "animate__fadeInUp");
+    clonedCard.removeAttribute("style");
+    clonedCard.classList.add("toggle-card");
+
+    clonedCard.addEventListener("click", () => {
+      const metric = clonedCard.getAttribute("data-pref-label");
+      const dataKey = clonedCard.getAttribute("data-pref");
+
+      loadBreakdownTable(metric, dataKey);
+      highlightToggleCard(dataKey);
+    });
+
+    toggleContainer.appendChild(clonedCard);
+  });
+
+  // Close modal
+  closeBtn?.addEventListener("click", () => popup.classList.remove("open"));
+
+  window.addEventListener("click", (e) => {
+    if (e.target === popup) popup.classList.remove("open");
+  });
+
+  // Expose global function
+  window.openBreakdownModal = (metric, dataKey) => {
+    popup.classList.add("open");
+    loadBreakdownTable(metric, dataKey);
+    highlightToggleCard(dataKey);
+  };
+
+  console.log("Breakdown modal initialized.");
+}
+
+/**
+ * Highlight active toggle card in sidebar
+ */
+function highlightToggleCard(activeKey) {
+  const sidebarCards = document.querySelectorAll("#modal-card-toggles .toggle-card");
+
+  sidebarCards.forEach((card) => {
+    card.classList.toggle("active", card.getAttribute("data-pref") === activeKey);
+
+    if (card.classList.contains("active")) {
+      card.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  });
+}
+
+/**
+ * Load table data into modal content area
+ */
+function loadBreakdownTable(metric, dataKey) {
+  const tableContainer = document.getElementById("breakdown-table-container");
+  const titleElement = document.getElementById("breakdown-title");
+
+  if (!tableContainer || !titleElement) return;
+
+  titleElement.textContent = `Detailed Breakdown: ${metric}`;
+  tableContainer.innerHTML = `<p class="loading-state">Loading data for <b>${metric}</b>...</p>`;
+
+  setTimeout(() => {
+    let tableHTML = "";
+
+    switch (dataKey) {
+      case "todayGateIn":
+      case "GateInToday":
+        tableHTML = `
+          <table class="data-table cps-data-table" data-datatable="true">
+              <thead>
+                  <tr><th>Container ID</th><th>Size</th><th>Time In</th><th>Transporter</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>C-IN-0042</td><td>20ft</td><td>11:05</td><td>Transco</td><td>Processed</td></tr>
+                  <tr><td>C-IN-0063</td><td>40ft</td><td>11:15</td><td>Apex</td><td>Inspection</td></tr>
+              </tbody>
+          </table>
+        `;
+        break;
+
+      case "YardStockbyTEUs":
+      case "ContainersinYard":
+        tableHTML = `
+          <table class="data-table cps-data-table" data-datatable="true">
+              <thead>
+                  <tr><th>Location</th><th>TEUs</th><th>Containers</th><th>Last Move</th><th>Hold Status</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>A-Stack-01</td><td>24</td><td>12</td><td>1d ago</td><td>None</td></tr>
+                  <tr><td>B-Stack-05</td><td>16</td><td>8</td><td>3h ago</td><td>Quarantine</td></tr>
+              </tbody>
+          </table>
+        `;
+        break;
+
+      case "GateOutToday":
+        tableHTML = `
+          <table class="data-table cps-data-table" data-datatable="true">
+              <thead>
+                  <tr><th>Container ID</th><th>Size</th><th>Time Out</th><th>Truck ID</th><th>Driver</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>C-OUT-0051</td><td>40ft</td><td>09:00</td><td>T-001</td><td>John Doe</td></tr>
+              </tbody>
+          </table>
+        `;
+        break;
+
+      default:
+        tableHTML = `<p>No breakdown data found for <b>${metric}</b> (Key: ${dataKey}).</p>`;
+    }
+
+    tableContainer.innerHTML = tableHTML;
+
+    if (tableContainer.querySelector(".data-table") && typeof initDataTables === "function") {
+      initDataTables();
+    }
+  }, 300);
+}
