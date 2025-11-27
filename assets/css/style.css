@@ -4172,7 +4172,9 @@ button.noti .noti_count {
   overflow-y: auto;
   overflow-x: auto;
   height: 100%;
-  max-height: calc(100% - 200px);
+  max-height: calc(100% - 30px);
+  max-width: calc(100vw - 50px);
+  min-width: 300px;
 }
 
 .cps-modal-body::-webkit-scrollbar {
@@ -4213,6 +4215,8 @@ button.noti .noti_count {
     border-right: none;
     border-bottom: 1px solid #ddd;
     max-height: 200px;
+    max-width: 100%;
+    min-width: 300px;
   }
 }
 
