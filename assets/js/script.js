@@ -180,3 +180,8 @@ function cancelProfileChanges() {
 function saveProfileChanges() {
   alert("Profile saved"); // Replace with actual save logic
 }
+
+function toggleSettingsMenu() {
+  const menu = document.querySelector(".settings_menu");
+  menu.classList.toggle("open");
+}

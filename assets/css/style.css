@@ -1868,6 +1868,60 @@ button.noti .noti_count {
   transition: all 300ms ease-in-out;
   /* border-left: 3px solid blue; */
 }
+.settings_toggle_btn {
+  display: none;
+}
+
+/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+  /* Make sidebar slide in/out */
+  .settings_menu {
+    position: absolute;
+    top: 0;
+    left: -250px; /* hidden by default */
+    height: 100vh;
+    width: 240px;
+    background: var(--secondary-color);
+    z-index: 9999;
+    transition: left 0.3s ease;
+    padding-top: 60px; /* for toggle button space */
+  }
+
+  /* Active/visible sidebar */
+  .settings_menu.open {
+    left: 0;
+  }
+
+  /* Toggle Button */
+  .settings_toggle_btn {
+    display: block;
+    position: fixed;
+    top: 80px;
+    right: 15px;
+    color: var(--primary-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    z-index: 10000;
+    cursor: pointer;
+  }
+
+  .settings_toggle_btn:hover {
+    background: var(--primary-color-light);
+  }
+
+  /* Make nav items bigger for touch */
+  .settings_menu .navlink {
+    padding: 10px 12px;
+    margin-left: 0;
+  }
+
+  .settings_menu h6 {
+    margin-left: 5px;
+    font-size: 11px;
+  }
+}
 
 /* Content area */
 .settings_content {
