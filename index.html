@@ -102,7 +102,7 @@
         class="hidden h-full min-h-full w-full flex flex-col items-center justify-center animate__animated animate__fadeIn">
         <div class="w-full h-full bg-white shadow-md overflow-hidden flex flex-col md:flex-row">
             <!-- LEFT SIDE -->
-            <div class="relative w-full max-w-4xl md:w-1/2 flex flex-col justify-between px-10 py-12 space-y-4">
+            <div class="relative w-full md:w-1/2 flex flex-col justify-between px-10 py-12 space-y-4">
 
                 <div class="flex flex-row justify-between">
                     <img src="./assets/imgs/logo/logo.png" alt="Terminus Logo" loading="lazy" class="w-full max-w-48">
@@ -113,13 +113,7 @@
                     <h1
                         class="text-2xl font-semibold text-gray-900 relative text-center flex align-center justify-center text-center w-full">
                         Sign In
-                        <div
-                            class="text-left absolute float-left top-16 w-full -right-44 flex justify-center items-center">
-                            <button id="replayIntroBtn"
-                                class="text-xs text-blue-600 hover:bg-blue-200/10 rounded-full px-2 py-1">
-                                Replay Intro <i class="fa fa-play"></i>
-                            </button>
-                        </div>
+
                     </h1>
                     <p class="text-gray-500 mt-1 text-sm">
                         Log in to manage your container terminal operations with Terminus.
@@ -204,9 +198,15 @@
                     <!-- Register -->
                     <p class="text-sm text-center text-gray-600 mt-2">
                         Don’t Have An Account?
-                        <a href="#" class="text-[#0349d7] font-medium hover:underline">Register Now.</a>
+                        <a href="register.html" class="text-[#0349d7] font-medium hover:underline">Register Now.</a>
                     </p>
                 </form>
+                <div class="text-left float-left  w-full  flex justify-center items-center">
+                    <button id="replayIntroBtn"
+                        class="text-[8px] text-blue-600 hover:bg-blue-200/10 rounded-full px-2 py-1 -m-14">
+                        Replay Intro <i class="fa fa-play"></i>
+                    </button>
+                </div>
 
                 <!-- 2FA SECTION (inside login container) -->
                 <div id="twoFABox"
