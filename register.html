@@ -98,8 +98,9 @@
                     <!-- Social Register -->
                     <div class="flex flex-row space-x-4 w-32 m-auto align-center justify-center">
                         <div class="liner mt-2 text-indigo-200">Or</div>
-                        <div id="g_id_onload" data-client_id="99436185601-lnfp6u8945cl8rkbqln0v1qlh2hucipa.apps.googleusercontent.com
-" data-context="signup" data-ux_mode="popup" data-callback="handleGoogleLogin">
+                        <div id="g_id_onload"
+                            data-client_id="99436185601-lnfp6u8945cl8rkbqln0v1qlh2hucipa.apps.googleusercontent.com"
+                            data-context="signup" data-ux_mode="popup" data-callback="handleGoogleLogin">
                         </div>
 
                         <button id="googleBtn"
@@ -123,6 +124,40 @@
                     © 2025 Terminus Enterprises LTD. |
                     <a href="#" class="text-[#0349d7] hover:underline">Privacy Policy</a>
                 </footer>
+            </div>
+
+            <!-- Privacy Policy Modal -->
+            <div id="privacyModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+                <div
+                    class="bg-white rounded-lg w-11/12 max-w-xl p-6 relative shadow-lg animate__animated animate__fadeInDown">
+                    <!-- Close button -->
+                    <button id="closePrivacy" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                    <h2 class="text-xl font-semibold mb-4">Privacy Policy</h2>
+                    <div class="text-sm text-gray-700 max-h-96 overflow-y-auto space-y-2">
+                        <p>
+                            Welcome to Terminus Enterprises LTD. Your privacy is important to us. We collect and use
+                            your data
+                            to provide and improve our services. By using our services, you consent to the collection
+                            and use of
+                            information in accordance with this policy.
+                        </p>
+                        <p>
+                            We do not sell or share your personal data with third parties except as required by law or
+                            to
+                            provide the services you requested. You can review or request deletion of your data at any
+                            time by
+                            contacting our support team.
+                        </p>
+                        <p>
+                            This privacy policy may be updated from time to time. Please check this modal periodically
+                            to
+                            stay informed of any changes.
+                        </p>
+                    </div>
+                </div>
             </div>
 
 
@@ -159,29 +194,43 @@
 
     <!-- 2FA SECTION -->
     <!-- 2FA SECTION -->
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
-        document.getElementById("googleBtn").addEventListener("click", () => {
-            google.accounts.id.prompt(); // opens Google popup
-        });
-
         function handleGoogleLogin(response) {
-            // Google returns a JWT credential
             const jwt = response.credential;
-
-            console.log("Google JWT:", jwt);
-
-            // Decode to see user info
             const payload = JSON.parse(atob(jwt.split('.')[1]));
 
             console.log("Google User:", payload);
 
             alert("Welcome " + payload.name);
-
-            // Redirect to dashboard
             window.location.href = "dashboard.html";
         }
+
+
+        const privacyLink = document.querySelector("footer a"); // selects your Privacy Policy link
+        const privacyModal = document.getElementById("privacyModal");
+        const closePrivacy = document.getElementById("closePrivacy");
+
+        privacyLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            privacyModal.classList.remove("hidden");
+            privacyModal.classList.add("flex");
+        });
+
+        closePrivacy.addEventListener("click", () => {
+            privacyModal.classList.add("hidden");
+            privacyModal.classList.remove("flex");
+        });
+
+        // Close modal when clicking outside the modal content
+        privacyModal.addEventListener("click", (e) => {
+            if (e.target === privacyModal) {
+                privacyModal.classList.add("hidden");
+                privacyModal.classList.remove("flex");
+            }
+        });
     </script>
 
 </body>
