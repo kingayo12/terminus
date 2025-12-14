@@ -1,0 +1,142 @@
+<!-- online_clients_management.html -->
+
+<div class="ratinghistory_page scrollpage">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="#" class="crumb"><i class="fa fa-headset"></i> Customer Service</a></li>
+            <li><a href="#" class="crumb current">Rating History</a></li>
+        </ol>
+        <button class="btn" id="openPrefBtn">
+            <i class="fa fa-gear"></i>
+        </button>
+    </nav>
+
+    <!-- ===========================
+        SEARCH / form SECTION
+    ============================ -->
+    <div class="rating_form d_form">
+
+        <div class="form_grid ">
+            <!-- Category -->
+            <div class="form_group" data-pref="Client" data-pref-label="Client">
+                <label><i class="fa-solid fa-layer-group"></i> Choose Client</label>
+                <select class="form-control">
+                    <option>--Choose Category--</option>
+                    <option>APMT</option>
+                    <option>CMA</option>
+                    <option>ARKAS</option>
+                </select>
+            </div>
+            <!-- Client Name -->
+            <div class="form_group" data-pref="ratinid" data-pref-label="Rating ID">
+                <label><i class="fa-solid fa-user"></i> Rating ID</label>
+                <input type="text" class="form-control" placeholder="Rating ID">
+            </div>
+
+            <!-- Client Code -->
+            <div class="form_group" data-pref="fromdate" data-pref-label="From Date">
+                <label><i class="fa-solid fa-calendar-minus"></i> From Date</label>
+                <input type="date" class="form-control" placeholder="from">
+            </div>
+
+            <div class="form_group" data-pref="todate" data-pref-label="To Date">
+                <label><i class="fa-solid fa-calendar-check"></i>To Date</label>
+                <input type="date" class="form-control" placeholder="from">
+            </div>
+
+
+            <!-- Category -->
+            <div class="form_group" data-pref="containerstatus" data-pref-label="Container Status">
+                <label><i class="fa-solid fa-door-open"></i> Container Status</label>
+                <select class="form-control">
+                    <option>--Choose Container Status--</option>
+                    <option>Empty</option>
+                    <option>Full</option>
+                </select>
+            </div>
+            <div class="form_group" data-pref="billofladenno" data-pref-label="Bill Of Laden No">
+                <label><i class="fa-solid fa-edit"></i> Bill Of Laden No</label>
+                <textarea class="form-control" placeholder="Bill Of Laden No"></textarea>
+            </div>
+
+
+        </div>
+
+        <!-- SEARCH BUTTON -->
+        <div class="form_actions">
+            <button class="btn btn-refresh"><i class="fa-solid fa-rotate"></i> Refresh</button>
+            <button class="btn btn-primary"><i class="fa-solid fa-search"></i> Search</button>
+        </div>
+    </div>
+
+    <!-- ===========================
+        REFRESH SECTION
+    ============================ -->
+
+    <!-- ===========================
+        RESULT TABLE
+    ============================ -->
+    <div class="table_section">
+
+        <table class="rating_table cps-data-table" data-datatable="true">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Client Name</th>
+                    <th>Client Code</th>
+                    <th>Category</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Contact Person</th>
+                    <th>Approved</th>
+                    <th>Suspended</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>BlueLine Logistics</td>
+                    <td>BL001</td>
+                    <td>Shipping</td>
+                    <td>+234 801 234 5678</td>
+                    <td>info@blueline.com</td>
+                    <td>John Ade</td>
+                    <td><span class="status yes">Yes</span></td>
+                    <td><span class="status no">No</span></td>
+
+                    <td>12 Marina Road</td>
+                    <td>Lagos</td>
+                    <td>Lagos State</td>
+
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Harbor Freight</td>
+                    <td>HF102</td>
+                    <td>Freight</td>
+                    <td>+234 809 456 3321</td>
+                    <td>harbor@freight.com</td>
+                    <td>Mary Okafor</td>
+                    <td><span class="status no">No</span></td>
+                    <td><span class="status yes">Yes</span></td>
+
+                    <td>34 Port Street</td>
+                    <td>Port Harcourt</td>
+                    <td>Rivers State</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>

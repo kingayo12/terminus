@@ -11,7 +11,7 @@
 function includeHTML(id, file, ...callbacks) {
   const targetElement = document.getElementById(id);
   if (!targetElement) {
-    // console.error(`includeHTML: Target element with ID "${id}" not found.`);
+    console.error(`includeHTML: Target element with ID "${id}" not found.`);
     return;
   }
 
@@ -34,7 +34,7 @@ function includeHTML(id, file, ...callbacks) {
       });
     })
     .catch((error) => {
-      // console.error(`Error loading component ${file}:`, error);
+      console.error(`Error loading component ${file}:`, error);
       targetElement.innerHTML = `<p style="color:red;">Error loading ${file}</p>`;
     });
 }
@@ -49,8 +49,7 @@ function includeHTML(id, file, ...callbacks) {
 function initialLoad() {
   // Load components and run their specific initialization functions afterward
   includeHTML("sidebar", "./components/sidebar.html", initSidebarMenu);
-  includeHTML("header", "./components/header.html", initUserInitials, initThemeManager);
-  // includeHTML("settings", "../pages/settings.html", initThemeManager);
+  includeHTML("header", "./components/header.html", initUserInitials);
 
   // The 'content' area is loaded last, and its callback includes initDataTables
   includeHTML(
@@ -58,133 +57,192 @@ function initialLoad() {
     "../pages/dashboard.html",
     initDataTables,
     initTheme,
+    initDarkModeToggle,
     initPreferences,
     initDashboardCards,
     initBreakdownModal,
   );
+
+  // Cards component is loaded without a dedicated callback
+  includeHTML("cards", "../cards.html", updateProfileCompletion);
 }
 
 // Ensure all HTML elements are loaded before attempting to fetch components
 document.addEventListener("DOMContentLoaded", initialLoad);
 
-// -----------------------initSidebar------------------------------
+/**
+ * Initializes the click handlers for sidebar menu items.
+ * This is the function most likely causing your TypeError.
+ */
 function initSidebarMenu() {
-  const sidebar = document.querySelector(".sidebar");
-  if (!sidebar) return;
+  // **CRITICAL FIX**: Check if the elements exist.
+  const menuItems = document.querySelectorAll(".sidebar .menu_item");
 
-  const menuItems = sidebar.querySelectorAll(".menu_item");
-  const dropdowns = sidebar.querySelectorAll(".side_dropdown");
-  const submenuItems = sidebar.querySelectorAll(".side_dropdown_list a");
-
-  /* ----------------------------------------
-     Helpers
-  ---------------------------------------- */
-
-  function closeAllDropdowns(except = null) {
-    dropdowns.forEach((d) => {
-      if (d !== except) {
-        d.style.maxHeight = null;
-        d.style.overflow = "hidden";
-        d.previousElementSibling?.classList.remove("open");
-      }
-    });
+  if (menuItems.length === 0) {
+    console.warn(
+      "initSidebarMenu: No elements found matching '.sidebar .menu_item'. Check sidebar.html content.",
+    );
+    return; // Exit if no items are found, preventing the TypeError
   }
 
-  function clearActiveStates() {
-    menuItems.forEach((el) => el.classList.remove("active"));
-    submenuItems.forEach((el) => el.classList.remove("active"));
-  }
+  const toggles = document.querySelectorAll(".menu_item.hasdropdown");
 
-  function loadPage(target) {
-    if (!target) return;
-
-    const pageFile = `../pages/${target}.html`;
-
-    includeHTML("content", pageFile, ...pageCallbacks(target));
-  }
-
-  function pageCallbacks(target) {
-    return [
-      initsettings,
-      updateProfileCompletion,
-      initFontSizeSelect,
-      initDataTables,
-      init2FA,
-      initLockSetting,
-      initAppLock,
-      initTheme,
-      initPreferences,
-      initDashboardCards,
-      initBreakdownModal,
-      initChangePassword,
-
-      () => {
-        const fn = window[`init_${target}`];
-        if (typeof fn === "function") fn();
-      },
-    ];
-  }
-
-  function toggleDropdown(toggle, dropdown) {
-    const isOpen = dropdown.style.maxHeight;
-
-    closeAllDropdowns(isOpen ? null : dropdown);
-
-    if (isOpen) {
-      dropdown.style.maxHeight = null;
-      dropdown.style.overflow = "hidden";
-      toggle.classList.remove("open");
-    } else {
-      dropdown.style.maxHeight = dropdown.scrollHeight + "px";
-      dropdown.style.overflow = "visible";
-      toggle.classList.add("open");
-    }
-  }
-
-  /* ----------------------------------------
-     MAIN MENU CLICK (Event Delegation)
-  ---------------------------------------- */
-
-  sidebar.addEventListener("click", (e) => {
-    const menuItem = e.target.closest(".menu_item");
-    const submenu = e.target.closest(".side_dropdown_list a");
-
-    /* ---------- Submenu click ---------- */
-    if (submenu) {
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", (e) => {
       e.preventDefault();
 
-      clearActiveStates();
-      submenu.classList.add("active");
+      const dropdown = toggle.nextElementSibling;
 
-      const dropdown = submenu.closest(".side_dropdown");
-      const parentMenu = dropdown?.previousElementSibling;
+      // Only work if the next sibling is a .side_dropdown
+      if (!dropdown || !dropdown.classList.contains("side_dropdown")) return;
 
-      parentMenu?.classList.add("active", "open");
-      dropdown.style.maxHeight = dropdown.scrollHeight + "px";
-      dropdown.style.overflow = "visible";
+      // Close all other dropdowns
+      document.querySelectorAll(".side_dropdown").forEach((d) => {
+        if (d !== dropdown) {
+          d.style.maxHeight = null;
+          d.style.overflow = "hidden";
+          d.previousElementSibling.classList.remove("open");
+        }
+      });
 
-      loadPage(submenu.dataset.target);
-      return;
-    }
+      // Toggle current dropdown
+      if (dropdown.style.maxHeight) {
+        // Close it
+        dropdown.style.maxHeight = null;
+        toggle.classList.remove("open");
+        dropdown.style.overflow = "hidden";
+      } else {
+        // Open it
+        dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+        dropdown.style.overflow = "visible";
+        toggle.classList.add("open");
+      }
+    });
+  });
 
-    /* ---------- Main menu click ---------- */
-    if (!menuItem) return;
+  menuItems.forEach((item) => {
+    // The TypeError occurs if 'item' is null, but querySelectorAll returns a NodeList,
+    // so this is safe as long as the elements are in the DOM when this runs.
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    e.preventDefault();
-    clearActiveStates();
-    menuItem.classList.add("active");
+      const hasDropdown = item.classList.contains("hasdropdown");
 
-    const dropdown = menuItem.nextElementSibling;
-    const hasDropdown =
-      menuItem.classList.contains("hasdropdown") && dropdown?.classList.contains("side_dropdown");
+      // Remove active from ALL menu items
+      menuItems.forEach((el) => el.classList.remove("active"));
 
-    if (hasDropdown) {
-      toggleDropdown(menuItem, dropdown);
-      return;
-    }
+      // Remove active from ALL submenu items
+      document
+        .querySelectorAll(".side_dropdown_list a")
+        .forEach((a) => a.classList.remove("active"));
 
-    closeAllDropdowns();
-    loadPage(menuItem.dataset.target);
+      // If it is NOT a dropdown parent => close all dropdowns
+      if (!hasDropdown) {
+        document.querySelectorAll(".side_dropdown").forEach((d) => {
+          d.style.maxHeight = null;
+          d.style.overflow = "hidden";
+          d.previousElementSibling.classList.remove("open");
+        });
+      }
+
+      // Activate clicked menu item
+      item.classList.add("active");
+
+      const target = item.getAttribute("data-target");
+      if (!target) return;
+
+      const pageFile = `../pages/${target}.html`;
+
+      // Define an array of callbacks for page loads
+      const contentCallbacks = [
+        initFontSizeSelect,
+        initsettings, // Assumes initsettings is needed on page load
+        updateProfileCompletion, // Assumes profile completion needs to update
+        initDataTables, // Assumes DataTables needs to re-initialize on new content
+        init2FA, // Assumes 2FA logic needs to be set up on new page
+        initLockSetting, // Assumes Lock Setting logic needs to be set up on new page
+        initAppLock, // Assumes App Lock logic needs to be set up on new page
+        initTheme, // Re-apply theme settings
+        initThemeSelectAndToggle,
+        initPreferences, // Re-initialize dashboard preferences
+        initDashboardCards,
+        initBreakdownModal,
+        initChangePassword,
+
+        // Dynamically call initialization function for the new page (e.g., init_settings)
+        () => {
+          const initFunctionName = `init_${target}`;
+          if (typeof window[initFunctionName] === "function") {
+            window[initFunctionName]();
+          }
+        },
+      ];
+
+      // Re-load the content area with the new page and run all collected callbacks
+      includeHTML("content", pageFile, ...contentCallbacks);
+    });
+  });
+
+  const submenuItems = document.querySelectorAll(".side_dropdown_list a");
+
+  submenuItems.forEach((sub) => {
+    sub.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // Remove all submenu active states
+      submenuItems.forEach((a) => a.classList.remove("active"));
+
+      // Activate clicked submenu
+      sub.classList.add("active");
+
+      // Parent dropdown item
+      const parentDropdown = sub.closest(".side_dropdown");
+      const parentMenu = parentDropdown.previousElementSibling;
+
+      // Remove active from all main items first
+      menuItems.forEach((m) => m.classList.remove("active"));
+
+      // Activate parent menu
+      parentMenu.classList.add("active");
+
+      // Ensure dropdown is OPEN
+      parentDropdown.style.maxHeight = parentDropdown.scrollHeight + "px";
+      parentDropdown.style.overflow = "visible";
+      parentMenu.classList.add("open");
+
+      // Load page
+      const target = sub.getAttribute("data-target");
+      if (!target) return;
+
+      // Define an array of callbacks for page loads
+      const contentCallbacks = [
+        initsettings, // Assumes initsettings is needed on page load
+        updateProfileCompletion, // Assumes profile completion needs to update
+        initDataTables, // Assumes DataTables needs to re-initialize on new content
+        init2FA, // Assumes 2FA logic needs to be set up on new page
+        initLockSetting, // Assumes Lock Setting logic needs to be set up on new page
+        initAppLock, // Assumes App Lock logic needs to be set up on new page
+        initTheme, // Re-apply theme settings
+        initPreferences, // Re-initialize dashboard preferences
+        initDashboardCards,
+        initThemeSelectAndToggle,
+        initBreakdownModal,
+        // initFontSizeSelect, // Not needed here since it's an issue
+        initChangePassword,
+
+        // Dynamically call initialization function for the new page (e.g., init_settings)
+        () => {
+          const initFunctionName = `init_${target}`;
+          if (typeof window[initFunctionName] === "function") {
+            window[initFunctionName]();
+          }
+        },
+      ];
+
+      const pageFile = `../pages/${target}.html`;
+
+      includeHTML("content", pageFile, ...contentCallbacks);
+    });
   });
 }
 
@@ -196,7 +254,7 @@ function initSidebarMenu() {
 function initUserInitials() {
   const userWrapper = document.querySelector(".user_wrapper");
   if (!userWrapper) {
-    // console.warn("initUserInitials: User wrapper not found.");
+    console.warn("initUserInitials: User wrapper not found.");
     return;
   }
 
@@ -246,14 +304,14 @@ const ACTION_TEMPLATES = {
 function initDataTables() {
   // Ensure jQuery and DataTables are loaded before executing
   if (typeof $ === "undefined" || typeof $.fn.DataTable === "undefined") {
-    // console.error("initDataTables requires jQuery and DataTables libraries to be loaded.");
+    console.error("initDataTables requires jQuery and DataTables libraries to be loaded.");
     return;
   }
 
   const $tablesToInit = $('table[data-datatable="true"]');
 
   if ($tablesToInit.length === 0) {
-    // console.log("initDataTables: No tables found with data-datatable='true'.");
+    console.log("initDataTables: No tables found with data-datatable='true'.");
     return;
   }
 
@@ -335,7 +393,7 @@ function initDataTables() {
     $table.on("click", ".action-btn.details", function () {
       const row = $(this).closest("tr");
       const data = table.row(row).data();
-      // console.log("Details data:", data);
+      console.log("Details data:", data);
       alert(`Showing Details for: ${data[1]}`);
     });
 
@@ -403,7 +461,7 @@ function initsettings() {
 
   // Check for critical elements before adding listeners (addresses potential TypeErrors)
   if (!editBtn || !cancelBtn || !saveBtn || !saveText || !loader || !toast) {
-    // console.warn("initsettings: One or more required control buttons/elements not found.");
+    console.warn("initsettings: One or more required control buttons/elements not found.");
     return;
   }
 
@@ -426,10 +484,9 @@ function initsettings() {
         if (display && input) {
           display.innerText = input.value;
         } else {
-          console
-            .warn
-            // `Settings update skipped for field: ${name}. Display or input element not found.`,
-            ();
+          console.warn(
+            `Settings update skipped for field: ${name}. Display or input element not found.`,
+          );
         }
       });
 
@@ -485,9 +542,9 @@ function updateProfileCompletion() {
   const progressCircle = document.querySelector(".circular_progress .progress");
 
   if (!completionPercent || !completionItems || !progressCircle) {
-    // console.warn(
-    //   "updateProfileCompletion: One or more required elements for completion display not found.",
-    // );
+    console.warn(
+      "updateProfileCompletion: One or more required elements for completion display not found.",
+    );
     return;
   }
 
@@ -541,7 +598,7 @@ function init2FA() {
   const closeBtn = modal ? modal.querySelector(".close-button") : null;
 
   if (!modal) {
-    // console.warn("init2FA: 2FA modal (#twoFAModal) not found.");
+    console.warn("init2FA: 2FA modal (#twoFAModal) not found.");
     return;
   }
 
@@ -549,7 +606,7 @@ function init2FA() {
   if (manageBtn) {
     manageBtn.addEventListener("click", () => toggle2FAModal(true));
   } else {
-    // console.warn("init2FA: #manage2FABtn not found.");
+    console.warn("init2FA: #manage2FABtn not found.");
   }
 
   // Close button
@@ -562,7 +619,7 @@ function init2FA() {
     if (event.target === modal) toggle2FAModal(false);
   });
 
-  // console.log("2FA initialized successfully.");
+  console.log("2FA initialized successfully.");
 
   setup2FAToggle();
 }
@@ -597,7 +654,7 @@ function initLockSetting() {
   const toast = document.getElementById("toast"); // toast support
 
   if (!toggleLock || !openLockBtn || !modal || !timeoutSelect || !toast) {
-    // console.warn("initLockSetting: Missing required elements.");
+    console.warn("initLockSetting: Missing required elements.");
     return;
   }
 
@@ -648,7 +705,7 @@ function initLockSetting() {
   toggleLock.addEventListener("change", updateButtonState);
   openLockBtn.addEventListener("click", openLockModal);
 
-  // console.log("🔐 Screen Lock initialized");
+  console.log("🔐 Screen Lock initialized");
 
   // =============== SAVE TIMEOUT =====
   window.saveTimeoutSetting = function () {
@@ -796,7 +853,7 @@ function initAppLock() {
     disableAntiInspect(); // ✅ Re-enable inspect
   }
 
-  // console.log("🔐 App Lock Active");
+  console.log("🔐 App Lock Active");
 }
 
 // Function to apply theme with optional animation
@@ -877,6 +934,33 @@ function initTheme() {
 /**
  * 🌙 Initializes Dark Mode functionality (toggling and persistent state).
  */
+function initDarkModeToggle() {
+  const darkToggle = document.querySelector(".toggle_theme");
+  const body = document.body;
+
+  if (!darkToggle) {
+    console.warn("initDarkModeToggle: Element with class '.toggle_theme' not found.");
+    return;
+  } // Load saved dark mode state
+
+  const savedDark = localStorage.getItem("darkMode") === "true"; // Apply initial dark mode state
+
+  if (savedDark) {
+    body.classList.add("dark-mode");
+    darkToggle.setAttribute("aria-checked", "true");
+    darkToggle.classList.add("dark"); // Sync the custom toggle's visual state
+  } // DARK MODE BUTTON LISTENER
+
+  darkToggle.addEventListener("click", () => {
+    // 1. Toggle the 'dark-mode' class on the body
+    const isDark = body.classList.toggle("dark-mode"); // 2. Update localStorage
+
+    localStorage.setItem("darkMode", isDark); // 3. Sync the button's visual and accessible state
+
+    darkToggle.setAttribute("aria-checked", isDark);
+    darkToggle.classList.toggle("dark", isDark);
+  });
+}
 
 // ========================= UTILITY/HELPER FUNCTION (Assuming this is an external helper) =========================
 function handleThemeSwitch() {
@@ -887,96 +971,95 @@ function handleThemeSwitch() {
   document.querySelector(".toggle_theme").classList.toggle("dark");
 }
 
-function initThemeManager() {
-  const body = document.body;
-  const toggle = document.querySelector(".toggle_theme");
+function initThemeSelectAndToggle() {
   const select = document.getElementById("themeSelect");
+  const darkToggle = document.querySelector(".toggle_theme");
+  const body = document.body;
 
-  if (!toggle && !select) return;
+  if (!select || !darkToggle) return;
 
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-  /* ----------------------------------------
-     Helpers
-  ---------------------------------------- */
-  function applyDarkMode(isDark, persist = true) {
-    body.classList.toggle("dark-mode", isDark);
-
-    if (toggle) {
-      toggle.classList.toggle("dark", isDark);
-      toggle.setAttribute("aria-checked", isDark ? "true" : "false");
-    }
-
-    if (select && select.value !== "system") {
-      select.value = isDark ? "dark" : "light";
-    }
-
-    if (persist) {
-      localStorage.setItem("darkMode", isDark);
-    }
-  }
-
-  function applySystemMode() {
-    applyDarkMode(mediaQuery.matches, false);
-
-    if (select) select.value = "system";
-    localStorage.removeItem("darkMode");
-  }
-
-  /* ----------------------------------------
-     Initial Load
-  ---------------------------------------- */
+  // Initialize based on saved state or system preference
   const savedDark = localStorage.getItem("darkMode");
 
   if (savedDark === "true") {
-    applyDarkMode(true);
+    body.classList.add("dark-mode");
+    select.value = "dark";
+    darkToggle.classList.add("dark");
+    darkToggle.setAttribute("aria-checked", "true");
   } else if (savedDark === "false") {
-    applyDarkMode(false);
+    body.classList.remove("dark-mode");
+    select.value = "light";
+    darkToggle.classList.remove("dark");
+    darkToggle.setAttribute("aria-checked", "false");
   } else {
-    applySystemMode();
+    // System default
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDark) body.classList.add("dark-mode");
+    else body.classList.remove("dark-mode");
+    select.value = "system";
+    darkToggle.classList.remove("dark");
+    darkToggle.setAttribute("aria-checked", prefersDark ? "true" : "false");
   }
 
-  /* ----------------------------------------
-     Toggle Button
-  ---------------------------------------- */
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const isDark = !body.classList.contains("dark-mode");
-      applyDarkMode(isDark);
+  // ---------------- Dropdown change listener ----------------
+  select.addEventListener("change", () => {
+    const value = select.value;
 
-      if (select) {
-        select.value = isDark ? "dark" : "light";
-      }
-    });
-  }
+    if (value === "light") {
+      body.classList.remove("dark-mode");
+      darkToggle.classList.remove("dark");
+      darkToggle.setAttribute("aria-checked", "false");
+      localStorage.setItem("darkMode", "false");
+    } else if (value === "dark") {
+      body.classList.add("dark-mode");
+      darkToggle.classList.add("dark");
+      darkToggle.setAttribute("aria-checked", "true");
+      localStorage.setItem("darkMode", "true");
+    } else if (value === "system") {
+      localStorage.removeItem("darkMode");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (prefersDark) body.classList.add("dark-mode");
+      else body.classList.remove("dark-mode");
+      darkToggle.classList.toggle("dark", prefersDark);
+      darkToggle.setAttribute("aria-checked", prefersDark ? "true" : "false");
+    }
+  });
 
-  /* ----------------------------------------
-     Dropdown Selector
-  ---------------------------------------- */
-  if (select) {
-    select.addEventListener("change", () => {
-      if (select.value === "dark") applyDarkMode(true);
-      if (select.value === "light") applyDarkMode(false);
-      if (select.value === "system") applySystemMode();
-    });
-  }
+  // ---------------- Toggle button listener ----------------
+  darkToggle.addEventListener("click", () => {
+    const isDark = body.classList.toggle("dark-mode");
+    darkToggle.classList.toggle("dark", isDark);
+    darkToggle.setAttribute("aria-checked", isDark);
 
-  /* ----------------------------------------
-     System Theme Change Listener
-  ---------------------------------------- */
-  mediaQuery.addEventListener("change", (e) => {
-    if (select?.value === "system") {
-      applyDarkMode(e.matches, false);
+    // Update select to match the toggle
+    if (select.value === "system") {
+      // Override system temporarily
+      select.value = isDark ? "dark" : "light";
+      localStorage.setItem("darkMode", isDark ? "true" : "false");
+    } else {
+      localStorage.setItem("darkMode", isDark ? "true" : "false");
+    }
+  });
+
+  // ---------------- System preference listener ----------------
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (select.value === "system") {
+      body.classList.toggle("dark-mode", e.matches);
+      darkToggle.classList.toggle("dark", e.matches);
+      darkToggle.setAttribute("aria-checked", e.matches ? "true" : "false");
     }
   });
 }
 
-/* ----------------------------------------
-   Initialize ONCE
----------------------------------------- */
+// Initialize after DOM loaded
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme(); // your existing theme loader
-  initThemeManager();
+  initThemeSelectAndToggle();
+});
+
+// Initialization should only run once
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme(); // Load primary theme
+  initDarkModeToggle(); // Load dark mode toggle
 });
 
 /**

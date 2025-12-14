@@ -5,34 +5,119 @@
         </div>
 
         <div class="nav_links">
-            <h6>Account</h6>
+            <!-- ========== USER PREFERENCES ========== -->
+            <h6>User Preferences</h6>
+
             <a class="navlink active" onclick="handleSettingsMenu(this, 'profile')">
                 <i class="fa fa-user"></i> My Profile
             </a>
-            <a class="navlink" onclick="handleSettingsMenu(this, 'security')">
-                <i class="fa fa-lock"></i> Security
-            </a>
-            <a class="navlink" onclick="handleSettingsMenu(this, 'notifications')">
-                <i class="fa fa-bell"></i> Notifications
-            </a>
-            <a class="navlink" onclick="handleSettingsMenu(this, 'billing')">
-                <i class="fa fa-credit-card"></i> Billing
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'account-preferences')">
+                <i class="fa fa-sliders-h"></i> Account Preferences
             </a>
 
-            <h6>Preferences</h6>
             <a class="navlink" onclick="handleSettingsMenu(this, 'theme')">
                 <i class="fa fa-paint-brush"></i> Theme
             </a>
+
             <a class="navlink" onclick="handleSettingsMenu(this, 'language')">
                 <i class="fa fa-language"></i> Language
             </a>
 
-            <h6>System</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this, 'notifications')">
+                <i class="fa fa-bell"></i> Notifications
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'login-activity')">
+                <i class="fa fa-history"></i> Login Activity
+            </a>
+
+            <!-- <a class="navlink" onclick="handleSettingsMenu(this, 'twofactor')">
+                <i class="fa fa-shield-alt"></i> Two-Factor Auth
+            </a> -->
+
+
+
+            <!-- ========== ADMIN SETTINGS ========== -->
+            <h6>Admin Settings</h6>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'security')">
+                <i class="fa fa-lock"></i> Security
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'billing')">
+                <i class="fa fa-credit-card"></i> Billing
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'user-management')">
+                <i class="fa fa-users-cog"></i> User Management
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'roles-permissions')">
+                <i class="fa fa-user-shield"></i> Roles & Permissions
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'audit')">
+                <i class="fa fa-clipboard-list"></i> Audit Trail
+            </a>
+
+            <!-- ========== SYSTEM CONFIGURATION ========== -->
+            <h6>System Configuration</h6>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'branding')">
+                <i class="fa fa-image"></i> Branding
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'integrations')">
+                <i class="fa fa-plug"></i> Integrations
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'communication-settings')">
+                <i class="fa fa-envelope"></i> Email & SMS Settings
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'modules')">
+                <i class="fa fa-th-large"></i> Modules Control
+            </a>
+
+
+            <!-- ========== DATA & AUTOMATION ========== -->
+            <h6>Data & Automation</h6>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'import-export')">
+                <i class="fa fa-upload"></i> Import / Export
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'automations')">
+                <i class="fa fa-sync-alt"></i> Automations
+            </a>
+
+
+            <!-- ========== SYSTEM HEALTH & SECURITY ========== -->
+            <h6>System Health</h6>
+
             <a class="navlink" onclick="handleSettingsMenu(this, 'logs')">
                 <i class="fa fa-file"></i> Logs
             </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'server-status')">
+                <i class="fa fa-server"></i> Server Status
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'storage')">
+                <i class="fa fa-hdd"></i> Storage Monitoring
+            </a>
+
             <a class="navlink" onclick="handleSettingsMenu(this, 'apikey')">
                 <i class="fa fa-key"></i> API Keys
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'api-limits')">
+                <i class="fa fa-tachometer-alt"></i> API Rate Limits
+            </a>
+
+            <a class="navlink" onclick="handleSettingsMenu(this, 'compliance')">
+                <i class="fa fa-balance-scale"></i> Compliance
             </a>
         </div>
     </div>
@@ -447,9 +532,88 @@
                             <p class="setting-detail">
                                 Use a strong, unique password to secure your account. Avoid reusing passwords.
                             </p>
-                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-lock"></i> Change
+                            <button class="btn btn-primary setting-action-btn" id="changepassword"><i
+                                    class="fa-solid fa-lock"></i> Change
                                 Password</button>
                         </div>
+                        <!-- Change Password Modal -->
+                        <!-- Change Password Modal -->
+                        <div id="changePasswordModal" class="modal-overlay">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h3><i class="fa-solid fa-key"></i> Change Password</h3>
+                                    <span class="close-button">&times;</span>
+                                </div>
+
+                                <!-- Scrollable Body -->
+                                <div class="modal-body">
+                                    <div class="password-container">
+
+                                        <p class="section-detail">
+                                            Use a strong, unique password to secure your account. Avoid reusing
+                                            passwords.
+                                        </p>
+
+                                        <form id="changePasswordForm">
+
+                                            <div class="form-group">
+                                                <label>Old Password</label>
+                                                <div class="password-wrapper">
+                                                    <input type="password" id="oldPassword" class="form-control"
+                                                        required>
+                                                    <i class="fa fa-eye toggle-eye"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>New Password</label>
+                                                <div class="password-wrapper">
+                                                    <input type="password" id="newPassword" class="form-control"
+                                                        required>
+                                                    <i class="fa fa-eye toggle-eye"></i>
+                                                </div>
+
+                                                <ul class="password-rules">
+                                                    <li id="rule-length"><i class="fa-solid fa-circle-xmark icon"></i>
+                                                        At least 8 characters</li>
+                                                    <li id="rule-upper"><i class="fa-solid fa-circle-xmark icon"></i>
+                                                        One uppercase letter (A–Z)</li>
+                                                    <li id="rule-lower"><i class="fa-solid fa-circle-xmark icon"></i>
+                                                        One lowercase letter (a–z)</li>
+                                                    <li id="rule-number"><i class="fa-solid fa-circle-xmark icon"></i>
+                                                        One number (0–9)</li>
+                                                    <li id="rule-symbol"><i class="fa-solid fa-circle-xmark icon"></i>
+                                                        One special character (!@#$%^&*)</li>
+                                                </ul>
+
+                                                <p id="confirmMsg" class="confirm-msg"></p>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <div class="password-wrapper">
+                                                    <input type="password" id="confirmPassword" class="form-control"
+                                                        required>
+                                                    <i class="fa fa-eye toggle-eye"></i>
+                                                </div>
+                                                <small id="confirmMsg" class="error-msg"></small>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary setting-action-btn full-btn">
+                                                <i class="fa-solid fa-lock"></i> Update Password
+                                            </button>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
 
                         <hr>
 
@@ -861,6 +1025,377 @@
             <div class="tabPage" id="language">Language Settings Content</div>
             <div class="tabPage" id="logs">System Logs Content</div>
             <div class="tabPage" id="apikey">API Keys Content</div>
+            <div class="tabPage setbp" id="account-preferences">
+                <div class="preferences-settings-container">
+
+                    <div class="set_header">
+                        <h3>Account Preferences</h3>
+                    </div>
+
+                    <div class="details col-2">
+
+
+                        <!-- ================= REGIONAL SETTINGS ================= -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-earth-africa"></i> Regional Settings</h4>
+                            </div>
+
+                            <p class="setting-detail">Adjust locale and formatting options.</p>
+                            <div class="form_grid">
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-earth-africa"></i> Time Zone</label>
+                                    <select>
+                                        <option>--Select Time Zone--</option>
+                                        <option>(GMT+1) West Africa Time</option>
+                                        <option>(GMT) UTC</option>
+                                        <option>(GMT+2) South Africa</option>
+                                        <option>(GMT-5) Eastern Time (US)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-calendar"></i> Date Format</label>
+                                    <select>
+                                        <option>DD/MM/YYYY</option>
+                                        <option>MM/DD/YYYY</option>
+                                        <option>YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-clock"></i> Time Format</label>
+                                    <select>
+                                        <option>12-Hour (AM/PM)</option>
+                                        <option>24-Hour</option>
+                                    </select>
+                                </div>
+
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-money-bill-wave"></i> Currency</label>
+                                    <select>
+                                        <option>--Select Currency--</option>
+                                        <option>NGN - Nigerian Naira</option>
+                                        <option>USD - US Dollar</option>
+                                        <option>EUR - Euro</option>
+                                        <option>GBP - British Pound</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn-primary setting-action-btn">
+                                <i class="fa-solid fa-save"></i> Save Regional Settings
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= APP EXPERIENCE ================= -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-display"></i> Application Experience</h4>
+                            </div>
+
+                            <p class="setting-detail">Customize how the application layout behaves for you.</p>
+
+                            <div class="form_grid">
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-text-height"></i> Font Size</label>
+                                    <select id="fontSizeSelect">
+                                        <option value="default">Default</option>
+                                        <option value="small">Small</option>
+                                        <option value="large">Large</option>
+                                        <option value="xlarge">Extra Large</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-eye"></i> UI Density</label>
+                                    <select>
+                                        <option>Comfortable</option>
+                                        <option>Compact</option>
+                                        <option>Spacious</option>
+                                    </select>
+                                </div>
+
+                                <div class="form_group">
+                                    <label><i class="fa-solid fa-circle-half-stroke"></i> Theme Mode</label>
+                                    <select id="themeSelect">
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="system">System Default</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <p class="setting-detail">Automatically save input changes without requiring manual save.
+                            </p>
+
+
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= ACCESSIBILITY ================= -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-universal-access"></i> Accessibility</h4>
+                            </div>
+
+                            <p class="setting-detail">Improve your personal reading and navigation experience.</p>
+
+                            <div class="security-header">
+                                <h5>High Contrast Mode</h5>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleContrast">
+                                    <label for="toggleContrast" class="toggle-label"></label>
+                                </div>
+                            </div>
+
+                            <div class="security-header">
+                                <h5>Large Text Mode</h5>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleLargeText">
+                                    <label for="toggleLargeText" class="toggle-label"></label>
+                                </div>
+                            </div>
+
+                            <div class="security-header">
+                                <h5>Reduced Animations</h5>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleAnimations">
+                                    <label for="toggleAnimations" class="toggle-label"></label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary setting-action-btn">
+                                <i class="fa-solid fa-person"></i> Save Accessibility Settings
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= DATA MANAGEMENT ================= -->
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-database"></i> Data Management</h4>
+                            </div>
+
+                            <p class="setting-detail">Export your data or manage archived information.</p>
+
+                            <button class="btn btn-secondary setting-action-btn">
+                                <i class="fa-solid fa-file-export"></i> Export My Data
+                            </button>
+
+                            <button class="btn btn-secondary setting-action-btn">
+                                <i class="fa-solid fa-file-import"></i> Import Data
+                            </button>
+
+                            <button class="btn btn-warning setting-action-btn">
+                                <i class="fa-solid fa-box-archive"></i> View Archived Items
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <!-- ================= DANGER ZONE ================= -->
+                        <div class="security-group danger-zone">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Account Control</h4>
+                            </div>
+
+                            <p class="setting-detail">
+                                Temporarily deactivate or permanently delete your account.
+                            </p>
+
+                            <button class="btn btn-error setting-action-btn">
+                                <i class="fa-solid fa-user-slash"></i> Deactivate Account
+                            </button>
+
+                            <button class="btn btn-error setting-action-btn">
+                                <i class="fa-solid fa-trash"></i> Delete Account Permanently
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tabPage setbp" id="login-activity">
+                <div class="login-activity-container">
+                    <div class="set_header">
+                        <h3>Login Activity</h3>
+                    </div>
+                    <div class="details col-2">
+                        <p class="description">
+                            Review and manage recent login activity, including device, location, and time.
+                        </p>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-clock-rotate-left"></i> Recent Logins</h4>
+                            </div>
+                            <p class="setting-detail">
+                                The last 10 logins to your account are listed below. You can review details and log out
+                                of any session remotely.
+                            </p>
+
+                            <div class="login-activity-table cps-data-table">
+                                <table data-datatable="true" data-actions="logout">
+                                    <thead>
+                                        <tr>
+                                            <th>Device</th>
+                                            <th>Location / IP</th>
+                                            <th>Date & Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Chrome on Windows</td>
+                                            <td>New York, USA / 192.168.1.1</td>
+                                            <td>Dec 7, 2025 - 09:15 AM</td>
+                                            <td><button class="btn btn-secondary btn-small"><i
+                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Safari on iPhone</td>
+                                            <td>London, UK / 192.168.1.2</td>
+                                            <td>Dec 6, 2025 - 07:42 PM</td>
+                                            <td><button class="btn btn-secondary btn-small"><i
+                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Firefox on Mac</td>
+                                            <td>Paris, France / 192.168.1.3</td>
+                                            <td>Dec 5, 2025 - 11:23 AM</td>
+                                            <td><button class="btn btn-secondary btn-small"><i
+                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Add more rows as needed -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-shield-check"></i> Security Alerts</h4>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="toggleLoginAlerts" checked
+                                        aria-label="Enable Login Alerts">
+                                    <label for="toggleLoginAlerts" class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <p class="setting-detail">
+                                Receive notifications whenever your account is accessed from a new device or location.
+                            </p>
+                            <button class="btn btn-secondary setting-action-btn"><i class="fa-solid fa-bell"></i> View
+                                Alert History</button>
+                        </div>
+
+                        <hr>
+
+                        <div class="security-group">
+                            <div class="security-header">
+                                <h4><i class="fa-solid fa-user-lock"></i> Active Sessions</h4>
+                            </div>
+                            <p class="setting-detail">
+                                See all devices currently logged into your account. You can log out remotely if needed.
+                            </p>
+
+                            <div class="active-sessions-list">
+                                <ul>
+                                    <li>
+                                        Chrome on Windows - New York, USA
+                                        <button class="btn btn-secondary btn-small"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                    </li>
+                                    <li>
+                                        Safari on iPhone - London, UK
+                                        <button class="btn btn-secondary btn-small"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                    </li>
+                                    <li>
+                                        Firefox on Mac - Paris, France
+                                        <button class="btn btn-secondary btn-small"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-error setting-action-btn"><i class="fa-solid fa-ban"></i> Log Out All
+                                Sessions</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tabPage setbp" id="user-management">
+                <div class="user-management-container">
+                    <div class="set_header">
+                        <h3>User Management</h3>
+                    </div>
+
+                    <div class="details col-2">
+                        <p class="description">
+                            Manage your users, including roles, permissions, and account status.
+                        </p>
+                        <div class="add-user-section">
+                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-user-plus"></i> Add
+                                New User</button>
+                        </div>
+
+                        <!-- User Table -->
+                        <div class="user-management-table cps-data-table">
+                            <table data-datatable="true" data-actions="edit,delete">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>User</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Last Login</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>John Doe</td>
+                                        <td>john@example.com</td>
+                                        <td>Admin</td>
+                                        <td><span class="status active">Active</span></td>
+                                        <td>2025-12-07 10:30 AM</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2 </td>
+                                        <td>Jane Smith</td>
+                                        <td>jane@example.com</td>
+                                        <td>User</td>
+                                        <td><span class="status inactive">Inactive</span></td>
+                                        <td>2025-12-06 09:15 AM</td>
+                                    </tr>
+                                    <!-- More users here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Add New User Button -->
+                        <div class="add-user-section">
+                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-user-plus"></i> Add
+                                New User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div id="toast" class="toast_notification">Profile updated successfully!</div>
 

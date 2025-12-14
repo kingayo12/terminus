@@ -185,3 +185,29 @@ function toggleSettingsMenu() {
   const menu = document.querySelector(".settings_menu");
   menu.classList.toggle("open");
 }
+
+function handleUserDropdown() {
+  document.querySelector(".user_box").classList.add("show");
+
+  // Close others
+  document.querySelector(".panel_box").classList.remove("show");
+  document.querySelector(".noti_box").classList.remove("show");
+}
+
+function closeUserDropdown() {
+  const box = document.querySelector(".user_box");
+  if (!box.classList.contains("show")) return;
+
+  box.classList.add("animate__fadeOutRight");
+
+  box.addEventListener(
+    "animationend",
+    () => {
+      box.classList.remove("show", "animate__fadeOutRight");
+      box.classList.add("animate__fadeInRight");
+    },
+    { once: true },
+  );
+}
+
+// ==================sidebar dropdown===================

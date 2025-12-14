@@ -1,71 +1,163 @@
-let snapshotChartInstance = null; // store reference for cleanup
+/********************************************************************
+ *  UNIVERSAL CHART MANAGER
+ *  - Auto-detects charts in DOM
+ *  - Supports ANY Chart.js type
+ *  - Unlimited datasets
+ *  - Theme-aware (uses CSS vars)
+ *  - Reusable everywhere
+ ********************************************************************/
 
-document.addEventListener("DOMContentLoaded", () => {
-  const observer = new MutationObserver(() => {
-    const chartCanvas = document.querySelector("#content #snapshotChart");
+const ChartManager = {
+  charts: new WeakMap(),
 
-    // Only run if chart exists and not already rendered
-    if (chartCanvas && !snapshotChartInstance) {
-      initSnapshotChart(chartCanvas);
-    }
+  initObserver() {
+    const target = document.body;
+    if (!target) return;
 
-    // If user navigates away (chartCanvas removed), reset reference
-    if (!chartCanvas && snapshotChartInstance) {
-      snapshotChartInstance.destroy();
-      snapshotChartInstance = null;
-    }
-  });
+    const observer = new MutationObserver(() => {
+      this.scanForCharts();
+      this.cleanup();
+    });
 
-  observer.observe(document.querySelector("#content"), { childList: true, subtree: true });
-});
+    observer.observe(target, { childList: true, subtree: true });
 
-function initSnapshotChart(canvas) {
-  const ctx = canvas.getContext("2d");
+    this.scanForCharts();
+  },
 
-  const styles = getComputedStyle(document.body);
+  scanForCharts() {
+    document.querySelectorAll(".chart").forEach((canvas) => {
+      if (!this.charts[canvas]) this.createChart(canvas);
+    });
+  },
 
-  const textColor = styles.getPropertyValue("--text-color").trim();
-  const primaryColor = styles.getPropertyValue("--primary-color").trim();
-  const successColor = styles.getPropertyValue("--success-color").trim();
-  const warningColor = styles.getPropertyValue("--warning-color").trim();
-  const accentColor = styles.getPropertyValue("--accent-color").trim();
+  // cleanup() {
+  //   for (const canvas in this.charts) {
+  //     const el = this.charts[canvas].canvas;
+  //     if (!document.body.contains(el)) {
+  //       this.charts[canvas].destroy();
+  //       delete this.charts[canvas];
+  //     }
+  //   }
+  // },
 
-  snapshotChartInstance = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Gate In", "Gate Out", "Avg Turnaround"],
-      datasets: [
+  cleanup() {
+    this.charts.forEach((chart, canvas) => {
+      if (!document.body.contains(canvas)) {
+        chart.destroy();
+        this.charts.delete(canvas);
+      }
+    });
+  },
+
+  createChart(canvas) {
+    const ctx = canvas.getContext("2d");
+    const styles = getComputedStyle(document.body);
+
+    const theme = {
+      text: styles.getPropertyValue("--light-text").trim(),
+      primary: styles.getPropertyValue("--primary-color").trim(),
+      success: styles.getPropertyValue("--success-color").trim(),
+      warning: styles.getPropertyValue("--warning-color").trim(),
+      accent: styles.getPropertyValue("--accent-color").trim(),
+      borderl: styles.getPropertyValue("--border-color").trim(),
+    };
+
+    // Read attributes
+    const type = canvas.dataset.type || "bar";
+    const labels = JSON.parse(canvas.dataset.labels || "[]");
+
+    let datasets = [];
+
+    if (canvas.dataset.datasets) {
+      // Parse user datasets
+      datasets = JSON.parse(canvas.dataset.datasets);
+
+      // Auto-apply theme colors if not provided
+      datasets = datasets.map((ds, index) => {
+        // If dataset has NO backgroundColor, apply automatic theme colors
+        if (!ds.backgroundColor) {
+          const themeColors = [theme.primary, theme.success, theme.warning];
+          ds.backgroundColor = themeColors[index % themeColors.length];
+        }
+
+        // If dataset has NO borderColor, use same color
+        if (!ds.borderColor) {
+          ds.borderColor = ds.backgroundColor;
+        }
+
+        // Optional defaults
+        ds.borderWidth ??= 1;
+        ds.tension ??= 0.3;
+        ds.borderRadius ??= 6;
+
+        return ds;
+      });
+    } else {
+      // Fallback single dataset mode
+      datasets = [
         {
-          label: "Today",
-          data: [48, 21, 14],
-          backgroundColor: [primaryColor, successColor, warningColor],
+          label: canvas.dataset.label || "Dataset",
+          data: JSON.parse(canvas.dataset.data || "[]"),
+          backgroundColor: JSON.parse(
+            canvas.dataset.colors || `["${theme.primary}","${theme.success}","${theme.warning}"]`,
+          ),
+          borderColor: JSON.parse(
+            canvas.dataset.colors || `["${theme.primary}","${theme.success}","${theme.warning}"]`,
+          ),
+          borderWidth: 1,
+          tension: 0.3,
           borderRadius: 6,
-          borderWidth: 0,
         },
-      ],
-    },
-    options: {
+      ];
+    }
+
+    const options = {
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { color: textColor, font: { size: 11 } },
-          grid: { color: "rgba(0,0,0,0.05)" },
-        },
-        x: {
-          ticks: { color: textColor, font: { size: 11 } },
-          grid: { display: false },
+      layout: {
+        padding: {
+          top: 5,
+          bottom: 25,
         },
       },
+
+      // Only bar/line need axes
+      scales: ["bar", "line"].includes(type)
+        ? {
+            y: {
+              beginAtZero: true,
+              ticks: { color: theme.accent },
+              grid: { color: theme.borderl },
+            },
+            x: {
+              ticks: { color: theme.test },
+              grid: { display: false },
+            },
+          }
+        : {},
+
       plugins: {
-        legend: { display: false },
+        legend: { display: true },
+        datalabels: {
+          // <-- NEW
+          color: theme.text, // text color of the numbers
+          anchor: "end", // position relative to the bar/point
+          align: "end",
+          font: { weight: "bold", size: 10 },
+        },
         tooltip: {
-          backgroundColor: accentColor,
-          titleColor: "#fff",
+          backgroundColor: theme.accent,
+          titleColor: theme.text,
           bodyColor: "#fff",
         },
       },
-    },
-  });
-}
+    };
+
+    const chart = new Chart(ctx, { type, data: { labels, datasets }, options });
+
+    this.charts.set(canvas, chart);
+  },
+};
+
+// Auto-run
+document.addEventListener("DOMContentLoaded", () => ChartManager.initObserver());

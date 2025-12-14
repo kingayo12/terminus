@@ -65,17 +65,38 @@
                 </div>
             </div>
         </div>
-        <button class="user_wrapper">
-            <div class="user_img">
-                <img src="../assets/imgs/profile/user.png" alt="User Image" loading="lazy" />
-                <div class="user_initials"></div>
-            </div>
+        <div class="user_wrapper_cont">
+            <button class="user_wrapper" onclick="handleUserDropdown()">
+                <div class="user_img">
+                    <img src="../assets/imgs/profile/user.png" alt="User Image" loading="lazy" />
+                    <div class="user_initials"></div>
+                </div>
 
-            <div class="user_info">
-                <p class="user_name" title="Codespro Solutions">Codespro Solutions</p>
-                <p class="user_role">Administrator</p>
+                <div class="user_info">
+                    <p class="user_name" title="Codespro Solutions">Codespro Solutions</p>
+                    <p class="user_role">Administrator</p>
+                </div>
+            </button>
+
+            <div class="user_box animate__animated animate__fadeInRight">
+                <button class="closeuserBtn" onclick="closeUserDropdown()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <ul>
+                    <li onclick="openProfile()">My Profile</li>
+                    <li onclick="openChangePassword()">Change Password</li>
+                    <li onclick="openThemeSettings()">Change Theme</li>
+                    <li onclick="openHelp()">Help & Support</li>
+                    <li onclick="openAccountSettings()">Account Settings</li>
+                    <li onclick="openNotifications()">Notifications</li>
+                    <li onclick="logoutUser()">Logout</li>
+                </ul>
             </div>
-        </button>
+        </div>
+
+
+
     </div>
 </div>
 
@@ -114,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <div class="boxTheme1 royal-theme" id="royal-btn" data-content="Royal">
+        <div class="boxTheme1 sunset-theme" id="sunset-btn" data-content="Sunset">
             <div class="lnav">
                 <div class="laside"></div>
                 <div class="lmain_cont">
@@ -128,7 +149,7 @@
                 </div>
             </div>
         </div>
-        <div class="boxTheme1 amethyst-theme" id="amethyst-btn" data-content="Amethyst">
+        <div class="boxTheme1 rose-theme" id="rose-btn" data-content="Rose Pink">
             <div class="lnav">
                 <div class="laside"></div>
                 <div class="lmain_cont">
@@ -142,5 +163,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

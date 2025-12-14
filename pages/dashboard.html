@@ -1,10 +1,9 @@
 <!-- pages/dashboard.html -->
-<div class="dashboard_page">
+<div class="dashboard_page scrollpage">
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol>
-            <li><a href="#" class="crumb">Home</a></li>
             <li><a href="#" class="crumb">Dashboard</a></li>
             <li aria-current="page" class="crumb current">Overview</li>
         </ol>
@@ -165,7 +164,11 @@
 
             <!-- Chart area -->
             <div class="chart_container" style="margin-top: 18px;">
-                <canvas id="snapshotChart"></canvas>
+                <canvas class="chart" data-type="bar" data-label="Today'"
+                    data-labels='["Gate In","Gate Out","Turnaround"]' data-data='[48,21,14]'>
+                </canvas>
+
+
             </div>
         </div>
 
@@ -211,4 +214,34 @@
             </ul>
         </aside>
     </section>
+
+    <section class="charts_row">
+        <!-- Gate-In vs Gate-Out Trend -->
+        <div class="chart_card animate__animated animate__fadeInUp" style="animation-delay: .2s;">
+            <h3 class="chart_title">Weekly Gate Movement</h3>
+            <canvas class="chart" data-type="line" data-labels='["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]'
+                data-datasets='[
+                { "label":"Gate In", "data":[50,42,38,60,55,47,52]},
+                { "label":"Gate Out", "data":[30,28,34,45,40,32,36]}
+            ]'>
+            </canvas>
+        </div>
+
+        <!-- Yard Occupancy Trend -->
+        <div class="chart_card animate__animated animate__fadeInUp" style="animation-delay: .28s;">
+            <h3 class="chart_title">Yard Occupancy Trend (%)</h3>
+            <canvas class="chart" data-type="bar" data-labels='["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]'
+                data-data='[72, 75, 78, 82, 80, 77, 79]'>
+            </canvas>
+        </div>
+
+        <!-- Container Category Distribution -->
+        <div class="chart_card animate__animated animate__fadeInUp" style="animation-delay: .36s;">
+            <h3 class="chart_title">Container Category Breakdown</h3>
+            <canvas class="chart" data-type="polarArea" data-labels='["Laden","Empty","Import","Export"]'
+                data-data='[45, 22, 18, 15]'>
+            </canvas>
+        </div>
+    </section>
+
 </div>

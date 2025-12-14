@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar collapsed_menu">
     <div class="logo">
         <img src="./assets/imgs/logo/logo.png" alt="Logo" class="logo_lg" loading="lazy" />
         <img src="./assets/imgs/logo/logo_sm.png" alt="" class="logo_sm" loading="lazy" />
@@ -14,8 +14,14 @@
                 class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
         <a href="#" class="menu_item" data-target="online_administrator"><i class="fa-solid fa-globe"></i><span>Online
                 Administrator</span></a>
-        <a href="#" class="menu_item" data-target="customerservice"><i class="fa-solid fa-headset"></i><span>Customer
+        <a href="#" class="menu_item hasdropdown"><i class="fa-solid fa-headset"></i><span>Customer
                 Service</span></a>
+        <div class="side_dropdown">
+            <div class="side_dropdown_list">
+                <a href="#" data-target="ratinghistory">Rating History</a>
+                <a href="#" data-target="invoices">Invoices</a>
+            </div>
+        </div>
         <a href="#" class="menu_item"><i class="fa-solid fa-user-gear"></i><span>Administration</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-screwdriver-wrench"></i><span>Administration
                 2</span></a>
@@ -24,8 +30,25 @@
         <a href="#" class="menu_item"><i class="fa-solid fa-calculator"></i><span>Accounts</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-ship"></i><span>Vessel Management</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-anchor"></i><span>Quay Management</span></a>
-        <a href="#" class="menu_item"><i class="fa-solid fa-users"></i><span>HR</span></a>
-        <a href="#" class="menu_item"><i class="fa-solid fa-door-open"></i><span>In Gate</span></a>
+
+
+        <a href="#" class="menu_item hasdropdown">
+            <i class="fa-solid fa-users"></i><span>HR</span>
+        </a>
+        <div class="side_dropdown">
+            <div class="side_dropdown_list">
+                <a href="#" data-target="stafflist">Staff List</a>
+                <a href="#" data-target="recruitment">Recruitment</a>
+            </div>
+        </div>
+
+        <a href="#" class="menu_item hasdropdown"><i class="fa-solid fa-door-open"></i><span>In Gate</span></a>
+        <div class="side_dropdown">
+            <div class="side_dropdown_list">
+                <a href="#">Staff List</a>
+                <a href="#">Recruitment</a>
+            </div>
+        </div>
         <a href="#" class="menu_item"><i class="fa-solid fa-door-closed"></i><span>Out Gate</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-truck-ramp-box"></i><span>In Gate (Laden)</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-truck-fast"></i><span>Out Gate (Laden)</span></a>
@@ -37,7 +60,7 @@
         <a href="#" class="menu_item"><i class="fa-solid fa-clock-rotate-left"></i><span>Gate History</span></a>
     </div>
     <div class="exit_settings">
-        <a href="#" class="menu_item" data-target="Settings"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+        <a href="#" class="menu_item" data-target="Settings"><i class="fa-solid fa-toolbox"></i><span>Manage</span></a>
         <a href="#" class="menu_item"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
     </div>
 </div>
