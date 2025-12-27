@@ -1348,9 +1348,131 @@
                             Manage your users, including roles, permissions, and account status.
                         </p>
                         <div class="add-user-section">
-                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-user-plus"></i> Add
-                                New User</button>
+                            <button class="btn btn-primary setting-action-btn" id="openAddUserModal">
+                                <i class="fa-solid fa-user-plus"></i> Add New User
+                            </button>
                         </div>
+                        <!-- Add User Modal -->
+                        <div class="modal-overlay" id="openAddUserModal">
+
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h3><i class="fa-solid fa-user-plus"></i> Add New User</h3>
+
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                    <form class="user_form d_form">
+                                        <div class="form_grid">
+
+                                            <!-- Full Name -->
+                                            <div class="form_group" data-pref="FullName" data-pref-label="Full Name">
+                                                <label><i class="fa-solid fa-user"></i> Full Name</label>
+                                                <input type="text" placeholder="Full Name">
+                                            </div>
+
+                                            <!-- Username -->
+                                            <div class="form_group" data-pref="Username" data-pref-label="Username">
+                                                <label><i class="fa-solid fa-at"></i> Username</label>
+                                                <input type="text" placeholder="Username">
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="form_group" data-pref="Email" data-pref-label="Email">
+                                                <label><i class="fa-regular fa-envelope"></i> Email</label>
+                                                <input type="email" placeholder="Email Address">
+                                            </div>
+
+                                            <!-- Phone -->
+                                            <div class="form_group" data-pref="Phone" data-pref-label="Phone Number">
+                                                <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                                                <input type="text" placeholder="Phone Number">
+                                            </div>
+
+                                            <!-- Role -->
+                                            <div class="form_group" data-pref="Role" data-pref-label="Role">
+                                                <label><i class="fa-solid fa-user-shield"></i> Role</label>
+                                                <select>
+                                                    <option>-- Select Role --</option>
+                                                    <option>Admin</option>
+                                                    <option>Manager</option>
+                                                    <option>User</option>
+                                                    <option>Viewer</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Password -->
+                                            <div class="form_group" data-pref="Password" data-pref-label="Password">
+                                                <label><i class="fa-solid fa-lock"></i> Password</label>
+                                                <input type="password" placeholder="Password">
+                                            </div>
+
+                                            <!-- Confirm Password -->
+                                            <div class="form_group" data-pref="ConfirmPassword"
+                                                data-pref-label="Confirm Password">
+                                                <label><i class="fa-solid fa-lock"></i> Confirm Password</label>
+                                                <input type="password" placeholder="Confirm Password">
+                                            </div>
+
+                                            <!-- Active Status -->
+                                            <div class="form_group switch_group" data-pref="Active"
+                                                data-pref-label="Active">
+                                                <label><i class="fa-solid fa-circle-check"></i> Active</label>
+                                                <div class="switch">
+                                                    <input type="checkbox" id="activeUser" checked>
+                                                    <label for="activeUser" class="switch_label">
+                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Email Confirmed -->
+                                            <div class="form_group switch_group" data-pref="EmailConfirmed"
+                                                data-pref-label="Email Confirmed">
+                                                <label><i class="fa-solid fa-envelope-circle-check"></i> Email
+                                                    Confirmed</label>
+                                                <div class="switch">
+                                                    <input type="checkbox" id="userEmailConfirmed">
+                                                    <label for="userEmailConfirmed" class="switch_label">
+                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Locked -->
+                                            <div class="form_group switch_group" data-pref="Locked"
+                                                data-pref-label="Locked">
+                                                <label><i class="fa-solid fa-lock"></i> Account Locked</label>
+                                                <div class="switch">
+                                                    <input type="checkbox" id="userLocked">
+                                                    <label for="userLocked" class="switch_label">
+                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Form Actions -->
+                                        <div class="form_actions">
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fa-solid fa-save"></i> Save User
+                                            </button>
+                                            <button type="reset" class="btn btn-dark">
+                                                <i class="fa-solid fa-rotate-left"></i> Clear
+                                            </button>
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa-solid fa-search"></i> Search
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- User Table -->
                         <div class="user-management-table cps-data-table">

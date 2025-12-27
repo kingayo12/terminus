@@ -768,6 +768,7 @@ body {
   width: 100%;
   flex: content;
   height: calc(100% - 70px);
+  /* height: 100dvh; */
   max-height: 100%;
   overflow-y: hidden;
   background: var(--secondary-color);
@@ -775,8 +776,10 @@ body {
   border-radius: 10px;
 }
 
-#content {
-}
+/* #content {
+  height: 100%;
+  background: green;
+} */
 .logo {
   padding: 20px;
   position: relative;
@@ -841,9 +844,14 @@ body {
   color: var(--primary-color);
 }
 
-.sidebar .menu_items::-webkit-scrollbar {
-  width: 3px;
+/* .sidebar .menu_items::-webkit-scrollbar {
+  width: 0;
   background: transparent;
+} */
+
+.sidebar .menu_items {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
 }
 
 /* .sidebar .menu_items::-webkit-scrollbar-thumb {
@@ -1184,7 +1192,7 @@ body {
 }
 
 .toggle_theme i {
-  font-size: var(--font-size);
+  font-size: var(--font-sizef);
 }
 
 .toggle_theme.dark .theme_switch .toggle_circle {
@@ -2008,9 +2016,11 @@ button.noti .noti_count {
   font-size: var(--font-size);
 }
 .scrollpage {
-  height: calc(100vh - 150px);
+  height: calc(100vh - 135px);
   overflow-y: scroll;
   padding-top: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
 }
 .details {
   display: flex;
@@ -2022,6 +2032,8 @@ button.noti .noti_count {
   padding-bottom: 100px;
   position: relative;
   width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
   /* margin-top: -100px; */
 }
 
@@ -3349,7 +3361,10 @@ button.noti .noti_count {
   font-weight: 600;
   text-wrap-mode: nowrap;
   white-space: nowrap;
-  max-width: 20px;
+  max-width: fit-content;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
 }
 .card_value {
   font-size: var(--font-size-larger);
@@ -4211,6 +4226,17 @@ div.dt-button-collection {
 /* ============================
    CPS MODAL CONTENT
 ============================ */
+.cps-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+/* Active State */
+.cps-modal.active {
+  display: block;
+}
 .cps-modal-content {
   width: 90%;
   max-width: 1120px;
