@@ -2071,6 +2071,6 @@ function initializeDragAndDrop() {
     }
     errorTimeout = setTimeout(() => {
       errorMsg.classList.remove("show");
-    }, 2000);
+    }, 3000);
   }
 }

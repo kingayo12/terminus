@@ -681,7 +681,8 @@ button {
   text-spacing-trim: normal;
 }
 
-body {
+body,
+html {
   scroll-behavior: smooth;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
@@ -849,7 +850,7 @@ body {
   background: transparent;
 } */
 
-.sidebar .menu_items {
+.sidebar:hover .menu_items {
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) transparent;
 }
@@ -2019,6 +2020,9 @@ button.noti .noti_count {
   height: calc(100vh - 135px);
   overflow-y: scroll;
   padding-top: 10px;
+}
+
+.scrollpage:hover {
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) transparent;
 }
@@ -3417,7 +3421,7 @@ button.noti .noti_count {
 .summary_title {
   margin: 0 0 12px 0;
   color: var(--accent-color);
-  font-size: var(--font-size);
+  font-size: var(--font-size-large);
   font-weight: 700;
 }
 .summary_stats {

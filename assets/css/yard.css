@@ -10,6 +10,23 @@
   flex-wrap: wrap;
   position: relative;
   overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.rowd {
+  display: flex;
+  width: 100%;
+  float: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cold {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .yard_container .yardfilter {
@@ -19,7 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999999;
 }
 
 .yard_container .yard_wrapper {
@@ -47,14 +63,17 @@
 .yard_container .free_area {
   width: 100%;
   background: linear-gradient(to right, #ccccccb1, #ffffff38, #cccccc4a) no-repeat;
-  max-width: 100%;
+  /* background: green; */
+  max-width: 388px;
   flex-wrap: wrap;
   overflow-y: scroll;
   display: flex;
-  align-items: center;
+  align-items: start;
   padding: 5px;
-  height: auto;
-  min-height: 60px;
+  /* height: auto; */
+  height: 100%;
+  min-height: 30dvh;
+  max-height: 80dvh;
   transition: all 800ms ease-in-out;
   position: relative;
   backdrop-filter: blur(10px);
@@ -122,7 +141,8 @@
   flex: 1;
   /* background: violet; */
   width: 100%;
-  min-width: 280px;
+  /* min-width: 280px; */
+  max-width: 388px;
   max-height: 250px;
 }
 
@@ -152,10 +172,10 @@
 /* ---------------------------container_space--------------------------- */
 .snap_box {
   flex: 1;
-  max-width: 120x;
-  min-width: 120px;
-  min-height: 60px;
-  height: 60px;
+  max-width: 80px;
+  min-width: 80px;
+  min-height: 40px;
+  height: 40px;
   border: 1px solid #ccccccc4;
   border-style: dashed;
   position: relative;
@@ -183,10 +203,12 @@
 }
 
 .cont_num {
-  font-size: 10px;
+  font-size: 7px;
   text-align: left;
   width: 100%;
-  text-indent: 10px;
+  text-indent: 2px;
+  font-weight: 600;
+  filter: drop-shadow(0px 0px 5px black);
 }
 
 /* ----------container_size-------------------------------- */
@@ -195,23 +217,24 @@
   z-index: 999;
   display: flex;
   flex-direction: column;
+  font-size: var(--font-size-medium);
 }
 
 .twenty {
-  width: 120px;
-  height: 60px;
+  width: 80px !important;
+  height: 40px;
   cursor: grab;
 }
 
 .fourty {
-  width: 240px !important;
-  height: 60px;
+  width: 160px !important;
+  height: 40px;
   cursor: grab;
 }
 
 .fortyfive {
-  width: 240px !important;
-  height: 60px;
+  width: 160px !important;
+  height: 40px;
   cursor: grab;
 }
 
@@ -263,12 +286,13 @@
 }
 
 .yard_transport .truck {
-  width: 450px;
+  /* width: 250px; */
   height: 120px;
   opacity: 0 !important;
   overflow: hidden;
   position: relative;
   display: flex;
+  z-index: 9999;
 }
 
 .yard_transport .truck .truck_head {
@@ -277,19 +301,21 @@
 
 .yard_transport .truck .truck_head img {
   width: 100%;
+  /* width: 2cm; */
   margin-left: 15px;
 }
 
 .yard_transport .loadtruck {
-  width: 320px;
-  height: 70px;
-  background: #ffffff23;
-  z-index: 2;
+  width: 260px;
+  height: 60px;
+  background: #fc000023;
+
   display: flex;
   align-items: center;
   position: absolute;
-  top: 5px;
-  left: 110px;
+  top: 25px;
+  left: 95px;
+  z-index: 999;
 }
 
 .loadtruck .container {
@@ -299,21 +325,16 @@
 }
 
 .loadtruck .container.twenty {
-  width: 160px !important;
+  width: 130px !important;
 }
 
 .loadtruck .container.fourty,
 .loadtruck .container.fortyfive {
-  width: 320px !important;
+  width: 260px !important;
 }
 
 .loadtruck .container {
-  height: 70px !important;
-}
-
-.truck_head img {
-  width: 2cm;
-  margin-top: -30px;
+  height: 60px !important;
 }
 
 .truck_head .img_2 {
@@ -325,75 +346,65 @@
 #searchForm {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  padding: 10px;
+  justify-content: center;
   width: 100%;
-
-  z-index: 999;
-  gap: 10px;
+  top: 10px;
   transition: all 400ms ease;
-}
-
-#searchForm:hover .search_icon {
-  display: none;
 }
 
 .search_icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: hsl(0, 0%, 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 12px;
   cursor: pointer;
   font-size: var(--font-size);
+  position: absolute;
+  left: 0;
 }
 
 #searchForm .form_control {
   display: flex;
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
+  width: 300px;
+  position: relative;
 }
 #searchForm .form_control input {
-  padding: 10px 5px;
+  padding: 8px 8px 8px 30px;
   outline: none;
   background: #ffffff38;
   backdrop-filter: 100px;
   border-style: none;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px 0 0 3px;
+  width: 300px;
+  font-size: var(--font-size);
+  /* text-indent: 35px; */
 }
 
 #searchForm button {
-  padding: 10px 25px;
+  padding: 8px;
   border-style: none;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 3px 4px 10px #e4e4e4;
+  border: 1px solid var(--border-color);
+  border-radius: 0 6px 6px 0;
+  background: var(--primary-color-light);
   cursor: pointer;
-}
-
-#searchForm .form_control,
-#searchForm button {
-  display: none;
-}
-
-#searchForm:hover .form_control,
-#searchForm:hover button {
-  display: flex;
+  font-size: var(--font-size);
+  color: var(--text-color);
 }
 
 .add_truck-details {
   position: absolute;
+  top: 50px;
   width: 30px;
   height: 30px;
-  /* background: rgba(129, 129, 129, 0.212); */
-  background: green;
+  background: rgba(129, 129, 129, 0.212);
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -410,7 +421,7 @@
 }
 
 .truck_animation {
-  width: 450px;
+  width: 250px;
   height: 200px;
   position: absolute;
   top: -20px;
@@ -418,8 +429,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: red;
-  z-index: 9999;
+  z-index: 1;
   animation: movetruck 4s forwards ease;
 }
 
@@ -444,17 +454,31 @@
 }
 
 .truck_info {
+  max-width: 400px;
   text-transform: uppercase;
   line-height: 25px;
   color: #000000cc;
   background: linear-gradient(to right, #e7e6e61e, transparent);
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.truck_info span {
+  color: var(--primary-color);
 }
 
 .truck_info div {
   display: flex;
+
   gap: 10px;
+  margin-left: 10px;
+}
+
+.truck_info p {
+  font-size: var(--font-size);
+  color: var(--text-color);
 }
 
 /* ------------------other css------------------------ */
@@ -466,7 +490,7 @@
 /* ----------------------yard form----------------------------- */
 
 .containers_list h1 {
-  width: 100%;
+  width: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -501,50 +525,18 @@
   transform: scale(1);
 }
 
-.add_details-modal .truck_info-details {
-  background: #fffffff5;
-  max-width: 10px;
-  outline: 1px solid #ccc;
-  outline-offset: 10px;
-  padding: 20px;
-  transform: scale(0);
-  backdrop-filter: blur(10px);
-  transition: all 1s ease-in-out;
-}
-
-.truck_info-details .form-group {
+.truck_info-details .form_group {
   margin-bottom: 15px;
-}
-
-.truck_info-details label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.truck_info-details input,
-.truck_info-details select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border-style: none;
-  border-bottom: 1px solid #c2c2c2;
-  background: rgba(0, 0, 255, 0.048);
-  outline: none;
 }
 
 .truck_info-details button {
   padding: 10px 15px;
   background: transparent;
-  color: rgb(0, 26, 255);
-  border: 1px solid blue;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   cursor: pointer;
   transition: all 400ms ease;
-}
-
-.truck_info-details button:hover {
-  background-color: #0400ff3d;
 }
 
 .load_button {
@@ -578,7 +570,7 @@
 }
 
 .num_box {
-  width: 120px;
+  width: 80px;
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -587,6 +579,7 @@
 }
 
 .boldtext {
+  font-size: var(--font-size);
   font-weight: 700;
 }
 
@@ -833,11 +826,11 @@
 
 .error_message {
   position: absolute;
-  bottom: 0;
+  top: 10px;
   left: 20px;
   bottom: 30px;
   width: 250px;
-
+  height: fit-content;
   padding: 20px;
   word-wrap: break-word;
   z-index: 99999;
@@ -857,6 +850,7 @@
   border-radius: 5px;
   position: relative;
   display: none;
+  font-size: var(--font-size);
 }
 
 .er_message::before {

@@ -16,12 +16,13 @@
 
     <div class="cps_yard-container">
         <div class="yard_container">
-            <div class="yardfilter">
+            <div class="yardfilter animate__animated animate__fadeInDown">
                 <form action="" id="searchForm">
-                    <div class="search_icon">
-                        <i class="fa fa-search"></i>
-                    </div>
+
                     <div class="form_control">
+                        <div class="search_icon">
+                            <i class="fa fa-search"></i>
+                        </div>
                         <input type="text" name="" id="searchInput" placeholder="BL No / CONT No / TDO">
                     </div>
                     <button type="submit">Search</button>
@@ -40,79 +41,91 @@
                 <button class="mode7">rotate R</button>
                 <button class="mode8">Rotate L</button>
             </div>
+            <div class="rowd">
+                <div class="cold">
+                    <div class="free_area" id="freeArea"></div>
+                    <div class="yard_transport">
 
-            <div class="free_area" id="freeArea"></div>
-            <div class="yard_wrapper">
-                <div class="yard animate" id="yard">
-                    <div class="containers_list">
-                        <div class="num_box"><i class="fa fa-arrow-right"></i></div>
-                        <h1>1</h1>
-                        <h1>2</h1>
-                        <h1>3</h1>
-                        <h1>4</h1>
-                        <h1>5</h1>
-                        <h1>6</h1>
+                        <div class="truck_animation">
+                            <lottie-player src="../assets/js/truck.json" background="transparent" speed="1"
+                                style="width: 600px; height: 300px;" loop controls autoplay></lottie-player>
+                        </div>
+                        <div class="truck">
+                            <div class="truck_head">
+                                <img src="../assets/imgs/truck.svg" alt="">
+
+                            </div>
+                            <div class="loadtruck"></div>
+
+                            <div class="add_truck-details" onclick="handleAddClick()">
+                                <i class="fas fa-memo"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="load_button"><button>Confirm</button></div>
+
                     </div>
+                    <div class="truck_info">
+                        <div> <span class="boldtext">Truck No:</span>
+                            <p class="truck_number">-</p>
+                        </div>
+                        <div> <span class="boldtext">Driver Name:</span>
+                            <p class="driver_name">-</p>
+                        </div>
+                        <div> <span class="boldtext">Truck Company:</span>
+                            <p class="truck_company">-</p>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- <div class="yard_name">Apapa</div> -->
+                <div class="yard_wrapper">
+                    <div class="yard animate" id="yard">
+                        <div class="containers_list">
+                            <div class="num_box"><i class="fa fa-arrow-right"></i></div>
+                            <h1>1</h1>
+                            <h1>2</h1>
+                            <h1>3</h1>
+                            <h1>4</h1>
+                            <h1>5</h1>
+                            <h1>6</h1>
+                        </div>
+
+                        <!-- <div class="yard_name">Apapa</div> -->
+                    </div>
                 </div>
             </div>
-            <div class="yard_transport">
-                <div class="truck_info">
-                    <div> <span class="boldtext">Truck No:</span>
-                        <p class="truck_number">-</p>
-                    </div>
-                    <div> <span class="boldtext">Driver Name:</span>
-                        <p class="driver_name">-</p>
-                    </div>
-                    <div> <span class="boldtext">Truck Company:</span>
-                        <p class="truck_company">-</p>
-                    </div>
-                </div>
-                <div class="truck_animation">
-                    <lottie-player src="../assets/js/truck.json" background="transparent" speed="1"
-                        style="width: 600px; height: 300px;" loop controls autoplay></lottie-player>
-                </div>
-                <div class="truck">
-                    <div class="truck_head">
-                        <img src="../assets/imgs/truck.svg" alt="">
 
-                    </div>
-                    <div class="loadtruck"></div>
-
-                    <div class="add_truck-details" onclick="handleAddClick()">
-                        <i class="fas fa-memo"></i>
-                    </div>
-
-                </div>
-
-
-                <div class="load_button"><button>Confirm</button></div>
-
-            </div>
             <div class="add_details-modal" onclick="handleCloseModal()">
                 <div class="truck_info-details" onclick="event.stopPropagation()">
-                    <form id="truckForm" action="/submit-truck-info" method="POST">
-                        <div class="form-group">
-                            <label for="truckNumber">Truck Reg No:</label>
-                            <input type="text" id="truckNumber" name="truckNumber" required>
+                    <form id="truckForm" class="d_form" action="/submit-truck-info" method="POST">
+                        <div class="truckForm">
+                            <div class="form_group">
+                                <label for="truckNumber"><i class="fa-regular fa-pen-to-square"></i> Truck Reg
+                                    No:</label>
+                                <input type="text" id="truckNumber" name="truckNumber" required>
+                            </div>
+
+                            <div class="form_group">
+                                <label for="driverName"> <i class="fa-regular fa-pen-to-square"></i>Driver Name:</label>
+                                <input type="text" id="driverName" name="driverName" required>
+                            </div>
+
+
+                            <div class="form_group">
+                                <label for="Truck company"><i class="fa-solid fa-layer-group"></i> Truck
+                                    Company:</label>
+                                <select id="containerType" name="containerType">
+                                    <option>--Choose Category--</option>
+                                    <option value="ESSL">ESSL</option>
+                                    <option value="Hapa">Hapa</option>
+                                    <option value="op">op</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="driverName">Driver Name:</label>
-                            <input type="text" id="driverName" name="driverName" required>
-                        </div>
 
-
-
-                        <div class="form-group">
-                            <label for="containerType">Truck Company:</label>
-                            <select id="containerType" name="containerType">
-                                <option value="ESSL">ESSL</option>
-                                <option value="Hapa">Hapa</option>
-                                <option value="op">op</option>
-                            </select>
-                        </div>
 
                         <button type="submit">continue</button>
                         <div class="loading-spinner hidden"></div>
