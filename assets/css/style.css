@@ -861,12 +861,6 @@ html {
   max-height: 0;
 } */
 
-.sidebar:hover .menu_items::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  height: 2px;
-  max-height: 0;
-}
-
 .sidebar.collapsed_menu {
   width: 70px;
   min-width: 70px;
@@ -875,6 +869,7 @@ html {
 .sidebar:hover.collapsed_menu {
   width: 220px;
   min-width: 220px;
+  height: calc(100vh - 20px);
   position: absolute;
   left: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -3273,6 +3268,7 @@ button.noti .noti_count {
 }
 #openPrefBtn {
   color: var(--accent-color);
+  width: 30px;
 }
 .breadcrumb ol li::after {
   content: "›";
@@ -4526,6 +4522,7 @@ div.dt-button-collection {
   cursor: pointer;
   transition: 0.25s;
   font-size: var(--font-size);
+  color: var(--text-color);
   border-radius: 3px;
   margin-right: 20px;
   text-wrap-mode: nowrap;
@@ -4538,4 +4535,10 @@ div.dt-button-collection {
 
 .description {
   font-size: var(--font-size);
+}
+
+/* Darken containers that have something on top of them */
+.snap_box .container:not(:last-child) {
+  filter: brightness(0.7);
+  cursor: not-allowed;
 }

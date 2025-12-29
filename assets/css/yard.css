@@ -16,7 +16,7 @@
 .rowd {
   display: flex;
   width: 100%;
-  float: row;
+  /* float: row; */
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -42,6 +42,7 @@
   overflow-y: scroll;
   max-height: calc(100vh - 20vh);
   scroll-behavior: smooth;
+  margin-right: 50px;
 }
 
 .yard_container .yard_wrapper .yard {
@@ -292,7 +293,7 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  z-index: 9999;
+  z-index: 99;
 }
 
 .yard_transport .truck .truck_head {
@@ -308,7 +309,7 @@
 .yard_transport .loadtruck {
   width: 260px;
   height: 60px;
-  background: #fc000023;
+  background: var(--primary-color-light);
 
   display: flex;
   align-items: center;
@@ -363,6 +364,7 @@
   cursor: pointer;
   font-size: var(--font-size);
   position: absolute;
+  color: var(--text-color);
   left: 0;
 }
 
@@ -404,12 +406,12 @@
   top: 50px;
   width: 30px;
   height: 30px;
-  background: rgba(129, 129, 129, 0.212);
+  background: var(--primary-color-light);
   border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #303030;
+  color: var(--primary-color);
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
@@ -523,10 +525,15 @@
   max-width: 500px;
   min-width: 300px;
   transform: scale(1);
+  background: var(--secondary-color);
 }
 
 .truck_info-details .form_group {
   margin-bottom: 15px;
+}
+.truck_info-details form {
+  border: none;
+  background: transparent;
 }
 
 .truck_info-details button {

@@ -1448,15 +1448,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // YARD MANAGEMENT
 // Fetch the container data from data.json and populate the yard
 function init_yardManagement() {
-  fetch("assets/js/data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      populateContainers(data.containers);
-      initializeDragAndDrop();
-      initializeSnapBoxCounts();
-    })
-    .catch((error) => console.error("Error loading containers:", error));
-
   const addTruckDetails = document.querySelector(".add_details-modal");
   const truck = document.querySelector(".truck");
   const truckForm = document.getElementById("truckForm");
@@ -1655,88 +1646,104 @@ function init_yardManagement() {
   function showSearchError(message) {
     alert(message);
   }
+
+  fetch("assets/js/data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      populateContainers(data.containers);
+      initializeDragAndDrop();
+      // initializeSnapBoxCounts();
+    })
+    .catch((error) => console.error("Error loading containers:", error));
 }
 
 function populateContainers(containers) {
   const yard = document.getElementById("yard");
-  const yardRows = ["A", "B", "C", "D", "E", "F", "G"]; // Define the rows in the yard
+  const yardRows = ["A", "B", "C", "D", "E", "F", "G"];
+  const snapBoxMap = {}; // Temporary map to find boxes by location string
 
+  // 1. First, create all empty snap boxes
   yardRows.forEach((row) => {
-    // Create container row dynamically
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("containers_list");
     const rowLabel = document.createElement("h1");
     rowLabel.textContent = row;
     rowDiv.appendChild(rowLabel);
 
-    // Create snap boxes within each row
     for (let i = 1; i <= 6; i++) {
+      const location = `${row}${i}`;
       const snapBox = document.createElement("div");
       snapBox.classList.add("snap_box");
       snapBox.setAttribute("data-capacity", 5);
-      snapBox.setAttribute("data-location", `${row}${i}`);
+      snapBox.setAttribute("data-location", location);
       snapBox.innerHTML = `<span class="count"></span>`;
 
-      // Check if any containers belong in this snap box
-      const matchingContainers = containers.filter(
-        (container) => container.location === `${row}${i}`,
-      );
-
-      matchingContainers.forEach((matchingContainer) => {
-        const containerDiv = document.createElement("div");
-
-        // Add classes based on container size and shipping line
-        containerDiv.classList.add(
-          "container",
-          matchingContainer.size === "20ft" ? "twenty" : "fortyfive",
-          matchingContainer.shippingLine, // Add shipping line as a class
-        );
-        containerDiv.setAttribute("draggable", "true");
-        containerDiv.setAttribute("data-type", matchingContainer.size);
-        containerDiv.innerHTML = `
-                          <div class="cont_num">${matchingContainer.containerNumber}</div>
-                          ${matchingContainer.size}
-                      `;
-        snapBox.appendChild(containerDiv);
-      });
-
       rowDiv.appendChild(snapBox);
+      snapBoxMap[location] = snapBox; // Store reference
     }
-
     yard.appendChild(rowDiv);
   });
-}
 
-function initializeSnapBoxCounts() {
-  const snapBoxes = document.querySelectorAll(".snap_box");
+  // 2. Place Containers
+  containers.forEach((containerData, index) => {
+    const snapBox = snapBoxMap[containerData.location];
+    if (!snapBox) return;
 
-  snapBoxes.forEach((snapBox, index) => {
-    const containers = snapBox.querySelectorAll(".container");
-    let totalContainerCount = 0;
+    const isLarge = containerData.size === "40ft" || containerData.size === "45ft";
 
-    containers.forEach((container) => {
-      const containerSize = container.getAttribute("data-type");
-      const nextSnapBox = snapBoxes[index + 1]; // Get the next snap box if it exists
-      if (containerSize === "40ft" || containerSize === "45ft") {
-        totalContainerCount += 1;
-        if (nextSnapBox) {
-          const nextContainerCount = nextSnapBox.querySelectorAll(".container").length;
-          updateCountDisplay(
-            nextSnapBox,
-            nextContainerCount + 1,
-            nextSnapBox.getAttribute("data-capacity"),
-          );
-          nextSnapBox.classList.add("occupied");
-        }
+    // IMPORTANT: Generate a clean ID that will be used by Drag & Drop
+    const uniqueId = `cont-${containerData.size}-${index}`;
+
+    const containerDiv = document.createElement("div");
+    containerDiv.id = uniqueId;
+    containerDiv.classList.add(
+      "container",
+      containerData.size === "20ft" ? "twenty" : "fortyfive",
+      containerData.shippingLine,
+    );
+    containerDiv.setAttribute("draggable", "true");
+    containerDiv.setAttribute("data-type", containerData.size);
+    containerDiv.innerHTML = `
+        <div class="cont_num">${containerData.containerNumber}</div>
+        ${containerData.size}
+    `;
+
+    // // Re-bind the drag events to these newly created elements
+    // containerDiv.addEventListener("dragstart", dragStart);
+    // containerDiv.addEventListener("dragend", dragEnd);
+    // Place in the primary box
+    snapBox.appendChild(containerDiv);
+
+    // Handle the 40ft/45ft placeholder logic for the SECOND box
+    if (isLarge) {
+      const row = containerData.location[0];
+      const col = parseInt(containerData.location.substring(1));
+      const nextLocation = `${row}${col + 1}`;
+      const nextSnapBox = snapBoxMap[nextLocation];
+
+      if (nextSnapBox) {
+        const placeholder = document.createElement("div");
+        placeholder.classList.add("container", "placeholder-hidden");
+        placeholder.style.display = "none";
+        placeholder.setAttribute("data-related-id", containerDiv.id);
+        nextSnapBox.appendChild(placeholder);
       }
-    });
+    }
   });
-  function updateCountDisplay(snapBox, currentCount, maxCapacity) {
-    const countElem = snapBox.querySelector(".count");
+
+  // refreshAllSnapBoxCounts();
+
+  // 3. Final Step: Refresh all counts once
+  document.querySelectorAll(".snap_box").forEach((box) => {
+    const currentCount = box.querySelectorAll(".container").length;
+    const maxCapacity = parseInt(box.getAttribute("data-capacity"));
+
+    const countElem = box.querySelector(".count");
     if (countElem) {
       countElem.innerHTML = `${currentCount} <sub>${maxCapacity - currentCount}</sub>`;
     }
-  }
+    if (currentCount > 0) box.classList.add("occupied");
+  });
 }
 
 function initializeDragAndDrop() {
@@ -1783,9 +1790,43 @@ function initializeDragAndDrop() {
 
   // ----------------------------Drag Start and Drag End
   function dragStart(e) {
-    e.dataTransfer.setData("text/plain", e.target.id);
-    draggedContainer = e.target;
-    e.target.classList.add("dragging");
+    const container = e.target;
+    const parentBox = container.closest(".snap_box");
+
+    if (parentBox) {
+      // Check if there are any elements after this one in the DOM
+      // (In our logic, the last child is the top of the stack)
+      if (
+        container.nextElementSibling &&
+        container.nextElementSibling.classList.contains("container")
+      ) {
+        showError("Cannot move: Remove the container on top first!");
+        e.preventDefault(); // Stop the drag action
+        return;
+      }
+
+      // Special check for 40ft/45ft containers
+      const type = container.getAttribute("data-type");
+      if (type === "40ft" || type === "45ft") {
+        const startIndex = [...snapBoxes].indexOf(parentBox);
+        const secondBox = snapBoxes[startIndex + 1];
+
+        // Check if the adjacent box has anything on top of the placeholder
+        if (secondBox) {
+          const placeholder = secondBox.querySelector(`[data-related-id="${container.id}"]`);
+          if (placeholder && placeholder.nextElementSibling) {
+            showError("Cannot move: Adjacent stack has a container on top!");
+            e.preventDefault();
+            return;
+          }
+        }
+      }
+    }
+
+    // Original drag logic
+    e.dataTransfer.setData("text/plain", container.id);
+    draggedContainer = container;
+    container.classList.add("dragging");
     clearHighlights();
   }
 
@@ -1900,25 +1941,33 @@ function initializeDragAndDrop() {
   function placeInSnapBox(box, draggingElement) {
     const containerType = draggingElement.getAttribute("data-type");
     const startBoxIndex = [...snapBoxes].indexOf(box);
-    const neededBoxes = containerType === "20ft" ? 1 : 2;
+    const isLarge = containerType === "40ft" || containerType === "45ft";
+    const neededBoxes = isLarge ? 2 : 1;
 
     for (let i = 0; i < neededBoxes; i++) {
       const currentBox = snapBoxes[startBoxIndex + i];
-      const maxCapacity = currentBox.getAttribute("data-capacity");
-      const currentContainerCount = currentBox.querySelectorAll(".container").length;
+      const maxCapacity = parseInt(currentBox.getAttribute("data-capacity"));
 
-      if (currentContainerCount < maxCapacity) {
-        if (i === 0 && !currentBox.contains(draggingElement)) {
-          currentBox.appendChild(draggingElement);
-          draggingElement.style.zIndex = 999 + currentContainerCount;
-        }
-
-        updateCountDisplay(currentBox, currentContainerCount + 1, maxCapacity);
-        currentBox.classList.add("occupied");
-      } else {
-        showError("Max stack limit reached for this snap box.");
-        return;
+      // 1. Physically move the element only to the FIRST box
+      if (i === 0) {
+        currentBox.appendChild(draggingElement);
+        const currentStackHeight = currentBox.querySelectorAll(".container").length;
+        draggingElement.style.zIndex = 999 + currentStackHeight;
       }
+      // 2. For the SECOND box of a 40ft container, add a hidden placeholder
+      // to keep the stack counts synchronized
+      else if (i === 1 && isLarge) {
+        const placeholder = document.createElement("div");
+        placeholder.classList.add("container", "placeholder-hidden");
+        placeholder.style.display = "none";
+        placeholder.setAttribute("data-related-id", draggingElement.id);
+        currentBox.appendChild(placeholder);
+      }
+
+      // 3. Update the visual count for BOTH boxes
+      const newCount = currentBox.querySelectorAll(".container").length;
+      updateCountDisplay(currentBox, newCount, maxCapacity);
+      currentBox.classList.add("occupied");
     }
   }
 
@@ -1932,11 +1981,40 @@ function initializeDragAndDrop() {
   function removeFromCurrentParent(container) {
     const parentBox = container.parentElement;
     if (parentBox && parentBox.classList.contains("snap_box")) {
-      parentBox.removeChild(container);
-      const currentContainerCount = parentBox.querySelectorAll(".container").length;
-      updateCountDisplay(parentBox, currentContainerCount, parentBox.getAttribute("data-capacity"));
+      const containerType = container.getAttribute("data-type");
+      const isLarge = containerType === "40ft" || containerType === "45ft";
 
-      if (currentContainerCount === 0) {
+      // 1. If it's a large container, find the placeholder in the adjacent box
+      if (isLarge) {
+        const allBoxes = Array.from(document.querySelectorAll(".snap_box"));
+        const startIndex = allBoxes.indexOf(parentBox);
+        const nextBox = allBoxes[startIndex + 1];
+
+        if (nextBox) {
+          // Find the placeholder that was linked to this specific container ID
+          const placeholder = nextBox.querySelector(`[data-related-id="${container.id}"]`);
+          if (placeholder) {
+            nextBox.removeChild(placeholder);
+
+            // Update the count for the adjacent box (A2)
+            const nextCount = nextBox.querySelectorAll(".container").length;
+            const nextMax = nextBox.getAttribute("data-capacity");
+            updateCountDisplay(nextBox, nextCount, nextMax);
+
+            if (nextCount === 0) nextBox.classList.remove("occupied");
+          }
+        }
+      }
+
+      // 2. Remove the actual container from the current box (A1)
+      parentBox.removeChild(container);
+
+      // 3. Update the count for the current box (A1)
+      const currentCount = parentBox.querySelectorAll(".container").length;
+      const currentMax = parentBox.getAttribute("data-capacity");
+      updateCountDisplay(parentBox, currentCount, currentMax);
+
+      if (currentCount === 0) {
         parentBox.classList.remove("occupied");
       }
     }
