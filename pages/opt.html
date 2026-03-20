@@ -1,130 +1,79 @@
+<!-- pages/settings.html -->
 <div class="settings">
-    <div class="settings_menu">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+       SIDEBAR NAV
+  ════════════════════════════════════════════════════════════════════════════ -->
+    <div class="settings_menu" id="settingsMenu">
         <div class="settings_toggle_btn" onclick="toggleSettingsMenu()">
             <i class="fa fa-bars"></i>
         </div>
 
         <div class="nav_links">
-            <!-- ========== USER PREFERENCES ========== -->
             <h6>User Preferences</h6>
+            <a class="navlink active" onclick="handleSettingsMenu(this,'profile')"><i class="fa fa-user"></i> My
+                Profile</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'account-preferences')"><i class="fa fa-sliders-h"></i>
+                Account Preferences</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'theme')"><i class="fa fa-paint-brush"></i> Theme</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'language')"><i class="fa fa-language"></i> Language</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'notifications')"><i class="fa fa-bell"></i>
+                Notifications</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'login-activity')"><i class="fa fa-history"></i> Login
+                Activity</a>
 
-            <a class="navlink active" onclick="handleSettingsMenu(this, 'profile')">
-                <i class="fa fa-user"></i> My Profile
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'account-preferences')">
-                <i class="fa fa-sliders-h"></i> Account Preferences
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'theme')">
-                <i class="fa fa-paint-brush"></i> Theme
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'language')">
-                <i class="fa fa-language"></i> Language
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'notifications')">
-                <i class="fa fa-bell"></i> Notifications
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'login-activity')">
-                <i class="fa fa-history"></i> Login Activity
-            </a>
-
-            <!-- <a class="navlink" onclick="handleSettingsMenu(this, 'twofactor')">
-                <i class="fa fa-shield-alt"></i> Two-Factor Auth
-            </a> -->
-
-
-
-            <!-- ========== ADMIN SETTINGS ========== -->
             <h6>Admin Settings</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this,'security')"><i class="fa fa-lock"></i> Security</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'billing')"><i class="fa fa-credit-card"></i>
+                Billing</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'user-management')"><i class="fa fa-users-cog"></i> User
+                Management</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'roles-permissions')"><i class="fa fa-user-shield"></i>
+                Roles &amp; Permissions</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'audit')"><i class="fa fa-clipboard-list"></i> Audit
+                Trail</a>
 
-            <a class="navlink" onclick="handleSettingsMenu(this, 'security')">
-                <i class="fa fa-lock"></i> Security
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'billing')">
-                <i class="fa fa-credit-card"></i> Billing
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'user-management')">
-                <i class="fa fa-users-cog"></i> User Management
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'roles-permissions')">
-                <i class="fa fa-user-shield"></i> Roles & Permissions
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'audit')">
-                <i class="fa fa-clipboard-list"></i> Audit Trail
-            </a>
-
-            <!-- ========== SYSTEM CONFIGURATION ========== -->
             <h6>System Configuration</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this,'branding')"><i class="fa fa-image"></i> Branding</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'integrations')"><i class="fa fa-plug"></i>
+                Integrations</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'communication-settings')"><i
+                    class="fa fa-envelope"></i> Email &amp; SMS Settings</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'modules')"><i class="fa fa-th-large"></i> Modules
+                Control</a>
 
-            <a class="navlink" onclick="handleSettingsMenu(this, 'branding')">
-                <i class="fa fa-image"></i> Branding
-            </a>
+            <h6>Data &amp; Automation</h6>
+            <a class="navlink" onclick="handleSettingsMenu(this,'import-export')"><i class="fa fa-upload"></i> Import /
+                Export</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'automations')"><i class="fa fa-sync-alt"></i>
+                Automations</a>
 
-            <a class="navlink" onclick="handleSettingsMenu(this, 'integrations')">
-                <i class="fa fa-plug"></i> Integrations
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'communication-settings')">
-                <i class="fa fa-envelope"></i> Email & SMS Settings
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'modules')">
-                <i class="fa fa-th-large"></i> Modules Control
-            </a>
-
-
-            <!-- ========== DATA & AUTOMATION ========== -->
-            <h6>Data & Automation</h6>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'import-export')">
-                <i class="fa fa-upload"></i> Import / Export
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'automations')">
-                <i class="fa fa-sync-alt"></i> Automations
-            </a>
-
-
-            <!-- ========== SYSTEM HEALTH & SECURITY ========== -->
             <h6>System Health</h6>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'logs')">
-                <i class="fa fa-file"></i> Logs
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'server-status')">
-                <i class="fa fa-server"></i> Server Status
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'storage')">
-                <i class="fa fa-hdd"></i> Storage Monitoring
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'apikey')">
-                <i class="fa fa-key"></i> API Keys
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'api-limits')">
-                <i class="fa fa-tachometer-alt"></i> API Rate Limits
-            </a>
-
-            <a class="navlink" onclick="handleSettingsMenu(this, 'compliance')">
-                <i class="fa fa-balance-scale"></i> Compliance
-            </a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'logs')"><i class="fa fa-file"></i> Logs</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'server-status')"><i class="fa fa-server"></i> Server
+                Status</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'storage')"><i class="fa fa-hdd"></i> Storage
+                Monitoring</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'apikey')"><i class="fa fa-key"></i> API Keys</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'api-limits')"><i class="fa fa-tachometer-alt"></i> API
+                Rate Limits</a>
+            <a class="navlink" onclick="handleSettingsMenu(this,'compliance')"><i class="fa fa-balance-scale"></i>
+                Compliance</a>
         </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+       CONTENT AREA
+  ════════════════════════════════════════════════════════════════════════════ -->
     <div class="settings_content">
         <div id="contentBox" class="content-box">
 
+            <!-- ── TOAST ──────────────────────────────────────────────────────── -->
+            <div id="toast" class="toast_notification"></div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: MY PROFILE
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage active" id="profile">
                 <div class="set_header">
                     <h3>My Profile</h3>
@@ -297,689 +246,9 @@
                 </div>
             </div>
 
-            <div class="tabPage" id="security">
-                <div class="security-settings-container">
-
-                    <div class="set_header">
-                        <h3>Security</h3>
-                    </div>
-                    <div class="details col-2">
-
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-shield-halved"></i> Two-Factor Authentication (2FA)</h4>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggle2FA" aria-label="Enable Two-Factor Authentication">
-                                    <label for="toggle2FA" class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <p class="setting-detail">
-                                Requires a secondary verification code from a mobile app or text message every time you
-                                log
-                                in.
-                                **Highly recommended** for maximum security.
-                            </p>
-                            <button id="manage2FABtn" class="btn btn-secondary setting-action-btn" disabled><i
-                                    class="fa-solid fa-mobile-screen"></i>
-                                Manage 2FA Setup</button>
-
-                            <div id="twoFAModal" class="modal-overlay">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h3><i class="fa-solid fa-lock-open"></i> Two-Factor Authentication</h3>
-                                        <span class="close-button">&times;</span>
-                                    </div>
-
-                                    <!-- Scrollable Body -->
-                                    <div class="modal-body">
-                                        <div class="two-fa-management-container">
-                                            <h3><i class="fa-solid fa-lock-open"></i> Two-Factor Authentication Status
-                                            </h3>
-
-                                            <div class="status-box" id="twoFaStatus">
-                                                <p>Current Status: <span
-                                                        class="status-badge status-inactive">Inactive</span></p>
-                                                <p>Last Modified: Never</p>
-                                            </div>
-
-                                            <section class="setup-section">
-                                                <h4><i class="fa-solid fa-qrcode"></i> Setup Authenticator App</h4>
-                                                <p class="section-detail">Scan the QR code below with your preferred
-                                                    TOTP
-                                                    application (e.g., Google Authenticator, Authy, Microsoft
-                                                    Authenticator)
-                                                    to link your account.</p>
-
-                                                <div class="qr-code-box">
-                                                    <div class="qr-placeholder">
-
-
-                                                        [Image of a placeholder QR code]
-
-                                                    </div>
-                                                    <div class="secret-key-info">
-                                                        <p>Can't scan the code? Use this secret key:</p>
-                                                        <code id="secretKeyDisplay">ABCD-EFGH-IJKL-MNOP</code>
-                                                        <button class="btn btn-secondary btn-small copy-btn"><i
-                                                                class="fa-regular fa-copy"></i> Copy Key</button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="verification-step">
-                                                    <h5>3. Verify Setup</h5>
-                                                    <p>Enter the 6-digit code generated by your app to activate 2FA.</p>
-                                                    <input type="text" id="verificationCode"
-                                                        placeholder="Enter 6-digit code" maxlength="6"
-                                                        class="form-control">
-                                                    <button id="activate2FA"
-                                                        class="btn btn-primary setting-action-btn"><i
-                                                            class="fa-solid fa-check"></i> Activate 2FA</button>
-                                                </div>
-
-                                                <div class="action-footer">
-                                                    <button id="regenerateKey" class="btn btn-secondary-small"><i
-                                                            class="fa-solid fa-sync"></i> Regenerate QR Code</button>
-                                                </div>
-                                            </section>
-
-                                            <hr>
-
-                                            <section class="setup-section recovery-section">
-                                                <h4><i class="fa-solid fa-clipboard-list"></i> Recovery Methods</h4>
-
-                                                <div class="recovery-group">
-                                                    <h5>Recovery Codes</h5>
-                                                    <p class="section-detail">Use these codes to log in if you lose
-                                                        access
-                                                        to your primary device. Store them in a safe place.</p>
-                                                    <div id="recoveryCodeStatus" class="status-box status-warning">
-                                                        Status: <span class="status-badge status-pending">Not
-                                                            Generated</span>
-                                                    </div>
-                                                    <button id="generateCodes"
-                                                        class="btn btn-warning setting-action-btn"><i
-                                                            class="fa-solid fa-key"></i> Generate & Download
-                                                        Codes</button>
-                                                </div>
-                                            </section>
-
-                                            <hr>
-
-                                            <section class="setup-section advanced-section">
-                                                <h4><i class="fa-solid fa-desktop"></i> Trusted Devices & Management
-                                                </h4>
-                                                <p class="section-detail">Review devices that bypass 2FA or manage
-                                                    security
-                                                    settings.</p>
-
-                                                <button id="revokeTrusted" class="btn btn-secondary-small"><i
-                                                        class="fa-solid fa-delete-left"></i> Revoke All Trusted
-                                                    Devices</button>
-
-                                                <button id="disable2FA" class="btn btn-error setting-action-btn"><i
-                                                        class="fa-solid fa-ban"></i> Temporarily Disable 2FA</button>
-                                            </section>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                        </hr>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-lock"></i> Screen Lock / Auto Logout</h4>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleLock" aria-label="Enable Automatic Screen Lock">
-                                    <label for="toggleLock" class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <p class="setting-detail">
-                                Automatically lock your screen or log you out after a period of inactivity (e.g., 5
-                                minutes)
-                                to protect your data if you step away.
-                            </p>
-                            <button class="btn btn-secondary setting-action-btn" id="openLockBtn"><i
-                                    class="fa-solid fa-clock"></i> Set
-                                Inactivity Timeout</button>
-
-                            <!-- ================= SCREEN LOCK TIMEOUT MODAL ================== -->
-                            <div id="lockTimeoutModal" class="modal-overlay">
-                                <div class="modal-container">
-
-                                    <div class="modal-header">
-                                        <h3><i class="fa-solid fa-clock"></i> Set Inactivity Timeout</h3>
-                                        <button class="close-btn" onclick="closeLockModal()">&times;</button>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        <label>Select timeout duration:</label>
-
-                                        <select id="timeoutSelect" class="timeout-select">
-                                            <option value="1">1 minute</option>
-                                            <option value="5" selected>5 minutes</option>
-                                            <option value="10">10 minutes</option>
-                                            <option value="30">30 minutes</option>
-                                            <option value="60">1 hour</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button class="btn cancel" onclick="closeLockModal()">Cancel</button>
-                                        <button class="btn save" onclick="saveTimeoutSetting()">Save</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        </hr>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-key"></i> Change Password</h4>
-                            </div>
-                            <p class="setting-detail">
-                                Use a strong, unique password to secure your account. Avoid reusing passwords.
-                            </p>
-                            <button class="btn btn-primary setting-action-btn" id="changepassword"><i
-                                    class="fa-solid fa-lock"></i> Change
-                                Password</button>
-                        </div>
-                        <!-- Change Password Modal -->
-                        <!-- Change Password Modal -->
-                        <div id="changePasswordModal" class="modal-overlay">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h3><i class="fa-solid fa-key"></i> Change Password</h3>
-                                    <span class="close-button">&times;</span>
-                                </div>
-
-                                <!-- Scrollable Body -->
-                                <div class="modal-body">
-                                    <div class="password-container">
-
-                                        <p class="section-detail">
-                                            Use a strong, unique password to secure your account. Avoid reusing
-                                            passwords.
-                                        </p>
-
-                                        <form id="changePasswordForm">
-
-                                            <div class="form-group">
-                                                <label>Old Password</label>
-                                                <div class="password-wrapper">
-                                                    <input type="password" id="oldPassword" class="form-control"
-                                                        required>
-                                                    <i class="fa fa-eye toggle-eye"></i>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>New Password</label>
-                                                <div class="password-wrapper">
-                                                    <input type="password" id="newPassword" class="form-control"
-                                                        required>
-                                                    <i class="fa fa-eye toggle-eye"></i>
-                                                </div>
-
-                                                <ul class="password-rules">
-                                                    <li id="rule-length"><i class="fa-solid fa-circle-xmark icon"></i>
-                                                        At least 8 characters</li>
-                                                    <li id="rule-upper"><i class="fa-solid fa-circle-xmark icon"></i>
-                                                        One uppercase letter (A–Z)</li>
-                                                    <li id="rule-lower"><i class="fa-solid fa-circle-xmark icon"></i>
-                                                        One lowercase letter (a–z)</li>
-                                                    <li id="rule-number"><i class="fa-solid fa-circle-xmark icon"></i>
-                                                        One number (0–9)</li>
-                                                    <li id="rule-symbol"><i class="fa-solid fa-circle-xmark icon"></i>
-                                                        One special character (!@#$%^&*)</li>
-                                                </ul>
-
-                                                <p id="confirmMsg" class="confirm-msg"></p>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Confirm Password</label>
-                                                <div class="password-wrapper">
-                                                    <input type="password" id="confirmPassword" class="form-control"
-                                                        required>
-                                                    <i class="fa fa-eye toggle-eye"></i>
-                                                </div>
-                                                <small id="confirmMsg" class="error-msg"></small>
-                                            </div>
-
-                                            <button type="submit" class="btn btn-primary setting-action-btn full-btn">
-                                                <i class="fa-solid fa-lock"></i> Update Password
-                                            </button>
-
-                                        </form>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-
-                        <hr>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-location-dot"></i> Login Alerts</h4>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleAlerts" checked
-                                        aria-label="Receive Email Alerts for New Logins">
-                                    <label for="toggleAlerts" class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <p class="setting-detail">
-                                Receive an email notification whenever your account is accessed from a new device or
-                                location.
-                            </p>
-                            <button class="btn btn-secondary setting-action-btn"><i class="fa-solid fa-chart-line"></i>
-                                Review Recent Activity</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tabPage" id="notifications">
-                <div class="notifications-settings-container">
-                    <div class="set_header">
-                        <h3>Notifications</h3>
-                    </div>
-                    <div class="details col-2">
-                        <p class="description">
-                            Manage how you receive notifications, including email, in-app alerts, and push
-                            notifications.
-                        </p>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-bell"></i> Global Notifications</h4>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleGlobal" checked
-                                        aria-label="Enable All Notifications">
-                                    <label for="toggleGlobal" class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <p class="setting-detail">
-                                Turn this off to mute all notifications except critical security alerts.
-                            </p>
-                        </div>
-
-                        <hr>
-
-                        <div class="setup-section col-2">
-                            <h4><i class="fa-solid fa-envelope"></i> Delivery Channels</h4>
-                            <p class="section-detail">Choose which methods we use to notify you.</p>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>Email Notifications</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleEmail" checked
-                                            aria-label="Enable Email Notifications">
-                                        <label for="toggleEmail" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Receive important account updates and weekly summaries via
-                                    email.
-                                </p>
-                            </div>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>In-App Alerts</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleInApp" checked
-                                            aria-label="Enable In-App Notifications">
-                                        <label for="toggleInApp" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">See badges and alerts within the application interface.</p>
-                            </div>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>Push Notifications</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="togglePush" aria-label="Enable Push Notifications">
-                                        <label for="togglePush" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Send notifications directly to your desktop or mobile device
-                                    (requires browser permission).</p>
-                                <button class="btn btn-secondary setting-action-btn"><i
-                                        class="fa-solid fa-bell-slash"></i>
-                                    Manage Push Permissions</button>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="setup-section">
-                            <h4><i class="fa-solid fa-list-check"></i> Notify Me About...</h4>
-                            <p class="section-detail">Customize alerts for specific activities.</p>
-
-                            <div class delivery-channel>
-                                <div class="security-header">
-                                    <h5>Account Security & Access</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleSecurity" checked
-                                            aria-label="Enable Security Notifications">
-                                        <label for="toggleSecurity" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Alerts for password changes, new device logins, and 2FA
-                                    activity.
-                                </p>
-                            </div>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>Transaction Status</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleTransaction" checked
-                                            aria-label="Enable Transaction Notifications">
-                                        <label for="toggleTransaction" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Updates when a payment is sent, received, or fails.</p>
-                            </div>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>System Updates & News</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleSystem"
-                                            aria-label="Enable System Notifications">
-                                        <label for="toggleSystem" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Alerts for new features, maintenance schedules, and
-                                    promotional
-                                    content.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="tabPage" id="billing">
-                <div class="billing-container">
-                    <div class="details col-2">
-
-                        <p class="description">
-                            Manage your payment methods, subscription information, and view invoice history.
-                        </p>
-
-                        <!-- SUBSCRIPTION -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-box"></i> Subscription Plan</h4>
-                            </div>
-                            <p class="setting-detail">
-                                You're currently subscribed to the <strong>Pro Plan</strong> — $15/month.
-                            </p>
-                            <button class="btn btn-secondary setting-action-btn">
-                                <i class="fa-solid fa-arrow-up"></i> Upgrade / Change Plan
-                            </button>
-                        </div>
-
-                        <hr>
-
-                        <!-- PAYMENT METHOD -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-wallet"></i> Payment Method</h4>
-                            </div>
-                            <p class="setting-detail">
-                                Default payment method: <strong>Visa ending in 4820</strong>, expires 05/28.
-                            </p>
-                            <button class="btn btn-secondary setting-action-btn">
-                                <i class="fa-solid fa-pen"></i> Update Payment Method
-                            </button>
-                        </div>
-
-                        <hr>
-
-                        <!-- BILLING HISTORY -->
-                        <div class="setup-section">
-                            <h4><i class="fa-solid fa-file-invoice"></i> Billing History</h4>
-                            <p class="section-detail">Download receipts and track previous payments.</p>
-
-                            <div class="delivery-channel billing-item">
-                                <div class="security-header">
-                                    <h5>Nov 02, 2025 – $15.00</h5>
-                                    <button class="btn btn-secondary setting-action-btn">
-                                        <i class="fa-solid fa-download"></i> Receipt
-                                    </button>
-                                </div>
-                                <p class="setting-detail">Invoice: <strong>#INV-84920</strong></p>
-                            </div>
-
-                            <div class="delivery-channel billing-item">
-                                <div class="security-header">
-                                    <h5>Oct 02, 2025 – $15.00</h5>
-                                    <button class="btn btn-secondary setting-action-btn">
-                                        <i class="fa-solid fa-download"></i> Receipt
-                                    </button>
-                                </div>
-                                <p class="setting-detail">Invoice: <strong>#INV-84211</strong></p>
-                            </div>
-
-                            <div class="delivery-channel billing-item">
-                                <div class="security-header">
-                                    <h5>Sep 02, 2025 – $15.00</h5>
-                                    <button class="btn btn-secondary setting-action-btn">
-                                        <i class="fa-solid fa-download"></i> Receipt
-                                    </button>
-                                </div>
-                                <p class="setting-detail">Invoice: <strong>#INV-83350</strong></p>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <!-- BILLING PREFERENCES -->
-                        <div class="setup-section">
-                            <h4><i class="fa-solid fa-gear"></i> Billing Preferences</h4>
-                            <p class="section-detail">Customize how you receive billing notifications.</p>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>Email Invoices</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="toggleInvoiceEmails" checked>
-                                        <label for="toggleInvoiceEmails" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">Receive a PDF invoice every time you're billed.</p>
-                            </div>
-
-                            <div class="delivery-channel">
-                                <div class="security-header">
-                                    <h5>Payment Reminders</h5>
-                                    <div class="toggle-switch">
-                                        <input type="checkbox" id="togglePaymentReminders" checked>
-                                        <label for="togglePaymentReminders" class="toggle-label"></label>
-                                    </div>
-                                </div>
-                                <p class="setting-detail">You will be notified before your next billing date.</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="tabPage" id="theme">
-                <div class="theme-container">
-                    <div class="set_header">
-                        <h3>Theme Settings</h3>
-                    </div>
-                    <div class="details">
-                        <div class="boxTheme">
-
-                            <div class="boxTheme1 defaultish theme" id="white-btn" data-content="default">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 emerald-theme" id="emerald-btn" data-content="Emerald">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 purple-theme" id="purple-btn" data-content="Purple Royale">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 royal-theme" id="royal-btn" data-content="Royal">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 amethyst-theme" id="amethyst-btn" data-content="Amethyst">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 crimson-theme" id="crimson-btn" data-content="Crimson">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 amber-theme" id="amber-btn" data-content="Amber">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 sunset-theme" id="sunset-btn" data-content="Sunset">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 rose-theme" id="rose-btn" data-content="Rose Pink">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxTheme1 neon-theme" id="neon-btn" data-content="Cyber Neon">
-                                <div class="lnav">
-                                    <div class="laside"></div>
-                                    <div class="lmain_cont">
-                                        <div class="ltopnav"></div>
-                                        <div class="boxesl">
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                            <div class="boxl"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="tabPage" id="language">Language Settings Content</div>
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: SECURITY  (existing — kept intact)
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="security">
                 <div class="security-settings-container">
                     <div class="set_header">
@@ -1175,6 +444,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: ROLES & PERMISSIONS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="roles-permissions">
                 <div class="set_header">
                     <h3>Roles &amp; Permissions</h3>
@@ -1256,6 +529,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: AUDIT TRAIL
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="audit">
                 <div class="set_header">
                     <h3>Audit Trail</h3>
@@ -1379,6 +656,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: BRANDING
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="branding">
                 <div class="set_header">
                     <h3>Branding</h3>
@@ -1456,6 +737,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: INTEGRATIONS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="integrations">
                 <div class="set_header">
                     <h3>Integrations</h3>
@@ -1468,6 +753,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: EMAIL & SMS SETTINGS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="communication-settings">
                 <div class="set_header">
                     <h3>Email &amp; SMS Settings</h3>
@@ -1602,6 +891,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: MODULES CONTROL
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="modules">
                 <div class="set_header">
                     <h3>Modules Control</h3>
@@ -1614,6 +907,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: IMPORT / EXPORT
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="import-export">
                 <div class="set_header">
                     <h3>Import / Export</h3>
@@ -1746,6 +1043,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: AUTOMATIONS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="automations">
                 <div class="set_header">
                     <h3>Automations</h3>
@@ -1821,6 +1122,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: LOGS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="logs">
                 <div class="set_header">
                     <h3>System Logs</h3>
@@ -1853,6 +1158,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: SERVER STATUS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="server-status">
                 <div class="set_header">
                     <h3>Server Status</h3>
@@ -1881,6 +1190,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: STORAGE MONITORING
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="storage">
                 <div class="set_header">
                     <h3>Storage Monitoring</h3>
@@ -1930,6 +1243,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: API KEYS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="apikey">
                 <div class="set_header">
                     <h3>API Keys</h3>
@@ -2033,6 +1350,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: API RATE LIMITS
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="api-limits">
                 <div class="set_header">
                     <h3>API Rate Limits</h3>
@@ -2112,499 +1433,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tabPage setbp" id="account-preferences">
-                <div class="preferences-settings-container">
 
-                    <div class="set_header">
-                        <h3>Account Preferences</h3>
-                    </div>
-
-                    <div class="details col-2">
-
-
-                        <!-- ================= REGIONAL SETTINGS ================= -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-earth-africa"></i> Regional Settings</h4>
-                            </div>
-
-                            <p class="setting-detail">Adjust locale and formatting options.</p>
-                            <div class="form_grid">
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-earth-africa"></i> Time Zone</label>
-                                    <select>
-                                        <option>--Select Time Zone--</option>
-                                        <option>(GMT+1) West Africa Time</option>
-                                        <option>(GMT) UTC</option>
-                                        <option>(GMT+2) South Africa</option>
-                                        <option>(GMT-5) Eastern Time (US)</option>
-                                    </select>
-                                </div>
-
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-calendar"></i> Date Format</label>
-                                    <select>
-                                        <option>DD/MM/YYYY</option>
-                                        <option>MM/DD/YYYY</option>
-                                        <option>YYYY-MM-DD</option>
-                                    </select>
-                                </div>
-
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-clock"></i> Time Format</label>
-                                    <select>
-                                        <option>12-Hour (AM/PM)</option>
-                                        <option>24-Hour</option>
-                                    </select>
-                                </div>
-
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-money-bill-wave"></i> Currency</label>
-                                    <select>
-                                        <option>--Select Currency--</option>
-                                        <option>NGN - Nigerian Naira</option>
-                                        <option>USD - US Dollar</option>
-                                        <option>EUR - Euro</option>
-                                        <option>GBP - British Pound</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <button class="btn btn-primary setting-action-btn">
-                                <i class="fa-solid fa-save"></i> Save Regional Settings
-                            </button>
-                        </div>
-
-                        <hr>
-
-                        <!-- ================= APP EXPERIENCE ================= -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-display"></i> Application Experience</h4>
-                            </div>
-
-                            <p class="setting-detail">Customize how the application layout behaves for you.</p>
-
-                            <div class="form_grid">
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-text-height"></i> Font Size</label>
-                                    <select id="fontSizeSelect">
-                                        <option value="default">Default</option>
-                                        <option value="small">Small</option>
-                                        <option value="large">Large</option>
-                                        <option value="xlarge">Extra Large</option>
-                                    </select>
-                                </div>
-
-
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-eye"></i> UI Density</label>
-                                    <select>
-                                        <option>Comfortable</option>
-                                        <option>Compact</option>
-                                        <option>Spacious</option>
-                                    </select>
-                                </div>
-
-                                <div class="form_group">
-                                    <label><i class="fa-solid fa-circle-half-stroke"></i> Theme Mode</label>
-                                    <select id="themeSelect">
-                                        <option value="light">Light</option>
-                                        <option value="dark">Dark</option>
-                                        <option value="system">System Default</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <p class="setting-detail">Automatically save input changes without requiring manual save.
-                            </p>
-
-
-                        </div>
-
-                        <hr>
-
-                        <!-- ================= ACCESSIBILITY ================= -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-universal-access"></i> Accessibility</h4>
-                            </div>
-
-                            <p class="setting-detail">Improve your personal reading and navigation experience.</p>
-
-                            <div class="security-header">
-                                <h5>High Contrast Mode</h5>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleContrast">
-                                    <label for="toggleContrast" class="toggle-label"></label>
-                                </div>
-                            </div>
-
-                            <div class="security-header">
-                                <h5>Large Text Mode</h5>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleLargeText">
-                                    <label for="toggleLargeText" class="toggle-label"></label>
-                                </div>
-                            </div>
-
-                            <div class="security-header">
-                                <h5>Reduced Animations</h5>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleAnimations">
-                                    <label for="toggleAnimations" class="toggle-label"></label>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-primary setting-action-btn">
-                                <i class="fa-solid fa-person"></i> Save Accessibility Settings
-                            </button>
-                        </div>
-
-                        <hr>
-
-                        <!-- ================= DATA MANAGEMENT ================= -->
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-database"></i> Data Management</h4>
-                            </div>
-
-                            <p class="setting-detail">Export your data or manage archived information.</p>
-
-                            <button class="btn btn-secondary setting-action-btn">
-                                <i class="fa-solid fa-file-export"></i> Export My Data
-                            </button>
-
-                            <button class="btn btn-secondary setting-action-btn">
-                                <i class="fa-solid fa-file-import"></i> Import Data
-                            </button>
-
-                            <button class="btn btn-warning setting-action-btn">
-                                <i class="fa-solid fa-box-archive"></i> View Archived Items
-                            </button>
-                        </div>
-
-                        <hr>
-
-                        <!-- ================= DANGER ZONE ================= -->
-                        <div class="security-group danger-zone">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Account Control</h4>
-                            </div>
-
-                            <p class="setting-detail">
-                                Temporarily deactivate or permanently delete your account.
-                            </p>
-
-                            <button class="btn btn-error setting-action-btn">
-                                <i class="fa-solid fa-user-slash"></i> Deactivate Account
-                            </button>
-
-                            <button class="btn btn-error setting-action-btn">
-                                <i class="fa-solid fa-trash"></i> Delete Account Permanently
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="tabPage setbp" id="login-activity">
-                <div class="login-activity-container">
-                    <div class="set_header">
-                        <h3>Login Activity</h3>
-                    </div>
-                    <div class="details col-2">
-                        <p class="description">
-                            Review and manage recent login activity, including device, location, and time.
-                        </p>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-clock-rotate-left"></i> Recent Logins</h4>
-                            </div>
-                            <p class="setting-detail">
-                                The last 10 logins to your account are listed below. You can review details and log out
-                                of any session remotely.
-                            </p>
-
-                            <div class="login-activity-table cps-data-table">
-                                <table data-datatable="true" data-actions="logout">
-                                    <thead>
-                                        <tr>
-                                            <th>Device</th>
-                                            <th>Location / IP</th>
-                                            <th>Date & Time</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Chrome on Windows</td>
-                                            <td>New York, USA / 192.168.1.1</td>
-                                            <td>Dec 7, 2025 - 09:15 AM</td>
-                                            <td><button class="btn btn-secondary btn-small"><i
-                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Safari on iPhone</td>
-                                            <td>London, UK / 192.168.1.2</td>
-                                            <td>Dec 6, 2025 - 07:42 PM</td>
-                                            <td><button class="btn btn-secondary btn-small"><i
-                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Firefox on Mac</td>
-                                            <td>Paris, France / 192.168.1.3</td>
-                                            <td>Dec 5, 2025 - 11:23 AM</td>
-                                            <td><button class="btn btn-secondary btn-small"><i
-                                                        class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                            </td>
-                                        </tr>
-                                        <!-- Add more rows as needed -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-shield-check"></i> Security Alerts</h4>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleLoginAlerts" checked
-                                        aria-label="Enable Login Alerts">
-                                    <label for="toggleLoginAlerts" class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <p class="setting-detail">
-                                Receive notifications whenever your account is accessed from a new device or location.
-                            </p>
-                            <button class="btn btn-secondary setting-action-btn"><i class="fa-solid fa-bell"></i> View
-                                Alert History</button>
-                        </div>
-
-                        <hr>
-
-                        <div class="security-group">
-                            <div class="security-header">
-                                <h4><i class="fa-solid fa-user-lock"></i> Active Sessions</h4>
-                            </div>
-                            <p class="setting-detail">
-                                See all devices currently logged into your account. You can log out remotely if needed.
-                            </p>
-
-                            <div class="active-sessions-list">
-                                <ul>
-                                    <li>
-                                        Chrome on Windows - New York, USA
-                                        <button class="btn btn-secondary btn-small"><i
-                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                    </li>
-                                    <li>
-                                        Safari on iPhone - London, UK
-                                        <button class="btn btn-secondary btn-small"><i
-                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                    </li>
-                                    <li>
-                                        Firefox on Mac - Paris, France
-                                        <button class="btn btn-secondary btn-small"><i
-                                                class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <button class="btn btn-error setting-action-btn"><i class="fa-solid fa-ban"></i> Log Out All
-                                Sessions</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="tabPage setbp" id="user-management">
-                <div class="user-management-container">
-                    <div class="set_header">
-                        <h3>User Management</h3>
-                    </div>
-
-                    <div class="details col-2">
-                        <p class="description">
-                            Manage your users, including roles, permissions, and account status.
-                        </p>
-                        <div class="add-user-section">
-                            <button class="btn btn-primary setting-action-btn" id="openAddUserModal">
-                                <i class="fa-solid fa-user-plus"></i> Add New User
-                            </button>
-                        </div>
-                        <!-- Add User Modal -->
-                        <div class="modal-overlay" id="openAddUserModal">
-
-                            <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h3><i class="fa-solid fa-user-plus"></i> Add New User</h3>
-
-                                </div>
-
-                                <!-- Modal Body -->
-                                <div class="modal-body">
-                                    <form class="user_form d_form">
-                                        <div class="form_grid">
-
-                                            <!-- Full Name -->
-                                            <div class="form_group" data-pref="FullName" data-pref-label="Full Name">
-                                                <label><i class="fa-solid fa-user"></i> Full Name</label>
-                                                <input type="text" placeholder="Full Name">
-                                            </div>
-
-                                            <!-- Username -->
-                                            <div class="form_group" data-pref="Username" data-pref-label="Username">
-                                                <label><i class="fa-solid fa-at"></i> Username</label>
-                                                <input type="text" placeholder="Username">
-                                            </div>
-
-                                            <!-- Email -->
-                                            <div class="form_group" data-pref="Email" data-pref-label="Email">
-                                                <label><i class="fa-regular fa-envelope"></i> Email</label>
-                                                <input type="email" placeholder="Email Address">
-                                            </div>
-
-                                            <!-- Phone -->
-                                            <div class="form_group" data-pref="Phone" data-pref-label="Phone Number">
-                                                <label><i class="fa-solid fa-phone"></i> Phone Number</label>
-                                                <input type="text" placeholder="Phone Number">
-                                            </div>
-
-                                            <!-- Role -->
-                                            <div class="form_group" data-pref="Role" data-pref-label="Role">
-                                                <label><i class="fa-solid fa-user-shield"></i> Role</label>
-                                                <select>
-                                                    <option>-- Select Role --</option>
-                                                    <option>Admin</option>
-                                                    <option>Manager</option>
-                                                    <option>User</option>
-                                                    <option>Viewer</option>
-                                                </select>
-                                            </div>
-
-                                            <!-- Password -->
-                                            <div class="form_group" data-pref="Password" data-pref-label="Password">
-                                                <label><i class="fa-solid fa-lock"></i> Password</label>
-                                                <input type="password" placeholder="Password">
-                                            </div>
-
-                                            <!-- Confirm Password -->
-                                            <div class="form_group" data-pref="ConfirmPassword"
-                                                data-pref-label="Confirm Password">
-                                                <label><i class="fa-solid fa-lock"></i> Confirm Password</label>
-                                                <input type="password" placeholder="Confirm Password">
-                                            </div>
-
-                                            <!-- Active Status -->
-                                            <div class="form_group switch_group" data-pref="Active"
-                                                data-pref-label="Active">
-                                                <label><i class="fa-solid fa-circle-check"></i> Active</label>
-                                                <div class="switch">
-                                                    <input type="checkbox" id="activeUser" checked>
-                                                    <label for="activeUser" class="switch_label">
-                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <!-- Email Confirmed -->
-                                            <div class="form_group switch_group" data-pref="EmailConfirmed"
-                                                data-pref-label="Email Confirmed">
-                                                <label><i class="fa-solid fa-envelope-circle-check"></i> Email
-                                                    Confirmed</label>
-                                                <div class="switch">
-                                                    <input type="checkbox" id="userEmailConfirmed">
-                                                    <label for="userEmailConfirmed" class="switch_label">
-                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <!-- Locked -->
-                                            <div class="form_group switch_group" data-pref="Locked"
-                                                data-pref-label="Locked">
-                                                <label><i class="fa-solid fa-lock"></i> Account Locked</label>
-                                                <div class="switch">
-                                                    <input type="checkbox" id="userLocked">
-                                                    <label for="userLocked" class="switch_label">
-                                                        <span class="switch_text" data-on="Yes" data-off="No"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <!-- Form Actions -->
-                                        <div class="form_actions">
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="fa-solid fa-save"></i> Save User
-                                            </button>
-                                            <button type="reset" class="btn btn-dark">
-                                                <i class="fa-solid fa-rotate-left"></i> Clear
-                                            </button>
-                                            <button type="button" class="btn btn-primary">
-                                                <i class="fa-solid fa-search"></i> Search
-                                            </button>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- User Table -->
-                        <div class="user-management-table cps-data-table">
-                            <table data-datatable="true" data-actions="edit,delete">
-                                <thead>
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>User</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                        <th>Last Login</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>John Doe</td>
-                                        <td>john@example.com</td>
-                                        <td>Admin</td>
-                                        <td><span class="status active">Active</span></td>
-                                        <td>2025-12-07 10:30 AM</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>2 </td>
-                                        <td>Jane Smith</td>
-                                        <td>jane@example.com</td>
-                                        <td>User</td>
-                                        <td><span class="status inactive">Inactive</span></td>
-                                        <td>2025-12-06 09:15 AM</td>
-                                    </tr>
-                                    <!-- More users here -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Add New User Button -->
-                        <div class="add-user-section">
-                            <button class="btn btn-primary setting-action-btn"><i class="fa-solid fa-user-plus"></i> Add
-                                New User</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- ══════════════════════════════════════════════════════════════════
+           TAB: COMPLIANCE
+      ═══════════════════════════════════════════════════════════════════════ -->
             <div class="tabPage" id="compliance">
                 <div class="set_header">
                     <h3>Compliance</h3>
@@ -2730,8 +1562,15 @@
                 </div>
             </div>
 
-            <div id="toast" class="toast_notification">Profile updated successfully!</div>
+            <!-- ── Remaining stub tabs (content already present in your original) ── -->
+            <div class="tabPage" id="notifications"><!-- existing notifications HTML --></div>
+            <div class="tabPage" id="billing"><!-- existing billing HTML --></div>
+            <div class="tabPage" id="theme"><!-- existing theme HTML --></div>
+            <div class="tabPage" id="language"><!-- existing language HTML --></div>
+            <div class="tabPage setbp" id="account-preferences"><!-- existing account-preferences HTML --></div>
+            <div class="tabPage setbp" id="login-activity"><!-- existing login-activity HTML --></div>
+            <div class="tabPage setbp" id="user-management"><!-- existing user-management HTML --></div>
 
-        </div>
-    </div>
-</div>
+        </div><!-- /#contentBox -->
+    </div><!-- /.settings_content -->
+</div><!-- /.settings -->

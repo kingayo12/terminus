@@ -5,92 +5,117 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terminus Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ── Styles ─────────────────────────────────────────────────────────── -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/yard.css" />
-    <!-- DataTables Core CSS & JS -->
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- DataTables CSS — before app styles so you can override -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+
+    <!-- App styles -->
 
 
-<body class="default">
+    <!-- ── Vendor scripts (synchronous — DataTables requires jQuery at parse time) ── -->
 
-    <div class="dashboard_container">
-        <!-- sidebar -->
-        <div id="sidebar"></div>
-        <div class="main_content">
-            <div id="header"></div>
-            <div class="content_area p-6">
-                <div id="content">
+    <!-- jQuery loaded ONCE. A second tag anywhere in the page would silently
+       replace the instance DataTables was initialised against. -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
-                </div>
-                <!-- Dynamic content goes here -->
-
-            </div>
-        </div>
-        <!-- ================= LOCK SCREEN OVERLAY ================= -->
-        <div id="lockScreen" class="lock-overlay">
-            <div class="lock-container">
-                <h2><i class="fa-solid fa-lock"></i> Session Locked</h2>
-                <p>Please enter your password or unlock token</p>
-
-                <input id="unlockInput" type="password" placeholder="Enter password or token">
-
-                <button id="unlockBtn">
-                    <span class="btnText">Unlock</span>
-                    <span class="btnLoader"></span>
-                </button>
-
-                <p class="error-text" id="unlockError"></p>
-            </div>
-        </div>
-
-        <div id="preferenceModal" class="pref-modal animate__animated animate__fadeInRight"
-            style="animation-delay: .4s;">
-            <div class="pref-content">
-                <div class="header">
-                    <h2>Preferences</h2>
-                    <button id="closePrefBtn"><i class="fa fa-close"></i></button>
-                </div>
-                <div id="prefList"></div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-    <!-- <script type="module" src="./assets/js/yardthree.js" defer></script> -->
-    <script src="./assets/js/charts.js" defer></script>
-    <script src="./assets/js/script.js" defer></script>
-    <script src="./assets/js/move.js" defer></script>
-
-    <script type="module" src="./assets/js/load.js" defer></script>
-
-
-    <!-- datatablejs  -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- DataTables core then plugins (order is required) -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+
+    <!-- Export dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Lottie — non-critical, deferred -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/yard.css" />
+    <link rel="stylesheet" href="./assets/css/chart-themes.css" />
+    <link rel="stylesheet" href="./assets/css/settings-components.css" />
+</head>
+
+<body class="default">
+
+    <div class="dashboard_container">
+
+        <!-- Shell slots filled by includeHTML() at runtime -->
+        <div id="sidebar"></div>
+
+        <div class="main_content">
+            <div id="header"></div>
+            <div class="content_area p-6">
+                <div id="content"></div>
+            </div>
+        </div>
+
+        <!-- ── Lock screen overlay ──────────────────────────────────────────── -->
+        <div id="lockScreen" class="lock-overlay" aria-modal="true" role="dialog" aria-label="Session locked">
+            <div class="lock-container">
+                <h2><i class="fa-solid fa-lock" aria-hidden="true"></i> Session Locked</h2>
+                <p>Please enter your password or unlock token</p>
+                <input id="unlockInput" type="password" placeholder="Enter password or token"
+                    autocomplete="current-password" />
+                <button id="unlockBtn" type="button">
+                    <span class="btnText">Unlock</span>
+                    <span class="btnLoader" aria-hidden="true"></span>
+                </button>
+                <p class="error-text" id="unlockError" role="alert"></p>
+            </div>
+        </div>
+
+        <!-- ── Preferences modal ────────────────────────────────────────────── -->
+        <div id="preferenceModal" class="pref-modal animate__animated animate__fadeInRight" style="animation-delay:.4s;"
+            aria-modal="true" role="dialog" aria-label="Dashboard preferences">
+            <div class="pref-content">
+                <div class="header">
+                    <h2>Preferences</h2>
+                    <button id="closePrefBtn" type="button" aria-label="Close preferences">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div id="prefList"></div>
+            </div>
+        </div>
+
+    </div><!-- /.dashboard_container -->
+
+    <!-- ── App scripts ────────────────────────────────────────────────────── -->
+
+    <!--
+    charts.js is a plain IIFE script (not a module) so it can access the
+    Chart.js global and be observed by the MutationObserver without any
+    module scope issues. It must load BEFORE main.js so the observer is
+    active when the first page fragment is injected.
+  -->
+    <script src="./assets/js/charts.js" defer></script>
+
+    <!--
+    main.js is the ES module entry point.
+    type="module" scripts are automatically deferred — they execute after
+    all deferred scripts above, which is exactly what we need.
+
+    script.js has been fully removed. All its functions now live in
+    assets/js/modules/ui.js which main.js imports.
+  -->
+    <script type="module" src="./assets/js/main.js"></script>
 
 </body>
 

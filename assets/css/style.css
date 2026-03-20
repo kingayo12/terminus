@@ -647,6 +647,10 @@ button {
   font-size: var(--font-size);
 }
 
+button {
+  border-style: none;
+}
+
 .md-hidden {
   display: none !important;
 }
@@ -684,7 +688,9 @@ button {
 body,
 html {
   scroll-behavior: smooth;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 .bg-gradient {
@@ -807,7 +813,7 @@ html {
 #sidebar {
   width: 70px;
   min-width: 70px;
-  height: calc(100% - 10px);
+  height: 100%;
   background: var(--secondary-color);
   /* padding: 20px; */
   display: flex;
@@ -1362,7 +1368,9 @@ button.noti .noti_count {
   overflow: hidden;
   cursor: pointer;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .boxTheme .lightmode {
@@ -1967,6 +1975,7 @@ button.noti .noti_count {
 .tabPage {
   display: none;
   font-size: 16px;
+  padding: 10px;
 }
 
 .tabPage.active {
@@ -1981,7 +1990,7 @@ button.noti .noti_count {
   padding: 10px;
   z-index: 3;
   border-bottom: 1px solid var(--border-color);
-  border-style: dotted;
+  /* border-style: dotted; */
   height: 50px;
 }
 .set_header button.cancelBtn {
@@ -2055,6 +2064,9 @@ button.noti .noti_count {
   height: 145px;
   border-radius: 50%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* background: #fff; */
 }
 
@@ -2109,6 +2121,12 @@ button.noti .noti_count {
   border-radius: 50%;
   border: 1px solid var(--primary-color);
   cursor: pointer;
+}
+
+.avatars_grid .avatar_card img {
+  object-fit: contain;
+  width: 40px;
+  height: 40px;
 }
 
 .profile_image .change_image_btn i {
@@ -2310,7 +2328,9 @@ button.noti .noti_count {
   border-radius: 6px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   transform: translateY(-20px);
   z-index: 9999;
 }
@@ -2507,7 +2527,10 @@ button.noti .noti_count {
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid transparent; /* Ensure button has border space */
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .setting-action-btn:disabled {
@@ -2875,7 +2898,9 @@ button.noti .noti_count {
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .btn-secondary-small {
@@ -3195,7 +3220,9 @@ button.noti .noti_count {
 }
 
 .theme-container {
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
   width: 1024px;
   margin: 0 auto;
 }
@@ -3246,7 +3273,9 @@ button.noti .noti_count {
 }
 .dashboard_page {
   color: var(--text-color);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
   /* background: pink; */
 }
 
@@ -3269,6 +3298,13 @@ button.noti .noti_count {
 #openPrefBtn {
   color: var(--accent-color);
   width: 30px;
+  background: transparent;
+  outline: none;
+  border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .breadcrumb ol li::after {
   content: "›";
@@ -3328,7 +3364,10 @@ button.noti .noti_count {
   background: var(--secondary-color);
   border-radius: 8px;
   box-shadow: 0 6px 6px rgba(14, 30, 64, 0.06);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.3s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.3s ease;
   border: 1px solid var(--border-color);
   cursor: pointer;
 }
@@ -3549,7 +3588,7 @@ button.noti .noti_count {
 .chart_container {
   position: relative;
   width: 100%;
-  height: 130px;
+  /* height: ; */
 }
 
 @media (max-width: 1024px) {
@@ -3892,7 +3931,10 @@ button.noti .noti_count {
   /* transform: translate(-50%, -50%); */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease, left 0.1s linear;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    left 0.1s linear;
   z-index: 20;
   white-space: nowrap;
   pointer-events: auto;
@@ -4016,7 +4058,7 @@ button.noti .noti_count {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  color: #fff !important;
+  color: var(--text-color) !important;
 }
 
 .dataTables_filter label {
@@ -4082,7 +4124,9 @@ div.dt-button-collection {
 
   /* Animation base */
   opacity: 0;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition:
+    opacity 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
 }
 
 /* 2. Style when the 'show' class is added (Triggered by JavaScript) */
@@ -4116,7 +4160,9 @@ div.dt-button-collection {
 
 /* Apply the animations */
 #toast.show {
-  animation: fadein 0.5s, fadeout 0.5s 2.5s; /* 0.5s in, 2.5s wait, 0.5s out */
+  animation:
+    fadein 0.5s,
+    fadeout 0.5s 2.5s; /* 0.5s in, 2.5s wait, 0.5s out */
 }
 
 /* ===========================prefrence modal============================ */
@@ -4487,7 +4533,7 @@ div.dt-button-collection {
 .charts_row {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
   gap: 22px;
 }
 
@@ -4535,6 +4581,7 @@ div.dt-button-collection {
 
 .description {
   font-size: var(--font-size);
+  color: var(--text-color);
 }
 
 /* Darken containers that have something on top of them */

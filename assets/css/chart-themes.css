@@ -1,0 +1,193 @@
+/*
+ * chart-themes.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Chart colour variables consumed by charts.js via getComputedStyle().
+ *
+ * IMPORTANT: The body class names here MUST match exactly what theme.js sets.
+ * theme.js converts data-content values like "Purple Royale" → "purple-royale"
+ * and "Cyber Neon" → "cyber-neon", which matches your style.css selectors.
+ *
+ * The --chart-grid and --chart-text variables intentionally reuse your
+ * existing --border-color and --text-color so charts automatically stay
+ * consistent with your design system without any duplication.
+ *
+ * Variables:
+ *   --chart-color-1 … --chart-color-6   Dataset fill / border colours
+ *   --chart-grid                         Gridline / axis colour
+ *   --chart-text                         Tick labels & legend text
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ── Default ─────────────────────────────────────────────────────────────── */
+/* --primary-color: #0349d7 */
+body.default {
+  --chart-color-1: #0349d7cc;
+  --chart-color-2: #27ae60cc;
+  --chart-color-3: #ffc107cc;
+  --chart-color-4: #e74c3ccc;
+  --chart-color-5: #8b5cf6cc;
+  --chart-color-6: #ec4899cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Emerald ─────────────────────────────────────────────────────────────── */
+/* --primary-color: #0f9d58, dark sidebar */
+body.emerald {
+  --chart-color-1: #0f9d58cc;
+  --chart-color-2: #34d399cc;
+  --chart-color-3: #6ee7b7cc;
+  --chart-color-4: #ffc107cc;
+  --chart-color-5: #0349d7cc;
+  --chart-color-6: #e74c3ccc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Purple Royale ───────────────────────────────────────────────────────── */
+/* --primary-color: #6a00ff, dark sidebar */
+body.purple-royale {
+  --chart-color-1: #6a00ffcc;
+  --chart-color-2: #a855f7cc;
+  --chart-color-3: #c084fccc;
+  --chart-color-4: #ec4899cc;
+  --chart-color-5: #0349d7cc;
+  --chart-color-6: #ffc107cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Royal ───────────────────────────────────────────────────────────────── */
+/* --primary-color: #4169e1, dark sidebar */
+body.royal {
+  --chart-color-1: #4169e1cc;
+  --chart-color-2: #5a7effcc;
+  --chart-color-3: #93c5fdcc;
+  --chart-color-4: #ffc107cc;
+  --chart-color-5: #27ae60cc;
+  --chart-color-6: #e74c3ccc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Amethyst ────────────────────────────────────────────────────────────── */
+/* --primary-color: #8a1cf9 / #9966cc */
+body.amethyst {
+  --chart-color-1: #9966cccc;
+  --chart-color-2: #b88ae6cc;
+  --chart-color-3: #d8b4fecc;
+  --chart-color-4: #ec4899cc;
+  --chart-color-5: #6366f1cc;
+  --chart-color-6: #ffc107cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Crimson ─────────────────────────────────────────────────────────────── */
+/* --primary-color: #c81d25, dark sidebar */
+body.crimson {
+  --chart-color-1: #c81d25cc;
+  --chart-color-2: #ef4444cc;
+  --chart-color-3: #fca5a5cc;
+  --chart-color-4: #ffc107cc;
+  --chart-color-5: #0349d7cc;
+  --chart-color-6: #27ae60cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Amber ───────────────────────────────────────────────────────────────── */
+/* --primary-color: #ffb300, warm sidebar */
+body.amber {
+  --chart-color-1: #ffb300cc;
+  --chart-color-2: #fcd34dcc;
+  --chart-color-3: #fde68acc;
+  --chart-color-4: #e74c3ccc;
+  --chart-color-5: #27ae60cc;
+  --chart-color-6: #0349d7cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Sunset ──────────────────────────────────────────────────────────────── */
+/* --primary-color: #ff6a00, warm dark sidebar */
+body.sunset {
+  --chart-color-1: #ff6a00cc;
+  --chart-color-2: #fb923ccc;
+  --chart-color-3: #fdba74cc;
+  --chart-color-4: #e74c3ccc;
+  --chart-color-5: #ffc107cc;
+  --chart-color-6: #8b5cf6cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Rose Pink ───────────────────────────────────────────────────────────── */
+/* --primary-color: #e91e63, dark sidebar */
+body.rose-pink {
+  --chart-color-1: #e91e63cc;
+  --chart-color-2: #4e022acc;
+  --chart-color-3: #fda4afcc;
+  --chart-color-4: #ec4899cc;
+  --chart-color-5: #8b5cf6cc;
+  --chart-color-6: #ffc107cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Cyber Neon ──────────────────────────────────────────────────────────── */
+/* --primary-color: #00b8a9, very dark sidebar */
+body.cyber-neon {
+  --chart-color-1: #00b8a9cc;
+  --chart-color-2: #34d399cc;
+  --chart-color-3: #ff3cb4cc;
+  --chart-color-4: #ffdc00cc;
+  --chart-color-5: #5078ffcc;
+  --chart-color-6: #ff6432cc;
+  --chart-grid: var(--border-color);
+  --chart-text: var(--text-color);
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────────────── */
+/*
+ * In dark mode your --border-color is already dark-adjusted (e.g. #3e3e3e for
+ * default dark), and --text-color shifts to #f0f0f0. Because --chart-grid and
+ * --chart-text are set to var(--border-color) and var(--text-color) above,
+ * dark mode works automatically with NO extra rules needed.
+ *
+ * The only thing we need to do is brighten the chart colours slightly so they
+ * remain vivid against dark backgrounds, which we achieve by bumping opacity.
+ */
+body.default.dark-mode {
+  --chart-color-1: #4c8dffdd;
+}
+body.emerald.dark-mode {
+  --chart-color-1: #0f9d58dd;
+  --chart-color-2: #34d399dd;
+}
+body.purple-royale.dark-mode {
+  --chart-color-1: #8b42ffdd;
+}
+body.royal.dark-mode {
+  --chart-color-1: #5a7effdd;
+}
+body.amethyst.dark-mode {
+  --chart-color-1: #b88ae6dd;
+}
+body.crimson.dark-mode {
+  --chart-color-1: #e2484fdd;
+}
+body.amber.dark-mode {
+  --chart-color-1: #ffb300dd;
+}
+body.sunset.dark-mode {
+  --chart-color-1: #ff8a33dd;
+}
+body.rose-pink.dark-mode {
+  --chart-color-1: #ff4f84dd;
+}
+body.cyber-neon.dark-mode {
+  --chart-color-1: #00ffd5dd;
+  --chart-color-2: #78ff00dd;
+  --chart-color-3: #ff3cb4dd;
+}
